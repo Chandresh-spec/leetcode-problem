@@ -52,7 +52,7 @@ def combination2(arr,target):
     helper(0,[],target)
     return ans
 
-arr=[1,1,1,2,2]
-target=4
+arr=[10,1,2,7,6,1,5]
+target=8
 print(combination2(arr,target))
 
