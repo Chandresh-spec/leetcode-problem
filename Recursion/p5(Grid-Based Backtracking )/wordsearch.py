@@ -30,7 +30,6 @@
 
 
 def wordserach(board,word):
-    found=False
     def helper(r,c,index):
         if index==len(word):
             return True
@@ -49,16 +48,6 @@ def wordserach(board,word):
         board[r][c]=temp
         return found
 
-        
-        
-
-
-
-
-
-
-
-    
     for i in range(len(board)):
         for j in range(len(board[0])):
             if helper(i,j,0):
@@ -67,5 +56,5 @@ def wordserach(board,word):
     return False
 
 board=[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
-word = "ABCCED"
+word = "ABCCEz"
 print(wordserach(board,word))

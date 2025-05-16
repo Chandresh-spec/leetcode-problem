@@ -1,4 +1,4 @@
-#  Partitioning
+#  131. Palindrome Partitioning
 # Solved
 # Medium
 # Topics
@@ -21,17 +21,6 @@
 
 # 1 <= s.length <= 16
 # s contains only lowercase English letters.
-
-
-
-
-
-
-
-
-
-
-
 
 
 
