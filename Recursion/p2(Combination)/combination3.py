@@ -55,9 +55,8 @@ def combinationSum3(k,n):
         helper(1,[],0)
         return ans
 
-
-k = 3
-n = 9
+k=5
+n=9
 print(combinationSum3(k,n))
 
 
