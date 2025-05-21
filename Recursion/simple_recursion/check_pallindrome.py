@@ -8,5 +8,5 @@ def pallindrome(str1,index):
     return pallindrome(str1,index+1)
 
 
-str1="madal"
+str1="madam"
 print(pallindrome(str1,0))
