@@ -24,7 +24,13 @@
 # Explanation: The rat has two possible paths to reach the destination: 1. "DDRR" 2. "RRDD", These are returned in lexicographically sorted order.
 
 
+def bactrack(i,j,vis,n,m,ans):
+    pass
+    
 
 
 
 
+n=4
+m=[[1, 0, 0, 0], [1, 1, 0, 1], [1, 1, 0, 0], [0, 1, 1, 1]]
+bactrack(n,m)
