@@ -20,7 +20,19 @@
 # Explanation: There is no common prefix among the input strings.
 
 def longest_prefix(str1):
-    pass
+    prefix=str1[0]
+
+
+    for s in str1:
+        while not s.startswith(prefix):
+            prefix=prefix[:-1]
+            if not prefix:
+                return "" 
+    
+
+    return prefix
+              
+
 
 
 
@@ -30,3 +42,5 @@ def longest_prefix(str1):
 
 str1=["flower","flow","flight"]
 print(longest_prefix(str1))
+
+
