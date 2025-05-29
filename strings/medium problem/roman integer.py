@@ -70,7 +70,7 @@ def romanToInt(s: str):
             if hashmap[s[num]]>=prev:
                 count+=hashmap[s[num]]
             
-            elif  hashmap[s[num]]<prev:
+            else:
                 count-=hashmap[s[num]]
             
             prev=hashmap[s[num]]
