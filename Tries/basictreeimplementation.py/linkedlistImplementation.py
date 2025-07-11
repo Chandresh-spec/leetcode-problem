@@ -1,94 +1,170 @@
+
 class Node:
     def __init__(self,data):
         self.data=data
         self.left=None
         self.right=None
+
+
+def Preorder(root):
+    if root is None:
+        return 
     
+    print(root.data,end=" ")
+    Preorder(root.left)
+    Preorder(root.right)
 
 
-def preorder(root):
-    if not root:
-        return
-    print(root.data,end="->")
-    preorder(root.left)
-    preorder(root.right)
 
-def inorder(root):
-    if not root:
-        return
-    inorder(root.left)
-    print(root.data,end="->")
-    inorder(root.right)
-
-def postorder(root):
-    if not root:
-        return
-    postorder(root.left)
-    postorder(root.right)
-    print(root.data,end="->")
+def Inorder(root):
+    if root is None:
+        return 
+    Inorder(root.left)
+    print(root.data,end=" ")
+    Inorder(root.right)
 
 
-from collections import deque
-def levelorder(root):
+
+
+
+def Postorder(root):
     if not root:
         return 
     
+    Postorder(root.left)
+    Postorder(root.right)
+    print(root.data,end=" ")
+
+
+from collections import deque
+def LevelOrder(root):
     queue=deque([root])
     while queue:
-            q1=queue.popleft()
-            print(q1.data,end="->")
+        temp=queue.popleft()
+        print(temp.data,end=" ")
         
-            if q1.left:
-                queue.append(q1.left)
-            
-            if q1.right:
-                queue.append(q1.right)
+        if temp.left:
+            queue.append(temp.left)
+        
+        if temp.right:
+            queue.append(temp.right)
 
-
-def insertnode(root,data):
-    if not root:
-        return Node(data)
-    
+from collections import deque
+def Insert(root,data):
     queue=deque([root])
     while queue:
-            q1=queue.popleft()
-            print(q1.data,end="->")
-            if not q1.left:
-                q1.left=Node(data)
-                break
-            else:
-                queue.append(q1.left)
-            if not q1.right:
-                q1.right=Node(data)
-                break
-            else:
-                queue.append(q1.right)
+        temp=queue.popleft()
     
-
+        if temp.left:
+           queue.append(temp.left)
+        else:
+            temp.left=Node(data)
+            break
     
+        if temp.right:
+            queue.append(temp.right)
+        else:
+            temp.right=Node(data)
+            break
+
+
+
+def DeleteDeepest(root,key):
+    queue=deque([root])
+    while queue:
+       temp=queue.popleft()
+       if key is temp:
+          temp=None    
+          return
+    
+       if temp.left:
+          if temp.left is key:
+              temp.left=None
+              return
+          else:
+              queue.append(temp.left)
+    
+       if temp.right:
+          if temp.right is key:
+             temp.right=None
+             return
+          else:
+              queue.append(temp.right)
+
+
+  
+
+
+
+def DeleteNode(root,key):
+    if not root:
+        return "Tree is None"
+    
+    if root.left is None and root.right is None:
+        if root.data==key:
+            return None
+        return root.data
+       
+    queue=deque([root])
+    hold=None
+    temp=None
+    while queue:
+        temp=queue.popleft()
+
+        if temp.data==key:
+            hold=temp
+        
+        if temp.left:
+             queue.append(temp.left)
+        
+        if temp.right:
+            queue.append(temp.right)
+    
+    if hold:
+        hold.data=temp.data
+        DeleteDeepest(root,temp)
+        
+        
+        
 
 
 
 
 
-node1=Node(10)
-node1.left=Node(20)
-node1.right=Node(30)
-node1.left.left=Node(40)
-node1.left.right=Node(50)
-node1.right.left=Node(60)
-node1.right.right=Node(70)
 
-preorder(node1)
+
+
+
+
+
+
+
+
+N1=Node(10)
+N1.left=Node(20)
+N1.right=Node(30)
+N1.left.left=Node(40)
+N1.left.right=Node(50)
+N1.right.left=Node(60)
+N1.right.right=Node(70)
+
+
+Preorder(N1)
 print()
-inorder(node1)
+Inorder(N1)
 print()
-postorder(node1)
-
+Postorder(N1)
 print()
 
-insertnode(node1,80)
+Insert(N1,80)
+Insert(N1,90)
+Insert(N1,190)
+LevelOrder(N1)
+print()
 
-levelorder(node1)
+DeleteNode(N1,30)
 
+DeleteNode(N1,20)
 
+LevelOrder(N1)
+print()
