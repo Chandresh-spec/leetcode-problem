@@ -63,6 +63,27 @@ def IterativeInorder(root):
         
     
     print(ans)
+
+
+def IterativePostorder(root):
+    stack=[]
+    cur=root
+    ans=[]
+
+    while cur or stack:
+        while cur:
+            
+            stack.append(cur)
+            cur=cur.left
+        
+        if stack[-1].right :
+            stack.append(stack[-1])
+            cur=stack[-1]
+        else:
+            temp=stack.pop()
+
+
+        
         
         
 
