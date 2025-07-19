@@ -47,6 +47,27 @@ def IterativePreoder(root):
         
     return ans
 
+def IterativeInorder(root):
+    stack=[]
+    cur=root
+    ans=[]
+
+    while stack or cur:
+        while  cur:
+            stack.append(cur)
+            cur=cur.left
+        
+        temp=stack.pop()
+        ans.append(temp.data)
+        cur=temp.right
+        
+    
+    print(ans)
+        
+        
+
+
+
     
 
 
@@ -67,3 +88,6 @@ Postorder(t1)
 print()
 
 print(IterativePreoder(t1))
+
+print()
+IterativeInorder(t1)
