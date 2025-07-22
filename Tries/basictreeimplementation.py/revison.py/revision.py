@@ -77,10 +77,13 @@ def IterativePostorder(root):
             cur=cur.left
         
         if stack[-1].right :
-            stack.append(stack[-1])
+            stack.append()
             cur=stack[-1]
         else:
             temp=stack.pop()
+            ans.append(temp.data)
+            cur=stack[-1]
+
 
 
         
