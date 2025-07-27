@@ -50,7 +50,7 @@
 #         self.right = right
 from collections import deque
 class Solution:
-    def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+    def widthOfBinaryTree(self, root) -> int:
             if not root:
                 return 0
             
