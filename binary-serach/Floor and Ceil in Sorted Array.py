@@ -38,6 +38,9 @@ class Solution:
             if nums[mid] == x:
                 return [x, x]  # exact match
             
+        
+        
+        
             if nums[mid] < x:
                 floor_val = nums[mid]   # store value
                 lb = mid + 1
