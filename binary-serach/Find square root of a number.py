@@ -27,18 +27,24 @@
 
 
 
-def floorSqrt(self, n: int) -> int:
-        low=1
-        high=n
-        ot= -1
-
-        while low<=high:
-            mid=(high+low)//2
-
-            if mid*mid <=  n:
-                low=mid+1
-                ot=mid
-            else:
-                high=mid-1
+# def floorSqrt(self, n: int) -> int:
+        # low=1
+        # high=n
+        # ot= -1
+# 
+        # while low<=high:
+            # mid=(high+low)//2
+# 
+            # if mid*mid <=  n:
+                # low=mid+1
+                # ot=mid
+            # else:
+                # high=mid-1
             
-        return ot
+        # return ot
+
+
+
+
+
+
