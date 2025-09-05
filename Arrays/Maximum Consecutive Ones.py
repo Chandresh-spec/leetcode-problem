@@ -28,21 +28,25 @@
 
 
 
-
-from typing import List
-
-
-class Solution:
-    def findMaxConsecutiveOnes(self, nums: List[int]) -> int:
-        count=0
-        maxi=0
-        for i in nums:
-            if i==1:
+def longest_subarray(nums,k):
+    maxi=0
+    for i in range(len(nums)):
+        count=1
+        cal=nums[i]
+        for j in range(1,len(nums)):
+            if cal == k:
+                maxi=max(count,maxi)
+            
+            elif cal <k:
+                cal=cal+nums[j]
                 count+=1
             else:
-                count=0
+                break
+        
+    return maxi
+
+nums = [-1, 1, 1]
+k=1
+print(longest_subarray(nums,k))
             
-            maxi=max(maxi,count)
-        
-        return maxi
-        
+

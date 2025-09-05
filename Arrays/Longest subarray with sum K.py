@@ -1,23 +1,21 @@
 def longest_subarray(arr,k):
+    prefix_sum=0
+    hashmap={0:-1}
     maxi=0
-    for i in range(len(arr)):
-        sm=arr[i]
-        count=1
-        for j in range(i+1,len(arr)):
-            sm+=arr[j]
-            if sm==k:
-                maxi=max(maxi,count)
-            if sm>k:
-                break
-            else:
-                count+=1
-        maxi=max(maxi,count)
-    
-    if maxi==0:
-        return -1
-    else:
-        return maxi
 
-nums = [-3, 2, 1]
-k=6
+    for index,val in enumerate(arr):
+        prefix_sum+=val
+
+        if prefix_sum-k in hashmap:
+            maxi=max(maxi,index-hashmap[prefix_sum-k])
+        
+        hashmap[prefix_sum]=index
+    
+    return maxi
+
+
+
+nums = [10, 5, 2, 7, 1, 9]
+k=15
+
 print(longest_subarray(nums,k))
