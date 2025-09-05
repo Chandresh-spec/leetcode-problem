@@ -19,3 +19,18 @@ nums = [10, 5, 2, 7, 1, 9]
 k=15
 
 print(longest_subarray(nums,k))
+
+
+
+arr=[1,5,4,8,9,6]
+
+n=len(nums)
+
+arr2=[0]*n
+print(arr2)
+
+
+for i in range(len(arr)):
+    arr2[i]=arr[i]
+
+print(arr2)
