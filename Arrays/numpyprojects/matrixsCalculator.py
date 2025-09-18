@@ -1,7 +1,8 @@
 import numpy as np
 class MatrixCalculator:
-    def __init__(self):
-        pass
+    def __init__(self,rows,cols):
+        self.rows=rows
+        self.cols=cols
     
 
 
@@ -18,12 +19,12 @@ class MatrixCalculator:
         print(add_a+add_b)
 
     
-    def substract_matrix(self,a,b):
+    def subtract_matrix(self,a,b):
         print("Matrix A:")
         print(a)
         print("Matrix B:")
         print(b)
-        print("_________________________________________-")
+        print("-"*40)
 
         print("Substraction of Matrix A and B is :")
 
@@ -43,26 +44,27 @@ obj=MatrixCalculator()
 
 
 def take_output(first,row,col):
-    matrix_list=[]
+    
     if first:
         print("Enter The Value For Matrix A")
     else:
         print("Enter the Value for matrix B")
+    matrix_list=[]
     for i in range(row):
         matrix_row=[]
         for j in range(1,col+1):
-           matrix_row.append(int(input(f"Enter the {i+1}th Row  {j}th element:  ")))
+           matrix_row.append(int(input(f"Enter Element at Row {i+1}, Col{j}:")))
     
 
         matrix_list.append(matrix_row)
 
 
-    return matrix_list
+    return np.array(matrix_list)
 
 
 
 print("WELCOME TO MATRIX CALCULATOR")
-print("1.ADDITION\n2.SUBSTRACTION ")
+print("1.ADDITION\n2.SUBTRACTION ")
 choice=int(input("CHOOSE A NUMBER [1,2]:  "))
 
 
@@ -71,7 +73,7 @@ if  choice ==1:
     row=int(input("Enter the number of row you want to insert:  "))
     col=int(input("Enter the number of Column you want to insert:  "))
     a=take_output(True,row,col)
-    b=take_output(False)
+    b=take_output(False,row,col)
 
     obj.add_matrix(a,b)
 
@@ -81,7 +83,7 @@ elif choice == 2:
     a=take_output(True,row,col)
     b=take_output(False,row,col)
 
-    obj.substract_matrix(a,b)
+    obj.subtract_matrix(a,b)
 
 
 
