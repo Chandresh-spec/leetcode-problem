@@ -11,7 +11,7 @@ class MatrixCalculator:
         print(a)
         print("Matrix B:")
         print(b)
-        print("_________________________________________-")
+        print("_"*40)
         add_a=np.array(a)
         add_b=np.array(b)
 
@@ -39,7 +39,11 @@ class MatrixCalculator:
 
 
 
-obj=MatrixCalculator()
+
+row=int(input("Enter the number of row you want to insert:  "))
+col=int(input("Enter the number of Column you want to insert:  "))
+
+obj=MatrixCalculator(row,col)
 
 
 
@@ -70,16 +74,12 @@ choice=int(input("CHOOSE A NUMBER [1,2]:  "))
 
 
 if  choice ==1:
-    row=int(input("Enter the number of row you want to insert:  "))
-    col=int(input("Enter the number of Column you want to insert:  "))
     a=take_output(True,row,col)
     b=take_output(False,row,col)
 
     obj.add_matrix(a,b)
 
 elif choice == 2:
-    row=int(input("Enter the number of row you want to insert:  "))
-    col=int(input("Enter the number of Column you want to insert:  "))
     a=take_output(True,row,col)
     b=take_output(False,row,col)
 
