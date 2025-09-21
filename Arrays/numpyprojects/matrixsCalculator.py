@@ -14,7 +14,6 @@ class MatrixCalculator:
 
         print(f" {op} of Matrix A and B is:")
 
-    
 
 
     def add_matrix(self,a,b):
