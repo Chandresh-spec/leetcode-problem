@@ -27,3 +27,34 @@
  
 
 # Follow up: Could you do it without extra space and in O(n) runtime? You may assume the returned list does not count as extra space.
+
+
+
+
+
+class Solution:
+    def findDisappearedNumbers(nums) :
+        i=0
+        n=len(nums)
+        while i < n :
+            correct_index=nums[i]-1
+
+            if nums[i] != nums[correct_index]:
+                nums[i],nums[correct_index]=nums[correct_index],nums[i]
+            
+            else:
+                i+=1
+        
+
+
+        arr=[]
+        for i in range(len(nums)):
+            if nums[i]!= i+1:
+                arr.append(i+1)
+        
+        return arr
+       
+
+
+
+        
