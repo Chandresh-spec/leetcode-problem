@@ -32,3 +32,27 @@
 
 # 1 <= nums.length <= 105
 # -231 <= nums[i] <= 231 - 1
+
+
+
+
+
+class Solution:
+    def firstMissingPositive(nums) -> int:
+        i = 0
+        n = len(nums)
+        while i < n:
+            correct_index = nums[i] -1
+            if 1 <= nums[i] <= n and nums[i] != nums[correct_index]:
+                 nums[i], nums[correct_index] = nums[correct_index], nums[i]
+            else:
+                i += 1
+        
+
+
+        for i in range(len(nums)):
+            if i+1 !=  nums[i]:
+                 return i+1
+    
+        return n+1
+        
