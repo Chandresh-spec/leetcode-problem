@@ -45,3 +45,22 @@
 
 # 1 <= nums.length <= 105
 # -109 <= nums[i] <= 109
+
+
+
+
+
+from typing import List
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        hashmap={}
+
+        for i in nums:
+            if i in hashmap:
+               return True
+            hashmap[i]=hashmap.get(i,0)+1
+        
+        return False
+
+          
+        
