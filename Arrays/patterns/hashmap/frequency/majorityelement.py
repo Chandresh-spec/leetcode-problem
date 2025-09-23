@@ -28,3 +28,21 @@
  
 
 # Follow-up: Could you solve the problem in linear time and in O(1) space?
+
+
+
+from typing import List
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        hashmap = {}
+        for i in nums:
+            hashmap[i] = hashmap.get(i, 0) + 1
+
+        maxi = 0
+        cand = None
+        for num, count in hashmap.items():
+            if count > maxi:
+                maxi = count
+                cand = num
+
+        return cand
