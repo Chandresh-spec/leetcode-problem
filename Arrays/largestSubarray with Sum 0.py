@@ -1,21 +1,55 @@
-# def longest_subarray_len(nums):
 
-#     maxi=0
-#     for i in range(len(nums)):
-#         count=0
-#         for j in range(i,len(nums)):
-#             count+=nums[j]
+# Largest Subarray with Sum 0
 
-#             if count==0:
-#                 maxi=max(maxi,j-i+1)
+
+# 0
+
+# 100
+# Medium
+
+# Hints
+# You are given an integer array arr of size n which contains both positive and negative integers. Your task is to find the length of the longest contiguous subarray with sum equal to 0.
+
+
+
+# Return the length of such a subarray. If no such subarray exists, return 0.
+
+
+# Examples:
+# Input: arr = [15, -2, 2, -8, 1, 7, 10, 23]
+
+# Output: 5
+
+# Explanation:
+
+# The subarray [-2, 2, -8, 1, 7] sums up to 0 and has the maximum length among all such subarrays.
+
+# Input: arr = [2, 10, 4]
+
+# Output: 0
+
+# Explanation:
+
+# There is no subarray whose elements sum to 0.
+
+# # def longest_subarray_len(nums):
+
+# #     maxi=0
+# #     for i in range(len(nums)):
+# #         count=0
+# #         for j in range(i,len(nums)):
+# #             count+=nums[j]
+
+# #             if count==0:
+# #                 maxi=max(maxi,j-i+1)
     
 
-#     return maxi
+# #     return maxi
 
 
-# nums=   [1, 0, -4, 3, 1, 0]
+# # nums=   [1, 0, -4, 3, 1, 0]
 
-# print(longest_subarray_len(nums))
+# # print(longest_subarray_len(nums))
 
 
 
@@ -25,12 +59,12 @@ def longest(arr):
     sum_of=0
     for i in range(len(arr)):
         sum_of+=arr[i]
-
+# 
         if sum_of in hashmap:
             maxi=max(maxi,i-hashmap[sum_of])
         else:
            hashmap[sum_of]=i
     return maxi
-
+# 
 nums=  [15, -2, 2, -8, 1, 7, 10, 23]
 print(longest(nums))
