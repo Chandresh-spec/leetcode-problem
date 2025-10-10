@@ -33,26 +33,77 @@
 
 
 
-def floorSqrt(n: int) -> int:
-        lb=1
-        ub=n
-        sq=None
+# def floorSqrt(n: int) -> int:
+        # lb=1
+        # ub=n
+        # sq=None
+# 
+        # while lb <= ub :
+            # mid=(ub+lb)//2
+# 
+            # square_root=mid*mid
+# 
+            # if square_root <= n :
+                # sq=mid
+                # lb= mid+1
+            # else:
+                # ub=mid-1
+            # 
+            # 
+        # return sq
+    # 
+# 
+# n=36
+# 
+# print(floorSqrt(n))
 
-        while lb <= ub :
-            mid=(ub+lb)//2
 
-            square_root=mid*mid
 
-            if square_root <= n :
-                sq=mid
-                lb= mid+1
-            else:
-                ub=mid-1
-            
-            
-        return sq
+def find_num(mid,n):
+    num=1
+
+    for i in range(n):
+        num*=mid
+    
+    return num
+
+def NthRoot(n, m):
+
+    lb=1
+    ub= m
+
+    while lb <= ub :
+        mid=(ub+lb)//2
+        cal=find_num(mid,n)
+
+        if cal==m :
+          return mid
+        
+        elif cal > m:
+          ub=mid-1
+        
+        else:
+          lb=mid+1
+      
+    return -1
+
+
+n=4
+m=81
+
+print(NthRoot(n,m))
+
     
 
-n=36
 
-print(floorSqrt(n))
+
+
+
+
+
+
+      
+    
+      
+
+      
