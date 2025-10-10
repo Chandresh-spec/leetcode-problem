@@ -1,17 +1,20 @@
-def insertion_sort(arr): 
-    for i in range(1, len(arr)): 
-        key=nums[i]
-        j=i-1
-
-        while j>=0 and nums[j] >key:
-            nums[j+1]=nums[j]
-            j-=1
-        
-        nums[j+1]=key
-       
+def min_max(nums,low,high):
+    if low==high:
+        return nums[low],nums[low]
     
-    return nums
+    elif high-low==1:
+        return min(nums[low],nums[high]),max(nums[low],nums[high])
+    
+
+    mid=(high+low)//2
+
+    left_min,left_max=min_max(nums,low,mid)
+    right_min,right_max=min_max(nums,mid+1,high)
+
+    return min(left_min,right_min),max(left_max,right_max)
 
 
-nums=[5,0,3,4,5,8]
-print(insertion_sort(nums))
+
+
+nums=[1,8,9,6,3,5,0]
+print(min_max(nums,0,len(nums)-1))
