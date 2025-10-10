@@ -124,6 +124,38 @@ class Solution:
         
 
 
+import math
+class Solution:
+    def smallestDivisor(self, nums, threshold: int) -> int:
+
+        def find(nums,mid,threshold):
+            total=0
+            for i in range(len(nums)):
+                total+=math.ceil(nums[i]/mid)
+            
+
+            return total
+
+
+
+
+        lb=1
+        ub=max(nums)
+        while lb <= ub :
+            mid=(ub+lb)//2
+
+            num=find(nums,mid,threshold)
+
+            if num <= threshold:
+                ub=mid-1
+            else:
+                lb=mid+1
+        
+        return lb
+
+
+
+
         
 
 
