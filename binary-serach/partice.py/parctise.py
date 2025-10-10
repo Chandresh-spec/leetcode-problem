@@ -96,7 +96,35 @@ print(NthRoot(n,m))
     
 
 
+import math
+class Solution:
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
 
+        def find(k,miles):
+            num=0
+            n=len(miles)
+            for i in range(n):
+                num+=math.ceil(miles[i]/k)
+            
+            return num
+
+        lb=1
+        ub=max(piles)
+        n=0
+        while lb <= ub :
+            mid=(ub+lb)//2
+
+            if find(mid,piles) <= h :
+                n=mid
+                ub=mid-1
+            else:
+                lb=mid+1
+
+        return n
+        
+
+
+        
 
 
 
