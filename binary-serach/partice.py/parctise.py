@@ -98,7 +98,7 @@ print(NthRoot(n,m))
 
 import math
 class Solution:
-    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+    def minEatingSpeed(piles,h) -> int:
 
         def find(k,miles):
             num=0
