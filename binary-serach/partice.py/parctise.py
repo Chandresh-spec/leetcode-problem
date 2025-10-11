@@ -188,8 +188,35 @@ n=28
 print(floorSqrt(n))
       
 
+       
+from typing import List
+import math
+class Solution:
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        def check(piles,mid,h):
+            total=0
+            for i in range(len(piles)):
+                total+=math.ceil(piles[i]/mid)
+            
+            return total <= h
 
 
-      
 
-      
+
+        lb=1
+        ub=max(piles)
+        while lb <= ub :
+
+            mid=(lb+ub)//2
+
+            
+            if check(piles,mid,h):
+                ub=mid-1
+            else:
+                lb=mid+1
+        
+        return lb
+
+
+
+    
