@@ -219,4 +219,52 @@ class Solution:
 
 
 
+
+class Solution:
+    def minDays(self, bloomDay: List[int], m: int, k: int) -> int:
+        def find(bloomDay,m,k,mid):
+            total=0
+            count=0
+            for i in range(len(bloomDay)):
+                if mid >= bloomDay[i]:
+                    count+=1
+
+                    if count==k :
+                        total+=1
+                        count=0
+                    
+                else:
+                    count=0
+                
+            return total>= m
+
+
+
+
+
+        lb=min(bloomDay)
+        ub=max(bloomDay)
+        ans=-1
+
+        while lb <= ub :
+            mid=(ub+lb)//2
+
+
+            if find(bloomDay,m,k,mid):
+                ub=mid-1
+                ans=mid
+            
+            else:
+                lb=mid+1
+        
+        return  ans
+            
+            
+        
+        
+            
+
+        
+
+        
     
