@@ -58,112 +58,138 @@
 # print(floorSqrt(n))
 
 
-
-def find_num(mid,n):
-    num=1
-
-    for i in range(n):
-        num*=mid
-    
-    return num
-
-def NthRoot(n, m):
-
-    lb=1
-    ub= m
-
-    while lb <= ub :
-        mid=(ub+lb)//2
-        cal=find_num(mid,n)
-
-        if cal==m :
-          return mid
+# 
+# def find_num(mid,n):
+    # num=1
+# 
+    # for i in range(n):
+        # num*=mid
+    # 
+    # return num
+# 
+# def NthRoot(n, m):
+# 
+    # lb=1
+    # ub= m
+# 
+    # while lb <= ub :
+        # mid=(ub+lb)//2
+        # cal=find_num(mid,n)
+# 
+        # if cal==m :
+        #   return mid
+        # 
+        # elif cal > m:
+        #   ub=mid-1
+        # 
+        # else:
+        #   lb=mid+1
+    #   
+    # return -1
+# 
+# 
+# n=4
+# m=81
+# 
+# print(NthRoot(n,m))
+# 
+    # 
+# 
+# 
+# import math
+# class Solution:
+    # def minEatingSpeed(piles,h) -> int:
+# 
+        # def find(k,miles):
+            # num=0
+            # n=len(miles)
+            # for i in range(n):
+                # num+=math.ceil(miles[i]/k)
+            # 
+            # return num
+# 
+        # lb=1
+        # ub=max(piles)
+        # n=0
+        # while lb <= ub :
+            # mid=(ub+lb)//2
+# 
+            # if find(mid,piles) <= h :
+                # n=mid
+                # ub=mid-1
+            # else:
+                # lb=mid+1
+# 
+        # return n
+        # 
+# 
+# 
+# import math
+# class Solution:
+    # def smallestDivisor(self, nums, threshold: int) -> int:
+# 
+        # def find(nums,mid,threshold):
+            # total=0
+            # for i in range(len(nums)):
+                # total+=math.ceil(nums[i]/mid)
+            # 
+# 
+            # return total
+# 
+# 
+# 
+# 
+        # lb=1
+        # ub=max(nums)
+        # while lb <= ub :
+            # mid=(ub+lb)//2
+# 
+            # num=find(nums,mid,threshold)
+# 
+            # if num <= threshold:
+                # ub=mid-1
+            # else:
+                # lb=mid+1
+        # 
+        # return lb
+# 
+# 
+# 
+# 
         
-        elif cal > m:
-          ub=mid-1
-        
-        else:
-          lb=mid+1
-      
-    return -1
 
 
-n=4
-m=81
-
-print(NthRoot(n,m))
-
-    
 
 
-import math
-class Solution:
-    def minEatingSpeed(piles,h) -> int:
 
-        def find(k,miles):
-            num=0
-            n=len(miles)
-            for i in range(n):
-                num+=math.ceil(miles[i]/k)
-            
-            return num
-
+def floorSqrt(n: int) -> int:
         lb=1
-        ub=max(piles)
-        n=0
+        ub=n
+        ans=None
+
         while lb <= ub :
             mid=(ub+lb)//2
 
-            if find(mid,piles) <= h :
-                n=mid
+
+            sqrt=mid*mid
+
+            if sqrt == n:
+                 return mid
+            if sqrt >= n :
                 ub=mid-1
             else:
+                ans=mid
                 lb=mid+1
+        return ans
 
-        return n
-        
+       
 
-
-import math
-class Solution:
-    def smallestDivisor(self, nums, threshold: int) -> int:
-
-        def find(nums,mid,threshold):
-            total=0
-            for i in range(len(nums)):
-                total+=math.ceil(nums[i]/mid)
-            
-
-            return total
-
-
-
-
-        lb=1
-        ub=max(nums)
-        while lb <= ub :
-            mid=(ub+lb)//2
-
-            num=find(nums,mid,threshold)
-
-            if num <= threshold:
-                ub=mid-1
-            else:
-                lb=mid+1
-        
-        return lb
-
-
-
-
-        
-
-
-
-
-
+n=28
+print(floorSqrt(n))
       
-    
+
+
+
       
 
       
