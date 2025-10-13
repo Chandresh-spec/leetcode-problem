@@ -1,39 +1,34 @@
-def  aggressivecow(nums,k):
 
-    lb=1
-    ub=max(nums)
-    while lb <= ub :
-        mid=(ub+lb)//2
+def aggressiveCows(nums, k):
 
-        if is_cow(nums,mid,k):
-            lb=mid+1
-        else:
-            ub=mid-1
+
+        def is_count(nums,i,k):
+            cnt=1
+            prev=0
+            for j in range(len(nums)):
+                if nums[j]-prev <=i :
+                     cnt+=1
+                     prev=nums[j]
+                
+            return cnt>=k
+        n=max(nums)
+
+        for i in range(1,n):
+
+            if is_count(nums,i,k):
+                 return  i
         
-    return ub
-    
-    
 
 
+        return  -1
 
-def is_cow(nums,j,k):
-    last=nums[0]
-    cnt=1
-    for i in range(1,len(nums)):
-        if nums[i]- last >= j :
-            cnt+=1
-            last=nums[i]
-
-            if cnt >= k :
-                return True
-    return False
-    
-    
-   
+            
+            
+            
 
 
-nums = [10, 1, 2, 7, 5]
-
+nums =  [4, 2, 1, 3, 6]
+k=2
 nums.sort()
-k=3
-print(aggressivecow(nums,k))
+print(aggressiveCows(nums,k))
+        
