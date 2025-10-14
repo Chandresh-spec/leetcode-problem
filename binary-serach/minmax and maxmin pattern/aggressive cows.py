@@ -1,14 +1,16 @@
 def aggressive(nums,k):
+    lb=0
+    ub=max(nums)
 
-    maxi=max(nums)
+    while lb <= ub :
+        mid=(ub+lb)//2
 
-    for i in range(1,maxi+1):
-        if is_true(i,nums,k):
-            continue
+        if is_true(mid,nums,k):
+            lb=mid+1
         else:
-            break
-    
-    return i-1
+            ub=mid-1
+        
+    return ub
 
 
 
@@ -26,7 +28,7 @@ def is_true(j,nums,k):
 
 
 
-nums =   [10, 1, 2, 7, 5]
+nums =  [10, 1, 2, 7, 5]
 k=3
 nums.sort()
 print(aggressive(nums,k))
