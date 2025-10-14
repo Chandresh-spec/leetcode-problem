@@ -1,32 +1,33 @@
-def bookallocation(nums, k):
-    lb = max(nums)
-    ub = sum(nums)
+def book_collection(nums,k):
+    lb=max(nums)
+    ub=sum(nums)
 
-    while lb <= ub:
-        mid = (lb + ub) // 2
-        n = is_true(nums, mid)
+    while lb <= ub :
+        mid=(ub+lb)//2
 
-        if  n > k :
-            lb=mid+1
-        else:
+        check=is_true(nums,mid,k)
+
+        if check <=k :
             ub=mid-1
-
-    return lb  # ✅ smallest feasible value
-
-
-def is_true(nums, limit):
-    cnt = 1
-    total = 0
-
-    for pages in nums:
-        if total + pages <= limit:
-            total += pages
         else:
-            cnt += 1
-            total = pages
+            lb=mid+1
+        
+    return ub
+
+def is_true(nums,j,k):
+    cnt=1
+    total=0
+    for i in range(len(nums)):
+        if total+nums[i]<j:
+            total+=nums[i]
+        else:
+            cnt+=1
+            total=nums[i]
+        
     return cnt
 
-
-nums = nums = [12, 34, 67, 90]
-m = 2
-print(bookallocation(nums, m))  # ✅ Output: 71
+nums=[15, 17, 20]
+k=2
+print(book_collection(nums,k))
+            
+    
