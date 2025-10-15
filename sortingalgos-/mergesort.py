@@ -16,4 +16,3 @@ def insertion_sort(nums):
 
 
 nums=[1,8,9,6,3,0,2]
-print(insertion_sort(nums))
