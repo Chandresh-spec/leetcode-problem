@@ -1,24 +1,69 @@
-def largest_element(nums):
-    # largest_element=float('-inf')
-    # for i in nums:
-        # if i > largest_element:
-            # largest_element=i
-        # 
-    # 
-    # return largest_element
+# def largest_element(nums):
+#     # largest_element=float('-inf')
+#     # for i in nums:
+#         # if i > largest_element:
+#             # largest_element=i
+#         # 
+#     # 
+#     # return largest_element
 
-    nums.sort(reverse=False)
+#     nums.sort(reverse=False)
 
-    return nums
+#     return nums
     
 
 
 
 
-nums=[1,8,9,6,3,1]
-print(largest_element(nums))
+# nums=[1,8,9,6,3,1]
+# print(largest_element(nums))
 
-#o(n)
+# #o(n)
+
+
+
+
+
+
+
+# # if if the sorted array()
+# from typing import List
+
+# # class Solution:
+#     def check(self, nums: List[int]) -> bool:
+#         count=0
+#         n=len(nums)
+
+#         for i in range(n):
+#             index=(i+1)%n
+
+#             if nums[i]> nums[index]:
+#                 count+=1
+            
+#         return count==1 or count==0
+
+
+
+
+
+
+
+
+
+def remove_duplicate(nums):
+    j=0
+    for i in range(1,len(nums)):
+        if nums[i]>nums[j]:
+            j+=1
+            nums[i],nums[j]=nums[j],nums[i]
+        
+    return nums
+            
+
+
+nums = [1,1,2]
+print(remove_duplicate(nums))
+
 
 
 
