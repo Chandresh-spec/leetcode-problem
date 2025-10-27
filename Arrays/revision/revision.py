@@ -50,20 +50,49 @@
 
 
 
-def remove_duplicate(nums):
-    j=0
-    for i in range(1,len(nums)):
-        if nums[i]>nums[j]:
-            j+=1
-            nums[i],nums[j]=nums[j],nums[i]
+# def remove_duplicate(nums):
+    # j=0
+    # for i in range(1,len(nums)):
+        # if nums[i]>nums[j]:
+            # j+=1
+            # nums[i],nums[j]=nums[j],nums[i]
+        # 
+    # return j+1
+            # 
+# 
+# 
+# nums = [1,1,2]
+# print(remove_duplicate(nums))
+# 
+# 
+
+
+# rotate array
+
+
+def rotatearray(nums,k):
+    def rotate(nums,st,end):
         
+        while st <= end :
+            nums[st],nums[end]=nums[end],nums[st]
+            st+=1
+            end-=1
+        
+        return nums
+    
+
+    rotate(nums,0,len(nums)-1)
+
+    rotate(nums,0,k-1)
+
+    rotate(nums,k,len(nums)-1)
+
+
     return nums
-            
 
-
-nums = [1,1,2]
-print(remove_duplicate(nums))
-
-
+nums=[-1,-100,3,99]
+k=2
+print(rotatearray(nums,k))
+        
 
 
