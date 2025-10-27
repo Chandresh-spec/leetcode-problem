@@ -49,3 +49,29 @@ def findErrorNums(nums: List[int]) -> List[int]:
 
 nums=[1,5,3,2,2,7,6,4,8,9]
 print(findErrorNums(nums))
+
+
+
+
+class Solution:
+    def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
+        i=0
+        n=len(nums)
+
+        while i <= n-1 :
+            correct_index=nums[i]-1
+
+            if  nums[i]!= nums[correct_index]:
+                nums[i],nums[correct_index]=nums[correct_index],nums[i]
+            
+            else:
+                i+=1
+            
+        arr=[]
+        for i in range(len(nums)):
+            if i+1!= nums[i]:
+                arr.append(i+1)
+            
+        return arr
+
+        
