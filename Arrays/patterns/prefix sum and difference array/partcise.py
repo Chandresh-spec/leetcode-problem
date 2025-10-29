@@ -52,43 +52,69 @@ from typing import List
 
 
 
+# 
+# class Solution:
+    # def subarraysDivByK(self, nums: List[int], k: int) -> int:
+        # sum_of=0
+        # count=0
+        # hashmap={0:1}
+        # for num in nums:
+            # sum_of+=num
+# 
+            # val=sum_of%k
+# 
+            # if val in hashmap:
+                # count+=hashmap[val]
+            # 
+            # hashmap[val]=hashmap.get(val,0)+1
+        # 
+# 
+        # return count
+    # 
+# 
+# 
+# 
+# class Solution:
+    # def numSubarraysWithSum(self, nums: List[int], goal: int) -> int:
+        # hashmap={0:1}
+        # count=0
+        # val=0
+        # for num in nums:
+# 
+            # val+=num
+# 
+            # if val-goal in hashmap:
+                # count+=hashmap[val-goal]
+            # 
+            # hashmap[val]=hashmap.get(val,0)+1
+        # 
+# 
+        # return count
+    # 
 
-class Solution:
-    def subarraysDivByK(self, nums: List[int], k: int) -> int:
-        sum_of=0
-        count=0
-        hashmap={0:1}
-        for num in nums:
-            sum_of+=num
 
-            val=sum_of%k
 
-            if val in hashmap:
-                count+=hashmap[val]
-            
-            hashmap[val]=hashmap.get(val,0)+1
+
+
+
+def numberOfSubarrays(nums,k) -> int:
         
-
-        return count
-    
-
-
-
-class Solution:
-    def numSubarraysWithSum(self, nums: List[int], goal: int) -> int:
-        hashmap={0:1}
-        count=0
-        val=0
-        for num in nums:
-
-            val+=num
-
-            if val-goal in hashmap:
-                count+=hashmap[val-goal]
+        total=0
+        for i in range(len(nums)):
+            num_count=0
             
-            hashmap[val]=hashmap.get(val,0)+1
-        
+            for j in range(i,len(nums)):
+                if nums[j]%2==1:
+                    num_count+=1
+                
+                if num_count==k:
+                    total+=1
+                
+            
+        return total
 
-        return count
-    
-    
+
+
+nums=[2,2,2,1,2,2,1,2,2,2]
+k=2
+print(numberOfSubarrays(nums,k))
