@@ -125,52 +125,73 @@ from typing import List
 
 
 
-class Solution:
-    def numberOfSubarrays(self, nums: List[int], k: int) -> int:
+# class Solution:
+#     def numberOfSubarrays(self, nums: List[int], k: int) -> int:
         
-        hashmap={0:1}
-        total=0
-        count=0
-        for num in nums:
-            if num%2==1:
-                count+=1
+#         hashmap={0:1}
+#         total=0
+#         count=0
+#         for num in nums:
+#             if num%2==1:
+#                 count+=1
             
 
-            if count-k in hashmap:
-                total+=hashmap[count-k]
+#             if count-k in hashmap:
+#                 total+=hashmap[count-k]
             
-            hashmap[count]=hashmap.get(count,0)+1
+#             hashmap[count]=hashmap.get(count,0)+1
         
 
-        return total
+#         return total
 
 
 
+# class Solution:
+#     def productExceptSelf(self, nums: List[int]) -> List[int]:
+#         prefix_sum=1
+#         prefix_arr=[0]*len(nums)
+
+#         for i in range(len(nums)):
+#             prefix_arr[i]=prefix_sum
+#             prefix_sum*=nums[i]
+        
+
+        
+#         suffix_sum=1
+
+#         for i in range(len(nums)-1,-1,-1):
+#             prefix_arr[i]*=suffix_sum
+
+#             suffix_sum*=nums[i]
+        
+
+#         return prefix_arr
+       
+
+
+
+
+
+        
+
+
+    
 class Solution:
-    def productExceptSelf(self, nums: List[int]) -> List[int]:
-        prefix_sum=1
-        prefix_arr=[0]*len(nums)
-
+    def pivotIndex(self, nums: List[int]) -> int:
+        sum_of=sum(nums)
+        n=len(nums)-1
+        left_sum=0
         for i in range(len(nums)):
-            prefix_arr[i]=prefix_sum
-            prefix_sum*=nums[i]
+            sum_of-=nums[i]
+            
+           
+
+            if left_sum==sum_of:
+                return i
+            
+
+            left_sum+=nums[i]
+           
+            
         
-
-        
-        suffix_sum=1
-
-        for i in range(len(nums)-1,-1,-1):
-            prefix_arr[i]*=suffix_sum
-
-            suffix_sum*=nums[i]
-        
-
-        return prefix_arr
-       
-
-
-        
-        
-
-
-       
+        return -1
