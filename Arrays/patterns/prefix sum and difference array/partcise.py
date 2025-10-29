@@ -70,4 +70,25 @@ class Solution:
         
 
         return count
-       
+    
+
+
+
+class Solution:
+    def numSubarraysWithSum(self, nums: List[int], goal: int) -> int:
+        hashmap={0:1}
+        count=0
+        val=0
+        for num in nums:
+
+            val+=num
+
+            if val-goal in hashmap:
+                count+=hashmap[val-goal]
+            
+            hashmap[val]=hashmap.get(val,0)+1
+        
+
+        return count
+    
+    
