@@ -97,24 +97,53 @@ from typing import List
 
 
 
-def numberOfSubarrays(nums,k) -> int:
+# def numberOfSubarrays(nums,k) -> int:
+        # 
+        # total=0
+        # for i in range(len(nums)):
+            # num_count=0
+            # 
+            # for j in range(i,len(nums)):
+                # if nums[j]%2==1:
+                    # num_count+=1
+                # 
+                # if num_count==k:
+                    # total+=1
+                # 
+            # 
+        # return total
+# 
+# 
+# 
+# nums=[2,2,2,1,2,2,1,2,2,2]
+# k=2
+# print(numberOfSubarrays(nums,k))
+
+
+
+
+
+
+
+class Solution:
+    def numberOfSubarrays(self, nums: List[int], k: int) -> int:
         
+        hashmap={0:1}
         total=0
-        for i in range(len(nums)):
-            num_count=0
+        count=0
+        for num in nums:
+            if num%2==1:
+                count+=1
             
-            for j in range(i,len(nums)):
-                if nums[j]%2==1:
-                    num_count+=1
-                
-                if num_count==k:
-                    total+=1
-                
+
+            if count-k in hashmap:
+                total+=hashmap[count-k]
             
+            hashmap[count]=hashmap.get(count,0)+1
+        
+
         return total
 
 
 
-nums=[2,2,2,1,2,2,1,2,2,2]
-k=2
-print(numberOfSubarrays(nums,k))
+       
