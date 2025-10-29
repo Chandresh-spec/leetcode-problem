@@ -146,4 +146,31 @@ class Solution:
 
 
 
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        prefix_sum=1
+        prefix_arr=[0]*len(nums)
+
+        for i in range(len(nums)):
+            prefix_arr[i]=prefix_sum
+            prefix_sum*=nums[i]
+        
+
+        
+        suffix_sum=1
+
+        for i in range(len(nums)-1,-1,-1):
+            prefix_arr[i]*=suffix_sum
+
+            suffix_sum*=nums[i]
+        
+
+        return prefix_arr
+       
+
+
+        
+        
+
+
        
