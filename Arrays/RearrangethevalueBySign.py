@@ -1,127 +1,165 @@
-# 2149. Rearrange Array Elements by Sign
-# Solved
-# Medium
-# Topics
-# premium lock icon
-# Companies
-# Hint
-# You are given a 0-indexed integer array nums of even length consisting of an equal number of positive and negative integers.
+# # 2149. Rearrange Array Elements by Sign
+# # Solved
+# # Medium
+# # Topics
+# # premium lock icon
+# # Companies
+# # Hint
+# # You are given a 0-indexed integer array nums of even length consisting of an equal number of positive and negative integers.
 
-# You should return the array of nums such that the the array follows the given conditions:
+# # You should return the array of nums such that the the array follows the given conditions:
 
-# Every consecutive pair of integers have opposite signs.
-# For all integers with the same sign, the order in which they were present in nums is preserved.
-# The rearranged array begins with a positive integer.
-# Return the modified array after rearranging the elements to satisfy the aforementioned conditions.
+# # Every consecutive pair of integers have opposite signs.
+# # For all integers with the same sign, the order in which they were present in nums is preserved.
+# # The rearranged array begins with a positive integer.
+# # Return the modified array after rearranging the elements to satisfy the aforementioned conditions.
 
  
 
-# Example 1:
+# # Example 1:
 
-# Input: nums = [3,1,-2,-5,2,-4]
-# Output: [3,-2,1,-5,2,-4]
-# Explanation:
-# The positive integers in nums are [3,1,2]. The negative integers are [-2,-5,-4].
-# The only possible way to rearrange them such that they satisfy all conditions is [3,-2,1,-5,2,-4].
-# Other ways such as [1,-2,2,-5,3,-4], [3,1,2,-2,-5,-4], [-2,3,-5,1,-4,2] are incorrect because they do not satisfy one or more conditions.  
-# Example 2:
+# # Input: nums = [3,1,-2,-5,2,-4]
+# # Output: [3,-2,1,-5,2,-4]
+# # Explanation:
+# # The positive integers in nums are [3,1,2]. The negative integers are [-2,-5,-4].
+# # The only possible way to rearrange them such that they satisfy all conditions is [3,-2,1,-5,2,-4].
+# # Other ways such as [1,-2,2,-5,3,-4], [3,1,2,-2,-5,-4], [-2,3,-5,1,-4,2] are incorrect because they do not satisfy one or more conditions.  
+# # Example 2:
 
-# Input: nums = [-1,1]
-# Output: [1,-1]
-# Explanation:
-# 1 is the only positive integer and -1 the only negative integer in nums.
-# So nums is rearranged to [1,-1].
+# # Input: nums = [-1,1]
+# # Output: [1,-1]
+# # Explanation:
+# # 1 is the only positive integer and -1 the only negative integer in nums.
+# # So nums is rearranged to [1,-1].
  
 
-# Constraints:
+# # Constraints:
 
-# 2 <= nums.length <= 2 * 105
-# nums.length is even
-# 1 <= |nums[i]| <= 105
-# nums consists of equal number of positive and negative integers.
+# # 2 <= nums.length <= 2 * 105
+# # nums.length is even
+# # 1 <= |nums[i]| <= 105
+# # nums consists of equal number of positive and negative integers.
  
 
-# It is not required to do the modifications in-place.
+# # It is not required to do the modifications in-place.
  
-# Seen this question in a real interview before?
-# 1/5
-# Yes
-# No
-# Accepted
-# 6,87,748/814.3K
-# Acceptance Rate
-# 84.5%
-# Topics
-# Array
-# Two Pointers
-# Simulation
-# Weekly Contest 277
-# icon
-# Companies
-# Hint 1
-# Divide the array into two parts- one comprising of only positive integers and the other of negative integers.
-# Hint 2
-# Merge the two parts to get the resultant array.
-# Similar Questions
-# Discussion (211)
+# # Seen this question in a real interview before?
+# # 1/5
+# # Yes
+# # No
+# # Accepted
+# # 6,87,748/814.3K
+# # Acceptance Rate
+# # 84.5%
+# # Topics
+# # Array
+# # Two Pointers
+# # Simulation
+# # Weekly Contest 277
+# # icon
+# # Companies
+# # Hint 1
+# # Divide the array into two parts- one comprising of only positive integers and the other of negative integers.
+# # Hint 2
+# # Merge the two parts to get the resultant array.
+# # Similar Questions
+# # Discussion (211)
 
-# Choose a type
-
-
-
-# Copyright © 2025 LeetCode. All rights reserved.
-
-# 3.9K
+# # Choose a type
 
 
-# 211
+
+# # Copyright © 2025 LeetCode. All rights reserved.
+
+# # 3.9K
 
 
+# # 211
 
 
 
 
 
-from typing import List
-class Solution:
-    def rearrangeArray(self, nums: List[int]) -> List[int]:
-        arr=[0]*len(nums)
-        neg=1
-        pos=0
-        for i in range(len(nums)):
+
+
+# from typing import List
+# class Solution:
+#     def rearrangeArray(self, nums: List[int]) -> List[int]:
+#         arr=[0]*len(nums)
+#         neg=1
+#         pos=0
+#         for i in range(len(nums)):
+#             if nums[i]>0:
+#                 arr[pos]=nums[i]
+#                 pos+=2
+#             else:
+#                 arr[neg]=nums[i]
+#                 neg+=2
+            
+#         return arr
+    
+
+
+# class Solution:
+#     def rearrangeArray(self, nums: List[int]) -> List[int]:
+#         pos=[]
+#         neg=[]
+
+#         for i in  nums:
+#             if i > 0:
+#                 pos.append(i)
+#             else:
+#                 neg.append(i)
+            
+#         negative=0
+#         postive=0
+#         for i in range(len(nums)):
+#             if i %2==0:
+#                 nums[i]=pos[postive]
+#                 postive+=1
+#             else:
+#                 nums[i]=neg[negative]
+#                 negative+=1
+            
+#         return nums
+            
+    
+    
+
+
+def Rearrangement(nums):
+    for i in range(len(nums)):
+        if i%2==0:
+            val=True
+            pos=find(val,nums,i)
+            nums[pos],nums[i]=nums[i],nums[pos]
+        else:
+            val=False
+            neg=find(val,nums,i)
+            nums[neg],nums[i]=nums[i],nums[neg]
+    
+    return nums
+
+
+def find(val,nums,j):
+    for i in range(j,len(nums)):
+        if val:
             if nums[i]>0:
-                arr[pos]=nums[i]
-                pos+=2
-            else:
-                arr[neg]=nums[i]
-                neg+=2
+                return i
+        else:
+            if nums[i]<0:
+                return i
             
-        return arr
-    
 
 
-class Solution:
-    def rearrangeArray(self, nums: List[int]) -> List[int]:
-        pos=[]
-        neg=[]
+nums = [3,1,-2,-5,2,-4]
+print(Rearrangement(nums))
 
-        for i in  nums:
-            if i > 0:
-                pos.append(i)
-            else:
-                neg.append(i)
-            
-        negative=0
-        postive=0
-        for i in range(len(nums)):
-            if i %2==0:
-                nums[i]=pos[postive]
-                postive+=1
-            else:
-                nums[i]=neg[negative]
-                negative+=1
-            
-        return nums
-            
-    
-        
+
+
+
+
+for i in range(5):
+    print()
+    for i in range(5):
+        print("*",end="")
