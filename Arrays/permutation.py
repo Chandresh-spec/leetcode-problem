@@ -13,7 +13,7 @@ def permutation(nums):
 
     small=0
     for i in range(i+1,len(nums)):
-        if nums[i]>nums[index] and nums[i]<nums[]
+        if nums[i]>nums[index] and nums[i]<nums[mini]
 
 nums=[3,2,1]
 print(permutation(nums))
