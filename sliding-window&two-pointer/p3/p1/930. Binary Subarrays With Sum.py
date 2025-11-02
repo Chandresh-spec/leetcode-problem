@@ -1,39 +1,26 @@
+from typing import List
+class Solution:
+    def numSubarraysWithSum(self, nums: List[int], goal: int) -> int:
+        
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def cal(nums,goal):
-        if goal < 0:
-              return 0
-        def binary_sum(goal):
-            c_sum=0
+        def binary_sum(nums,goal):
+            if goal < 0:
+                return 0
             count=0
-            r=0
+            sum_of=0
+            st=0
             for i in range(len(nums)):
-                c_sum=c_sum+nums[i]
+                count+=nums[i]
 
-                while c_sum >  goal :
+                while count>goal:
+                    count-=nums[st]
+                    st+=1
                 
-                        c_sum -= nums[r]
-                        r+=1
-                count+= i - r+1
-            return count
-        return binary_sum(goal) - binary_sum(goal-1)
-  
+                sum_of+=i-st+1
+            
+            return sum_of
+        
 
+        return binary_sum(nums,goal)-binary_sum(nums,goal-1)
 
-nums = [1,0,1,0,1]
-goal=2
-print(cal(nums,goal))
+        
