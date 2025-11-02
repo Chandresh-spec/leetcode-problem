@@ -46,3 +46,10 @@ class Solution:
             total_sum+=cardPoints[len(cardPoints)-i-1]
             maxi=max(maxi,total_sum)
         return maxi
+
+
+
+
+
+hashma={1:0,5:0}
+print(len(hashma))
