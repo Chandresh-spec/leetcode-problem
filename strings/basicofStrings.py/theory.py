@@ -1,32 +1,58 @@
-#string?
-#strings is sequence of character enclosed in single or double quotes
-
-example="hello"
-
-# Immutable: Strings cannot be changed after creation.
-
-# Indexing: Access characters using index.
-
-s = "hello"
-print(s[0])     # 'h'
-print(s[-1])    # 'o'
+# string is sequence of character enclosed in quotes
 
 
-# Slicing:
-print(s[1:4])     # 'ell'
-print(s[::-1])
+# single='chandresh'
+# db="moger"
+# trip='''moger'''
 
 
+# print(single)
+# for i in single:
+#     print(i)
 
-# | Method                 | Description                             |
-# | ---------------------- | --------------------------------------- |
-# | `s.lower()`            | Convert to lowercase                    |
-# | `s.upper()`            | Convert to uppercase                    |
-# | `s.strip()`            | Remove leading/trailing whitespace      |
-# | `s.replace(old, new)`  | Replace substring                       |
-# | `s.find(sub)`          | Find first occurrence (-1 if not found) |
-# | `s.startswith(prefix)` | Check if starts with                    |
-# | `s.endswith(suffix)`   | Check if ends with                      |
-# | `s.split(delim)`       | Split into list                         |
-# | `s.join(list)`         | Join list with string                   |
-# | `s.count(sub)`         | Count occurrences of substring          |
+
+# 
+# 
+# name="chandresh"
+# 
+# print(name.endswith('sh'))
+# 
+# name="moge, moger "
+# 
+# l=name.split(',')
+# print(l)
+# 
+# 
+# s="madum"
+# print(s[::-1])
+# 
+# 
+# count=0
+# for num in s:
+    # if num in "aeiou":
+        # count+=1
+    # 
+# print(count)
+# 
+# 
+# lne=len(s)-1
+# n=len(s)//2
+# for i in range(n):
+    # if s[i]!=s[lne-i]:
+        # print(False)
+    # 
+# print(True)
+
+
+s="aabbcde"
+
+for char in s :
+    if s.count(char)==1:
+        print(char)
+        break
+
+
+s='  cha  n d '
+
+n=s.replace(" ","")
+print(n)
