@@ -64,7 +64,18 @@
     # print()
 
 
-s = "the sky is blue"
-print(len(s))
-for i in s:
-    print(i,end="")
+nums= "the sky is blue"
+s1=""
+s2=""
+for i in range(len(nums)-1,-1,-1):
+    char=nums[i]
+    if char!=" ": 
+        s1=s1+char
+    else:
+        if char ==" ":
+            if s1!= " ":
+                s2=s1+" "+s2
+            
+    
+print(s2)
+
