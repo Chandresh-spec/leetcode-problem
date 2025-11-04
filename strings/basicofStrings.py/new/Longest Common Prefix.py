@@ -28,7 +28,7 @@
 # strs[i] consists of only lowercase English letters if it is non-empty.
 
 
-
+from typing import List
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
         prefix=strs[0]
