@@ -65,3 +65,9 @@ class Solution:
             m2[ord(t[i])]=i+1
 
          return True
+    
+
+
+from collections import Counter
+l="Aabb"
+print(Counter(l))
