@@ -77,6 +77,21 @@ class Linkedlist:
                 print(True)
             temp=temp.next
         print(False)
+    
+
+    def length(self):
+        if self.head is None:
+            return 0
+        
+        count=0
+        temp=self.head
+
+        while temp:
+            count+=1
+            temp=temp.next
+        
+
+        return count
 
 l1=Linkedlist()
 
@@ -95,5 +110,5 @@ n3.next=n4
 
 l1.remove_at_st()
 l1.search(99)
-
+print(l1.length())
 l1.traversal()
