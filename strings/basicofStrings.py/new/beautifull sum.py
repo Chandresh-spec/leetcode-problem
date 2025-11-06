@@ -15,3 +15,13 @@ class Solution:
                 
 
         return count
+
+
+
+
+
+
+hashmap={"c":1,"d":4,"p":0}
+
+new=sorted(hashmap.items(),key=lambda y:y[1])
+print(new)
