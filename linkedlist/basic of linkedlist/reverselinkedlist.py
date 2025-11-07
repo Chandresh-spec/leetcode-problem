@@ -40,6 +40,15 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+
+
+
+
+
+
+
+
+# optimal apparoc
 class Solution:
     def reverseList(self, head):
         a=None

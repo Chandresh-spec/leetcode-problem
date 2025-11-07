@@ -41,7 +41,8 @@ class Dlinkedlist1:
     def insert_at_beg(self,data):
         nb=Node(data)
         if self.head is None:
-            return nb
+            self.head=nb
+            return 
         
 
         nb.next=self.head
@@ -52,7 +53,8 @@ class Dlinkedlist1:
     def insert_at_end(self,data):
         ne=Node(data)
         if self.head is None:
-            return ne
+            self.head=ne
+            return 
         
         temp=self.head
 
@@ -66,7 +68,8 @@ class Dlinkedlist1:
     def insert_at_middle(self,index,data):
         np=Node(data)
         if self.head is None:
-            return np
+            self.head=np
+            return 
         
         temp=self.head
         for i in range(1,index-1):
@@ -76,6 +79,67 @@ class Dlinkedlist1:
         temp.next.prev=np
         temp.next=np
         np.prev=temp
+
+# ____________________________________________________________________________________________________________________________________________________________________________________________________
+    # remove operations
+
+
+    def remove_from_beg(self):
+        if self.head is None:
+            return 
+        
+        if self.head.next is None:
+            self.head =None
+            return 
+        
+        self.head=self.head.next
+        self.head.prev=None
+
+    
+
+
+    def remove_from_end(self):
+        if self.head is None:
+            return None
+        if self.head.next is None:
+            self.head=None
+            return
+        a=self.head.next
+        temp=self.head
+
+        while a.next:
+            a=a.next
+            temp=temp.next
+        
+
+        temp.next=None
+        a.prev=None
+    
+
+
+
+
+    def remove_from_middle(self,index):
+        if self.head is None:
+            return None
+        
+        temp=self.head
+        for i in range(1,index-1):
+            if temp.next is None:
+                break
+            temp=temp.next
+        
+        del_node=temp.next
+        if del_node is None:
+            return
+        
+        temp.next=del_node.next
+        if del_node.next:
+            del_node.next.prev=temp
+
+
+        
+
 
 
 n1=Node(10)
@@ -113,8 +177,19 @@ dll.insert_at_end(90)
 
 dll.insert_at_middle(2,10)
 dll.insert_at_middle(1,10)
-dll.forward__traversal()
 
+# _____________________________________________________________________________________________________________________________________
+
+dll.remove_from_beg()
+dll.remove_from_beg()
+dll.remove_from_end()
+dll.remove_from_end()
+dll.remove_from_end()
+dll.remove_from_middle(2)
+dll.remove_from_middle(3)
+dll.remove_from_middle(3)
+
+dll.forward__traversal()
 print()
 dll.backward_traversal()
 
