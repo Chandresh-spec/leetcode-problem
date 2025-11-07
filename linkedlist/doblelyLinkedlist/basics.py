@@ -116,7 +116,24 @@ class Dlinkedlist1:
         a.prev=None
     
 
+    def reverse_ddl(self):
+        if self.head is None:
+            return
+        if self.head.next is None:
+            return
+        
+        a=None
+        temp=self.head
 
+        while temp:
+
+            next_node=temp.next
+            temp.next=a
+            temp.prev=next_node
+
+            a=temp
+            temp=next_node
+            
 
 
     def remove_from_middle(self,index):
@@ -188,11 +205,11 @@ dll.remove_from_end()
 dll.remove_from_middle(2)
 dll.remove_from_middle(3)
 dll.remove_from_middle(3)
-
+dll.reverse_ddl()
 dll.forward__traversal()
 print()
-dll.backward_traversal()
-
+# dll.backward_traversal()
+# 
 
 
 
