@@ -139,7 +139,7 @@ class Dlinkedlist1:
     def remove_from_middle(self,index):
         if self.head is None:
             return None
-        
+    
         temp=self.head
         for i in range(1,index-1):
             if temp.next is None:
