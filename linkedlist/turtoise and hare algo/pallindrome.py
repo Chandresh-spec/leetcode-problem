@@ -53,3 +53,58 @@ class Solution:
                 return False
             temp=temp.next
         return True
+
+
+
+# __________________________________________________________________________________________________
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def isPalindrome(self, head) -> bool:
+        fast=head
+        slow=head
+
+        while fast and fast.next:
+            slow=slow.next
+            fast=fast.next.next
+        
+
+        if fast:
+            slow=slow.next
+        
+
+        prev=None
+        temp=slow
+
+        while temp:
+            next_node=temp.next
+            temp.next=prev
+            prev=temp
+            temp=next_node
+        
+
+        first,second=head,prev
+        while second:
+            if first.val!=second.val:
+                return False
+            
+
+            first=first.next
+            second=second.next
+
+        return True
+
+        
+            
+              
+   
+
+
+    
+          
+
+        
