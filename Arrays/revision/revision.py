@@ -1,131 +1,40 @@
-# # def largest_element(nums):
-# #     # largest_element=float('-inf')
-# #     # for i in nums:
-# #         # if i > largest_element:
-# #             # largest_element=i
-# #         # 
-# #     # 
-# #     # return largest_element
 
-# #     nums.sort(reverse=False)
+# def removeDuplicates(nums) -> int:
+#         hashmap={}
+#         index=0
+#         for i in range(len(nums)):
 
-# #     return nums
-    
-
-
-
-
-# # nums=[1,8,9,6,3,1]
-# # print(largest_element(nums))
-
-# # #o(n)
-
-
-
-
-
-
-
-# # # if if the sorted array()
-# # from typing import List
-
-# # # class Solution:
-# #     def check(self, nums: List[int]) -> bool:
-# #         count=0
-# #         n=len(nums)
-
-# #         for i in range(n):
-# #             index=(i+1)%n
-
-# #             if nums[i]> nums[index]:
-# #                 count+=1
+#             if nums[i] not in hashmap:
+#                 nums[index],nums[i]=nums[i],nums[index]
+#                 hashmap[nums[index]]=1
+#                 index+=1
             
-# #         return count==1 or count==0
 
-
-
-
-
-
-
-
-
-# # def remove_duplicate(nums):
-#     # j=0
-#     # for i in range(1,len(nums)):
-#         # if nums[i]>nums[j]:
-#             # j+=1
-#             # nums[i],nums[j]=nums[j],nums[i]
-#         # 
-#     # return j+1
-#             # 
-# # 
-# # 
-# # nums = [1,1,2]
-# # print(remove_duplicate(nums))
-# # 
-# # 
-
-
-# # rotate array
-
-
-# def rotatearray(nums,k):
-#     def rotate(nums,st,end):
-        
-#         while st <= end :
-#             nums[st],nums[end]=nums[end],nums[st]
-#             st+=1
-#             end-=1
-        
-#         return nums
-    
-
-#     rotate(nums,0,len(nums)-1)
-
-#     rotate(nums,0,k-1)
-
-#     rotate(nums,k,len(nums)-1)
-
-
-#     return nums
-
-# nums=[-1,-100,3,99]
-# k=2
-# print(rotatearray(nums,k))
-
-
-
-
-# from typing import List
-# def moveZeroes(self, nums: List[int]) -> None:
-#         """
-#         Do not return anything, modify nums in-place instead.
-#         """
-#         i=0
-#         for j in range(len(nums)):
-
-#             if nums[j]!=0:
-#                 nums[i],nums[j]=nums[j],nums[i]
-#                 i+=1
-            
 #         return nums
 
-       
 
+# nums=[0,0,1,1,1,2,2,3,3,4]
+# print(removeDuplicates(nums))
+
+
+
+
+def missingNumber(nums) -> int:
+        for i in range(len(nums)):
+            correct_place=nums[i]
+
+            if correct_place <= len(nums)-1 and i !=nums[correct_place]:
+                nums[i],nums[correct_place]=nums[correct_place],nums[i]
         
 
-
-
-
-
-
-def unionarray(nums1,nums2):
-
-    return list(set(nums1)|set(nums2))
-nums1 = [3, 4, 6, 7, 9, 9]
-nums2 = [1, 5, 7, 8, 8]
-
-
-
-print(unionarray(nums1,nums2))
+        return nums
+        
+        # for i in range(len(nums)):
+            # if nums[i]!=i:
+                # return i
+        # 
+        # return i+1
+        # 
+# 
+nums=[9,6,4,2,3,5,7,0,1]
+print(missingNumber(nums))
