@@ -160,7 +160,56 @@ class Solution:
         return low
 
         
+
+
+
+import math
+class Solution:
+    def smallestDivisor(self, nums: List[int], threshold: int) -> int:
+
+
+        def smallest(nums,threshold,j):
+            count=0
+            for i in range(len(nums)):
+               count+=math.ceil(nums[i]/j)
         
+            return count
+
+    
+
+
+
+        lb=1
+        ub=max(nums)
+
+        while lb <= ub:
+            mid=(ub+lb)//2
+   
+
+            value=smallest(nums,threshold,mid)
+
+
+            if value <= threshold:
+                ub=mid-1
+            else:
+               lb=mid+1
+            
+        return lb
+        
+
+
+
+
+
+
+
+
+
+    
+
+
+
+      
             
 
         
