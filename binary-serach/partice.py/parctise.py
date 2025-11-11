@@ -113,3 +113,56 @@ for i in  range(len(lst)):
     hashmap[i]=lst[i]
 
 print(hashmap)
+
+
+
+
+
+from typing import List
+class Solution:
+    def minDays(self, bloomDay: List[int], m: int, k: int) -> int:
+        if len(bloomDay)<m*k:
+            return -1
+        def bloomday(bloomDay,m,k,j):
+            count=0
+            pair=0
+            for i in range(len(bloomDay)):
+               
+                if bloomDay[i]<=j:
+                    count+=1
+                    if count==k:
+                       count=0
+                       pair+=1
+                        
+                else:
+                    count=0
+            
+            return  pair >=m
+               
+            
+
+
+
+
+
+
+        low=min(bloomDay)
+        high=max(bloomDay)
+
+        while low <= high:
+            mid=(high+low)//2
+
+            if bloomday(bloomDay,m,k,mid):
+                high=mid-1
+            else:
+                low=mid+1
+            
+        return low
+
+        
+        
+            
+
+        
+
+        
