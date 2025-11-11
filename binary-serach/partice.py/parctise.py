@@ -102,3 +102,14 @@ def NthRoot(n, m):
 n=3
 m=27
 print(NthRoot(n,m))
+
+
+
+
+
+lst=[1,2,3,4]
+hashmap={}
+for i in  range(len(lst)):
+    hashmap[i]=lst[i]
+
+print(hashmap)
