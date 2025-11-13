@@ -201,6 +201,56 @@ class Solution:
 
 
 
+class Solution:
+    def shipWithinDays(self, weights: List[int], days: int) -> int:
+
+        def check(weights,days,j):
+            count=0
+            total_days=1
+            for i in range(len(weights)):
+                if count+weights[i]>j:
+                    total_days+=1
+                    count=weights[i]
+                    
+                else:
+                    count+=weights[i]
+                   
+            return total_days
+            
+
+
+
+
+
+
+
+
+        lb=max(weights)
+        ub=sum(weights)
+
+        while lb <= ub:
+            mid=(ub+lb)//2
+
+            total_days=check(weights,days,mid)
+            if total_days<=days:
+                ub=mid-1
+              
+            else:
+                  lb=mid+1
+                
+        return lb
+                
+            
+       
+        
+
+
+            
+        
+
+
+
+
 
 
 
