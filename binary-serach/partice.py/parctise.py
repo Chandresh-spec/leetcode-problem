@@ -288,25 +288,29 @@ def agressiveCow(nums,k):
                 count+=1
                 start=nums[i]
         
-        return count>=k
-
-
-
-    
-    maxi=max(nums)
-    mini=min(nums)
-    for i in range(1,maxi):
-        if not check(nums,k,i):
-            return i-1
+        return count
 
 
     
-   
-    return maxi-nums[0]
+    lb=1
+    ub=nums[-1]-nums[0]
+
+    while lb <= ub :
+        mid=(ub+lb)//2
+
+        val=check(nums,k,mid)
+
+        if val <k:
+            ub=mid-1
+        else:
+            lb=mid+1
+    
+
+    return ub
 
 
-nums =  [4, 2, 1, 3, 6]
-k=2
+nums =  [10, 1, 2, 7, 5]
+k=3
 nums.sort()
 print(agressiveCow(nums,k))
 
