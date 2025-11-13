@@ -245,7 +245,36 @@ class Solution:
         
 
 
+
+class Solution:
+    def findKthPositive(self, arr: List[int], k: int) -> int:
+        
+        lb=0
+        ub=len(arr)-1
+
+
+        while lb <=ub:
+            mid=(ub+lb)//2
+
+
+            missing=arr[mid]-mid
             
+
+
+            if missing <= k:
+                lb=mid+1
+            else:
+                ub=mid-1
+        
+
+        return lb+k
+
+        
+
+
+    
+
+         
         
 
 
