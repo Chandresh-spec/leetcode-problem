@@ -278,47 +278,76 @@
         
 
 
+# 
+# def agressiveCow(nums,k):
+    # def check(nums,k,j):
+        # count=1
+        # start=nums[0]
+        # for i in range(1,len(nums)):
+            # if nums[i]-start>=j:
+                # count+=1
+                # start=nums[i]
+        # 
+        # return count
+# 
+# 
+    # 
+    # lb=1
+    # ub=nums[-1]-nums[0]
+# 
+    # while lb <= ub :
+        # mid=(ub+lb)//2
+# 
+        # val=check(nums,k,mid)
+# 
+        # if val <k:
+            # ub=mid-1
+        # else:
+            # lb=mid+1
+    # 
+# 
+    # return ub
+# 
+# 
+# nums =  [10, 1, 2, 7, 5]
+# k=3
+# nums.sort()
+# print(agressiveCow(nums,k))
+# 
 
-def agressiveCow(nums,k):
-    def check(nums,k,j):
+
+
+
+def BookAllocation(nums,m):
+
+    def check(nums,m,j):
         count=1
-        start=nums[0]
-        for i in range(1,len(nums)):
-            if nums[i]-start>=j:
+        sum_of=0
+        for i in range(len(nums)):
+            if sum_of+nums[i]<j:
+                sum_of+=nums[i]
+            else:
                 count+=1
-                start=nums[i]
+                sum_of=nums[i]
         
-        return count
+        return count==m
 
 
-    
-    lb=1
-    ub=nums[-1]-nums[0]
 
-    while lb <= ub :
-        mid=(ub+lb)//2
+    mini=max(nums)
+    maxi=sum(nums)
 
-        val=check(nums,k,mid)
-
-        if val <k:
-            ub=mid-1
-        else:
-            lb=mid+1
-    
-
-    return ub
-
-
-nums =  [10, 1, 2, 7, 5]
-k=3
-nums.sort()
-print(agressiveCow(nums,k))
-
-
+    for i in range(mini,maxi):
+        if check(nums,m,i):
+            return i-1
+    else:
+        return -1
 
       
             
-
+nums = nums = [15, 17, 20]
+m=2
+print(BookAllocation(nums,m))
         
 
         
