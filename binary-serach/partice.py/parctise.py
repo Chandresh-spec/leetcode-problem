@@ -330,23 +330,30 @@ def BookAllocation(nums,m):
                 count+=1
                 sum_of=nums[i]
         
-        return count==m
+        return count
 
 
 
-    mini=max(nums)
-    maxi=sum(nums)
+    lb=max(nums)
+    ub=sum(nums)
 
-    for i in range(mini,maxi):
-        if check(nums,m,i):
-            return i-1
-    else:
-        return -1
+    while lb <= ub :
+        mid=(ub+lb)//2
+
+        value=check(nums,m,mid)
+
+        if value <=m:
+            ub=mid-1
+        else:
+            lb=mid+1
+        
+    return ub
 
       
             
-nums = nums = [15, 17, 20]
+nums =  [15, 17, 20]
 m=2
+
 print(BookAllocation(nums,m))
         
 
