@@ -64,3 +64,45 @@ class Solution:
                 return i
         
         return  low
+
+
+
+
+
+class Solution:
+    def splitArray(self, nums: List[int], k: int) -> int:
+        
+
+        def check(nums,j):
+            partition=1
+            subarray=0
+            for i in range(len(nums)):
+                if nums[i]+subarray<=j:
+                    subarray+=nums[i]
+                else:
+                    partition+=1
+                    subarray=nums[i]
+            
+            return partition
+
+
+
+        
+
+
+
+        low=max(nums)
+        high=sum(nums)
+
+        while low <= high:
+            mid=(high+low)//2
+
+            val=check(nums,mid)
+
+            if val <= k:
+                high=mid-1
+            else:
+                low=mid+1
+        
+
+        return low
