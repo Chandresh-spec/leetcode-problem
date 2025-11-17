@@ -41,3 +41,17 @@ def largestodd(nums):
 
 nums="52"
 print(largestodd(nums))
+
+
+
+
+
+class Solution:
+    def largestOddNumber(self, num: str) -> str:
+        for i in range(len(num)-1,-1,-1):
+            ele=int(num[i])
+
+            if ele%2==1:
+                return num[:i+1]
+        
+        return ""
