@@ -180,8 +180,35 @@ class Dlinkedlist1:
                 temp=next_node
             else:
                 temp=temp.next
+    
 
-               
+
+    def findpair(self,target):
+        arr=[]
+        last=self.head
+
+        while last.next:
+            last=last.next
+
+        
+        first=self.head
+
+        while first and last and first != last and first.prev != last:
+
+            if last.data+first.data==target:
+                arr.append([first.data,last.data])
+                first=first.next
+                last=last.prev
+            
+            elif last.data+first.data>target:
+                last=last.prev
+            else:
+                first=first.next
+        
+
+        return arr
+
+
                
 
 
@@ -190,11 +217,11 @@ class Dlinkedlist1:
 
 
 n1=Node(1)
-n2=Node(2)
-n3=Node(3)
-n4=Node(1)
-n5=Node(4)
-
+n2=Node(5)
+n3=Node(6)
+# n4=Node(9)
+# n5=Node(6)
+# 
 
 
 dll=Dlinkedlist1()
@@ -205,22 +232,23 @@ n1.next=n2
 n2.next=n3
 n2.prev=n1
 
+# 
+# n3.next=n4
+# n3.prev=n2
+# 
+# n4.next=n5
+# n4.prev=n3
+# 
+# n5.prev=n4
 
-n3.next=n4
-n3.prev=n2
-
-n4.next=n5
-n4.prev=n3
-
-n5.prev=n4
-
-
-
+# dll.insert_at_end(8)
+# dll.insert_at_end(9)
 
 # _____________________________________________________________________________________________________________________________________
-dll.deleteallOccurences(1)
+# dll.deleteallOccurences(1)
 dll.forward__traversal()
 print()
+print(dll.findpair(6))
 # dll.backward_traversal()
 # 
 
