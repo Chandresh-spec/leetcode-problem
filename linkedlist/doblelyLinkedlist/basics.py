@@ -207,6 +207,38 @@ class Dlinkedlist1:
         
 
         return arr
+    
+
+
+
+    def removeDuplicates(self):
+        # If the list is empty, return None
+        if not self.head:
+            return None
+
+        current = self.head
+
+        # Traverse the list until the second last node
+        while current and current.next:
+            nextDistinct = current.next
+
+            # Skip all nodes with the same value as current
+            while nextDistinct and nextDistinct.data == current.data:
+                nextDistinct = nextDistinct.next
+
+            # Connect current node to the next distinct node
+            current.next = nextDistinct
+            if nextDistinct:
+                nextDistinct.prev = current
+
+            # Move to the next node
+            current = current.next
+
+        return self.head
+
+
+            
+            
 
 
                
@@ -217,11 +249,10 @@ class Dlinkedlist1:
 
 
 n1=Node(1)
-n2=Node(5)
-n3=Node(6)
-# n4=Node(9)
-# n5=Node(6)
-# 
+n2=Node(2)
+n3=Node(3)
+# n4=Node(1)
+# n5=Node(1) 
 
 
 dll=Dlinkedlist1()
@@ -232,23 +263,24 @@ n1.next=n2
 n2.next=n3
 n2.prev=n1
 
-# 
+
 # n3.next=n4
 # n3.prev=n2
-# 
+
 # n4.next=n5
 # n4.prev=n3
-# 
-# n5.prev=n4
 
-# dll.insert_at_end(8)
+# n5.prev=n4
+# 
+# dll.insert_at_end(2)
 # dll.insert_at_end(9)
 
 # _____________________________________________________________________________________________________________________________________
 # dll.deleteallOccurences(1)
+dll.sortDDl()
 dll.forward__traversal()
 print()
-print(dll.findpair(6))
+# print(dll.findpair(6))
 # dll.backward_traversal()
 # 
 
