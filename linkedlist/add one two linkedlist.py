@@ -65,7 +65,7 @@ class Linkedlist:
         i=0
         temp=self.head
         a=None
-        while temp:
+        while temp and i <len(st):
             temp.data=st[i]
             i+=1
             a=temp
@@ -84,6 +84,7 @@ class Linkedlist:
 h1=Linkedlist()
 
 n1=Node(9)
+
 
 
 

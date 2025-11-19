@@ -153,17 +153,47 @@ class Dlinkedlist1:
         temp.next=del_node.next
         if del_node.next:
             del_node.next.prev=temp
+    
+
+    def deleteallOccurences(self,value):
+
+        while self.head and self.head.data==value:
+            self.head=self.head.next
+
+            if self.head:
+                self.head.prev=None
+        
+
+        temp=self.head
+
+        while temp:
+            if temp.data==value:
+                prev_node=temp.prev
+                next_node=temp.next
+
+                prev_node.next=next_node
+
+                if next_node:
+                    next_node.prev=prev_node
+                
+
+                temp=next_node
+            else:
+                temp=temp.next
+
+               
+               
 
 
         
 
 
 
-n1=Node(10)
-n2=Node(20)
-n3=Node(30)
-n4=Node(40)
-n5=Node(50)
+n1=Node(1)
+n2=Node(2)
+n3=Node(3)
+n4=Node(1)
+n5=Node(4)
 
 
 
@@ -185,27 +215,10 @@ n4.prev=n3
 n5.prev=n4
 
 
-dll.insert_at_beg(5)
-dll.insert_at_beg(1)
-dll.insert_at_beg(6)
-dll.insert_at_end(70)
-dll.insert_at_end(80)
-dll.insert_at_end(90)
 
-dll.insert_at_middle(2,10)
-dll.insert_at_middle(1,10)
 
 # _____________________________________________________________________________________________________________________________________
-
-dll.remove_from_beg()
-dll.remove_from_beg()
-dll.remove_from_end()
-dll.remove_from_end()
-dll.remove_from_end()
-dll.remove_from_middle(2)
-dll.remove_from_middle(3)
-dll.remove_from_middle(3)
-dll.reverse_ddl()
+dll.deleteallOccurences(1)
 dll.forward__traversal()
 print()
 # dll.backward_traversal()
