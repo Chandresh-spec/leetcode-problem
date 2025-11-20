@@ -117,7 +117,65 @@ class Solution:
       
          
 
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        
+        def median(a,b):
+            if len(a)>len(b):
+                return median(b,a)
+            
 
+            n1=len(a)
+            n2=len(b)
+
+            low,high=0,n1
+
+            while low <= high:
+                cut1=(low+high)//2
+                cut2=(n1+n2+1)//2-cut1
+
+
+                l1 = float('-inf') if cut1 == 0 else a[cut1 - 1]
+                l2 = float('-inf') if cut2 == 0 else b[cut2 - 1]
+                r1 = float('inf') if cut1 == n1 else a[cut1]
+                r2 = float('inf') if cut2 == n2 else b[cut2]
+
+
+
+                if l1<= r2 and l2<= r1:
+                    if (n1 + n2) % 2 == 0:
+                         return (max(l1, l2) + min(r1, r2)) / 2
+                    else:
+                         return max(l1, l2)
+                
+                elif l1> r2:
+                    high = cut1 - 1
+                
+
+                else:
+                    low = cut1 + 1
+
+
+
+        return median(nums1,nums2)
+            
+      
+         
+
+
+
+        
+
+
+
+
+
+
+
+         
+
+
+        
 
         
 
