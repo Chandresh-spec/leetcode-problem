@@ -77,4 +77,33 @@ class Solution:
                 return call(matrix,i,n,target)
             
         return False
+        
+
+
+
+
+
+
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        n=len(matrix[0])
+        m=len(matrix)
+
+        lb,ub=0,n*m-1
+
+        while lb <= ub :
+            mid=(ub+lb)//2
+
+            row=mid//n
+            col=mid%n
+
+            if matrix[row][col]==target:
+                return True
             
+            elif target> matrix[row][col]:
+                lb=mid+1
+            
+            else:
+                ub=mid-1
+            
+        return False

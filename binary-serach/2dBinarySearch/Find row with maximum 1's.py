@@ -85,10 +85,9 @@
 def solveNQueens(n):
     def backtrack(row):
         if row == n:
-            # Print board in the required format
             for r in board:
                 print(" ".join(r))
-            print()      # blank line between solutions
+            print()     
             return
 
         for col in range(n):
@@ -107,9 +106,6 @@ def solveNQueens(n):
             diag1.remove(row + col)
             diag2.remove(row - col)
 
-    # -------------------------------
-    # Initial setup
-    # -------------------------------
     board = [["."] * n for _ in range(n)]
     columns = set()
     diag1 = set()
@@ -118,6 +114,6 @@ def solveNQueens(n):
     backtrack(0)
 
 
-# Run the function
+
 n = int(input("Enter Board Size (n>=4): "))
 solveNQueens(n)
