@@ -27,22 +27,51 @@
 
 
 
-def Matrix(nums):
-    maxi=-1
+# def Matrix(nums):
+    # maxi=-1
+    # n=len(nums[0])
+    # m=len(nums)
+    # for  i in range(n):
+        # count=0
+        # for j in range(m):
+            # if nums[i][j]==1:
+                # count+=1
+            # 
+        # 
+        # maxi=max(maxi,count)
+    # 
+    # return maxi
+# 
+# 
+# mat = [ [0, 0, 1], [0, 1, 1], [0, 1, 1] ]
+
+# print(Matrix(mat))
+
+
+
+
+def BinaryMatrix(nums):
+    maxi=0
     n=len(nums[0])
     m=len(nums)
-    for  i in range(n):
-        count=0
-        for j in range(m):
-            if nums[i][j]==1:
-                count+=1
+    for i in range(m):
+        low=0
+        high=n-1
+
+        while low<= high:
+            mid=(high+low)//2
+
+            if nums[i][mid]==1:
+                high=mid-1
+            else:
+                low=mid+1
             
-        
+        count=n-low
         maxi=max(maxi,count)
     
     return maxi
 
 
-mat = [ [0, 0, 1], [0, 1, 1], [0, 1, 1] ]
+mat = [ [1, 1, 1], [0, 0, 1], [0, 0, 0] ]
+print(BinaryMatrix(mat))
 
-print(Matrix(mat))
