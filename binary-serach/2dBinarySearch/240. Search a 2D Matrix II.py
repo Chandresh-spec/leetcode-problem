@@ -90,3 +90,27 @@ class Solution:
         
 
         return False
+
+
+
+
+
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        n=len(matrix)
+        m=len(matrix[0])
+        row=0
+        col=m-1
+
+        while row< n and col>=0:
+            current=matrix[row][col]
+
+            if current==target:
+                return True
+            
+            elif current>target:
+                col-=1
+            else:
+                row+=1
+        
+        return False
