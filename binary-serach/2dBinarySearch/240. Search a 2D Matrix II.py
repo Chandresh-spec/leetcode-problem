@@ -48,3 +48,45 @@ class Solution:
         
 
         return False
+    
+
+
+
+
+
+
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+
+        def call(matrix,row,n,target):
+            lb,ub=0,n-1
+
+            while lb <= ub :
+                mid=(ub+lb)//2
+
+                if matrix[row][mid]==target:
+                    return True
+                
+                if  matrix[row][mid]>target:
+                    
+                    ub=mid-1
+                else:
+                    lb=mid+1
+                    
+            
+            return False
+
+
+
+
+        n=len(matrix[0])
+        m=len(matrix)
+
+
+        for i in range(m):
+            if matrix[i][0]<= target <= matrix[i][n-1]:
+                if call(matrix,i,n,target):
+                    return True
+        
+
+        return False
