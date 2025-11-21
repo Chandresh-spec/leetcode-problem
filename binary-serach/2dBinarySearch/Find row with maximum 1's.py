@@ -49,29 +49,75 @@
 
 
 
+# 
+# def BinaryMatrix(nums):
+    # maxi=0
+    # n=len(nums[0])
+    # m=len(nums)
+    # for i in range(m):
+        # low=0
+        # high=n-1
+# 
+        # while low<= high:
+            # mid=(high+low)//2
+# 
+            # if nums[i][mid]==1:
+                # high=mid-1
+            # else:
+                # low=mid+1
+            # 
+        # count=n-low
+        # maxi=max(maxi,count)
+    # 
+    # return -1  if maxi==0 else maxi
+# 
+# 
+# 
+# mat = [ [0, 0, 1], [0, 1, 1], [0, 1, 1] ]
+# print(BinaryMatrix(mat))
+# 
 
-def BinaryMatrix(nums):
-    maxi=0
-    n=len(nums[0])
-    m=len(nums)
-    for i in range(m):
-        low=0
-        high=n-1
-
-        while low<= high:
-            mid=(high+low)//2
-
-            if nums[i][mid]==1:
-                high=mid-1
-            else:
-                low=mid+1
-            
-        count=n-low
-        maxi=max(maxi,count)
-    
-    return maxi
 
 
-mat = [ [1, 1, 1], [0, 0, 1], [0, 0, 0] ]
-print(BinaryMatrix(mat))
 
+
+
+def solveNQueens(n):
+    def backtrack(row):
+        if row == n:
+            # Print board in the required format
+            for r in board:
+                print(" ".join(r))
+            print()      # blank line between solutions
+            return
+
+        for col in range(n):
+            if col in columns or (row + col) in diag1 or (row - col) in diag2:
+                continue
+
+            board[row][col] = "Q"
+            columns.add(col)
+            diag1.add(row + col)
+            diag2.add(row - col)
+
+            backtrack(row + 1)
+
+            board[row][col] = "."
+            columns.remove(col)
+            diag1.remove(row + col)
+            diag2.remove(row - col)
+
+    # -------------------------------
+    # Initial setup
+    # -------------------------------
+    board = [["."] * n for _ in range(n)]
+    columns = set()
+    diag1 = set()
+    diag2 = set()
+
+    backtrack(0)
+
+
+# Run the function
+n = int(input("Enter Board Size (n>=4): "))
+solveNQueens(n)
