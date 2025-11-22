@@ -79,3 +79,48 @@ def findPeak(mat):
 mat = [[1,4],[3,2]]
 
 print(findPeak(mat))
+
+
+
+
+
+
+from typing import List
+class Solution:
+    def findPeakGrid(self, mat: List[List[int]]) -> List[int]:
+
+
+        def findmaxi(col,mat):
+            maxi=mat[0][col]
+            row=0
+            for i in range(1,len(mat)):
+                if mat[i][col]>maxi:
+                    maxi=mat[i][col]
+                    row=i
+            return row
+                
+
+        rows=len(mat)
+        col=len(mat[0])
+        lb,ub=0,col-1
+
+        while lb <= ub :
+            mid=(ub+lb)//2
+
+            maxi=findmaxi(mid,mat)
+
+            
+            left=mat[maxi][mid-1]if mid-1 >= 0 else -1
+            right=mat[maxi][mid+1] if mid+1< col else -1
+
+            if  mat[maxi][mid]>left and mat[maxi][mid]>right:
+                return [maxi,mid]
+            
+            elif left > mat[maxi][mid]:
+                ub=mid-1
+            
+            else:
+                lb=mid+1
+        
+
+        return [-1,-1]
