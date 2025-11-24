@@ -387,3 +387,28 @@ def findKRotation(nums):
 
 nums = [3, 4, 5, 1, 2]
 print(findKRotation(nums))
+
+
+
+
+
+
+def sqaureRoot(n):
+      lb,ub=1,n
+
+      while lb <= ub :
+            mid=(ub+lb)//2
+
+            sqrt=mid*mid
+
+            if sqrt<=n:
+                  lb=mid+1
+                  
+            else:
+                  ub=mid-1
+      return ub
+
+
+
+num=50
+print(sqaureRoot(num))

@@ -1,9 +1,9 @@
 def helper(arr,n,index):
-            if index>=n//2:
-                return arr
+        if index>=n//2:
+            return arr
             
-            arr[index],arr[n-index-1]=arr[n-index-1],arr[index]
-            return helper(arr,n,index+1)
+        arr[index],arr[n-index-1]=arr[n-index-1],arr[index]
+        return helper(arr,n,index+1)
         
        
 
