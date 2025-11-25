@@ -1,221 +1,18 @@
-# # # def binary_search(nums,target):
-# # #     left=0
-# # #     right=len(nums)-1
 
-# # #     while left < right:
-# # #         mid=(right+left)//2
+def aggresiveCow(nums,k):
 
-# # #         if nums[mid]==target:
-# # #             return nums[mid],True
-        
+      def check(nums,j,k):
+            count=1
+            cow1=nums[0]
+            for i in range(1,len(nums)):
 
-# # #         elif target > nums[mid]:
-# # #             left=mid+1
-# # #         else:
-# # #             right=mid-1
-    
-
-
-# # # nums=[1,2,3,4,5,6,7,8]
-# # # target=7
-# # # print(list(binary_search(nums,target)))
-    
-
-# # # def lowerBound(nums,target):
-# # #     lb=0
-# # #     ub=len(nums)-1
-# # #     ans=len(nums)
-
-# # #     while lb <=ub:
-# # #         mid=(ub+lb)//2
-
-# # #         if nums[mid]>target:
-# # #             ans=nums[mid]
-# # #             ub=mid-1
-# # #         else:
-# # #             lb=mid+1
-        
-# # #     return ans
-
-
-# # # nums= nums= [3,5,8,9,15,19]
-# # # x = 9
-
-# # # print(lowerBound(nums,x))
-
-
-
-
-
-
-
-# # def floorSqrt(n) -> int:
-# #         lb=1
-# #         ub=n
-# #         ans=0
-
-# #         while lb <= ub :
-# #             mid=(ub+lb)//2
-
-# #             sqrt=mid*mid
-
-
-# #             if sqrt <= n :
-# #                 ans=mid
-# #                 lb=mid+1
+                  if nums[i]-cow1>=j:
+                        count+=1
+                        cow1=nums[i]
             
-# #             else:
-# #                 ub=mid-1
-            
-# #         return ans
-
-# # n=28
-# # print(floorSqrt(n))
-
-
-
-
-
-
-# # def NthRoot(n, m):
-       
-# #     lb=1
-# #     ub=m
-# #     ans= -1
-
-# #     while lb <= ub :
-# #         mid=(ub+lb)//2
-
-# #         cube=mid*mid*mid
-# #         if cube==m:
-# #             return mid
-
-# #         if cube < m :
-# #            lb=mid+1
-        
-# #         else:
-# #            ub=mid-1
-      
-# #     return ans
-
-
-# # n=3
-# # m=27
-# # print(NthRoot(n,m))
-
-
-
-
-
-# # lst=[1,2,3,4]
-# # hashmap={}
-# # for i in  range(len(lst)):
-# #     hashmap[i]=lst[i]
-
-# # print(hashmap)
-
-
-
-
-
-# # from typing import List
-# # class Solution:
-# #     def minDays(self, bloomDay: List[int], m: int, k: int) -> int:
-# #         if len(bloomDay)<m*k:
-# #             return -1
-# #         def bloomday(bloomDay,m,k,j):
-# #             count=0
-# #             pair=0
-# #             for i in range(len(bloomDay)):
-               
-# #                 if bloomDay[i]<=j:
-# #                     count+=1
-# #                     if count==k:
-# #                        count=0
-# #                        pair+=1
-                        
-# #                 else:
-# #                     count=0
-            
-# #             return  pair >=m
-               
+            return count
             
 
-
-
-
-
-
-# #         low=min(bloomDay)
-# #         high=max(bloomDay)
-
-# #         while low <= high:
-# #             mid=(high+low)//2
-
-# #             if bloomday(bloomDay,m,k,mid):
-# #                 high=mid-1
-# #             else:
-# #                 low=mid+1
-            
-# #         return low
-
-        
-
-
-
-# # import math
-# # class Solution:
-# #     def smallestDivisor(self, nums: List[int], threshold: int) -> int:
-
-
-# #         def smallest(nums,threshold,j):
-# #             count=0
-# #             for i in range(len(nums)):
-# #                count+=math.ceil(nums[i]/j)
-        
-# #             return count
-
-    
-
-
-
-# #         lb=1
-# #         ub=max(nums)
-
-# #         while lb <= ub:
-# #             mid=(ub+lb)//2
-   
-
-# #             value=smallest(nums,threshold,mid)
-
-
-# #             if value <= threshold:
-# #                 ub=mid-1
-# #             else:
-# #                lb=mid+1
-            
-# #         return lb
-        
-
-
-
-
-
-# # class Solution:
-# #     def shipWithinDays(self, weights: List[int], days: int) -> int:
-
-# #         def check(weights,days,j):
-# #             count=0
-# #             total_days=1
-# #             for i in range(len(weights)):
-# #                 if count+weights[i]>j:
-# #                     total_days+=1
-# #                     count=weights[i]
-                    
-# #                 else:
-# #                     count+=weights[i]
-                   
-# #             return total_days
             
 
 
@@ -224,191 +21,33 @@
 
 
 
-
-# #         lb=max(weights)
-# #         ub=sum(weights)
-
-# #         while lb <= ub:
-# #             mid=(ub+lb)//2
-
-# #             total_days=check(weights,days,mid)
-# #             if total_days<=days:
-# #                 ub=mid-1
-              
-# #             else:
-# #                   lb=mid+1
-                
-# #         return lb
-                
-            
-       
-        
-
-
-
-# # class Solution:
-# #     def findKthPositive(self, arr: List[int], k: int) -> int:
-        
-# #         lb=0
-# #         ub=len(arr)-1
-
-
-# #         while lb <=ub:
-# #             mid=(ub+lb)//2
-
-
-# #             missing=arr[mid]-mid
-            
-
-
-# #             if missing <= k:
-# #                 lb=mid+1
-# #             else:
-# #                 ub=mid-1
-        
-
-# #         return lb+k
-
-        
-
-
-    
-
-         
-        
-
-
-# # 
-# # def agressiveCow(nums,k):
-#     # def check(nums,k,j):
-#         # count=1
-#         # start=nums[0]
-#         # for i in range(1,len(nums)):
-#             # if nums[i]-start>=j:
-#                 # count+=1
-#                 # start=nums[i]
-#         # 
-#         # return count
-# # 
-# # 
-#     # 
-#     # lb=1
-#     # ub=nums[-1]-nums[0]
-# # 
-#     # while lb <= ub :
-#         # mid=(ub+lb)//2
-# # 
-#         # val=check(nums,k,mid)
-# # 
-#         # if val <k:
-#             # ub=mid-1
-#         # else:
-#             # lb=mid+1
-#     # 
-# # 
-#     # return ub
-# # 
-# # 
-# # nums =  [10, 1, 2, 7, 5]
-# # k=3
-# # nums.sort()
-# # print(agressiveCow(nums,k))
-# # 
-
-
-
-
-# def BookAllocation(nums,m):
-
-#     def check(nums,m,j):
-#         count=1
-#         sum_of=0
-#         for i in range(len(nums)):
-#             if sum_of+nums[i]<j:
-#                 sum_of+=nums[i]
-#             else:
-#                 count+=1
-#                 sum_of=nums[i]
-        
-#         return count
-
-
-
-#     lb=max(nums)
-#     ub=sum(nums)
-
-#     while lb <= ub :
-#         mid=(ub+lb)//2
-
-#         value=check(nums,m,mid)
-
-#         if value <=m:
-#             ub=mid-1
-#         else:
-#             lb=mid+1
-        
-#     return ub
-
-      
-            
-# nums =  [15, 17, 20]
-# m=2
-
-# print(BookAllocation(nums,m))
-        
-
-    
-
-
-
-
-def findKRotation(nums):
-        lb,ub=0,len(nums)-1
-        index=-1
-        ans=float('inf')
-
-        while lb <= ub :
-            mid=(ub+lb)//2
-
-            if nums[lb]<=nums[mid]:
-                    if nums[lb]< ans :
-                        ans=nums[lb]
-                        index=lb
-                    lb=mid+1
-            else:
-                if nums[mid]<=ans:
-                      ans=nums[mid]
-                      index=mid
-                ub=mid-1
-        
-
-        return index
-
-
-nums = [3, 4, 5, 1, 2]
-print(findKRotation(nums))
-
-
-
-
-
-
-def sqaureRoot(n):
-      lb,ub=1,n
+      ub=max(nums)
+      lb=min(nums)
 
       while lb <= ub :
             mid=(ub+lb)//2
 
-            sqrt=mid*mid
 
-            if sqrt<=n:
-                  lb=mid+1
-                  
-            else:
+            checkans=check(nums,mid,k)
+
+
+            if checkans < k:
                   ub=mid-1
+
+            else:
+                  lb=mid+1
+      
+
       return ub
 
+                  
 
 
-num=50
-print(sqaureRoot(num))
+            
+
+
+
+
+nums = [10, 1, 2, 7, 5]
+nums.sort()
+print(aggresiveCow(nums,2))
