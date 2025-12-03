@@ -3,7 +3,7 @@ def nse(nums):
     n=len(nums)
     arr=[n]*n
     for i in range(n-1,-1,-1):
-        while  stack and nums[stack[-1]]>nums[i]:
+        while  stack and nums[stack[-1]]>=nums[i]:
             stack.pop()
         
         arr[i]=stack[-1] if stack else n
