@@ -21,23 +21,49 @@
 # 
 
 
+# 
+# def insertion_sort(nums):
+    # for i in range(1,len(nums)):
+        # key=nums[i]
+        # j=i-1
+# 
+        # while j >=0 and key < nums[j]:
+            # nums[j+1]=nums[j]
+            # j-=1
+        # 
+# 
+        # nums[j+1]=key
+    # 
+# 
+    # return nums
+# 
+# 
+# 
+# nums=[1,8,9,6,3,5,0]
+# print(insertion_sort(nums))
 
-def insertion_sort(nums):
-    for i in range(1,len(nums)):
-        key=nums[i]
-        j=i-1
 
-        while j >=0 and key < nums[j]:
-            nums[j+1]=nums[j]
-            j-=1
-        
 
-        nums[j+1]=key
+def selectionSort(nums):
+    for i in range(len(nums)):
+        mini=i
+        for j in range(i,len(nums)):
+            if nums[j]<nums[mini]:
+                mini=j
+            
+        nums[i],nums[mini]=nums[mini],nums[i]
     
-
     return nums
 
 
 
-nums=[1,8,9,6,3,5,0]
-print(insertion_sort(nums))
+n=int(input("enter the number of element u want to insert:"))
+nums=[]
+for i in range(n):
+    nums.append(int(input(f"enter {i+1}th element:")))
+
+print("after sorting")
+print(selectionSort(nums))
+
+
+
