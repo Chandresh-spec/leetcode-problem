@@ -22,3 +22,25 @@ class Solution(object):
         
 
         return arr
+
+
+
+class Solution(object):
+    def nextGreaterElements(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        
+        n=len(nums)
+        arr=[-1]*n
+        for i in range(len(nums)):
+            for j in range(i+1,n*2):
+                index=j%n
+
+                if nums[index]>nums[i]:
+                    arr[i]=nums[index]
+                    break
+            
+           
+        return arr
