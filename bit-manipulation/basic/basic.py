@@ -43,4 +43,4 @@
 
 # and opertaor
 num=13
-print(num<<2)
+print(~5)
