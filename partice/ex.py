@@ -117,3 +117,17 @@ def insertion_sort(nums):
 
 nums=[5,4,7,1,0,2]
 print(insertion_sort(nums))
+
+
+
+
+
+
+
+a=5
+b=6
+a=a^b
+b=a^b
+a=a^b
+
+print(a,b)
