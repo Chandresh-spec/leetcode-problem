@@ -78,4 +78,21 @@ while n!=0:
 n=13
 
 n=n|(n+1)
-print(n)
+# print(n)
+
+
+
+
+# 29. Divide Two Integers
+
+dividend=7
+divisor=-3
+count=-1
+n=0
+while n <dividend:
+    count+=1
+    n+=divisor
+    
+
+
+print(count)
