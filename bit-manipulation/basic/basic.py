@@ -43,4 +43,11 @@
 
 # and opertaor
 num=13
-print(~5)
+# print(~5)
+# 
+
+
+
+
+# swap to numbers
+# 
