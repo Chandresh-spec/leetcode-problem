@@ -44,26 +44,65 @@
 
 
 
-def helper(nums,target):
-    def f(index,count):
-        if index == len(nums):
-            if count==target:
-                return 1
-            return 0
+# def helper(nums,target):
+    # def f(index,count):
+        # if index == len(nums):
+            # if count==target:
+                # return 1
+            # return 0
+        # 
+        # return f(index+1,count+nums[index]) +f(index+1,count)
+# 
+# 
+    # 
+    # return f(0,0)
+# 
+# 
+# nums=[1,2,3]
+# print(helper(nums,3))
+
+
+
+
+
+    
+
+def mergesort(nums):
+    if len(nums)==1:
+        return nums
+    
+    mid=len(nums)//2
+    left_arr=nums[:mid]
+    right_arr=nums[mid:]
+
+    left_half=mergesort(left_arr)
+    right_half=mergesort(right_arr)
+    return merge(left_half,right_half)
+
+
+
+def merge(left,right):
+    left_index=0
+    right_index=0
+    arr=[]
+    while left_index < len(left) and right_index < len(right):
+        if left[left_index] <= right[right_index]:
+            arr.append(left[left_index])
+            left_index+=1
+        else:
+            arr.append(right[right_index])
+            right_index+=1
         
-        return f(index+1,count+nums[index]) +f(index+1,count)
-
-
     
-    return f(0,0)
+    arr.extend(left[left_index:])
+    arr.extend(right[right_index:])
 
-
-nums=[1,2,3]
-print(helper(nums,3))
-
+    return arr
 
 
 
 
-    
+nums=[1,8,9,6,3,5]
+print(mergesort(nums))
+
 
