@@ -14,25 +14,56 @@
 
 
 
-def target_sum(nums,target):
-    ans=0
-    def f(count,index):
-        nonlocal ans
-        if index==len(nums):
+# def target_sum(nums,target):
+    # def f(count,index):
+        # 
+        # if index==len(nums):
+            # if count==target:
+                # return True
+            # return False
+            # 
+            # return
+        # 
+        # if f(count+nums[index],index+1)==True:
+            # return True
+        # if f(count,index+1)==True:
+            # return True
+        # 
+        # return False
+# 
+    # 
+    # return f(0,0)
+    # 
+# 
+# nums=[4, 2, 10, 5, 1, 3]
+# target=99
+# print(target_sum(nums,target))
+# 
+# 
+# 
+
+
+
+def helper(nums,target):
+    def f(index,count):
+        if index == len(nums):
             if count==target:
-                ans+=1
-            
-            return
+                return 1
+            return 0
         
-        f(count+nums[index],index+1)
-        f(count,index+1)
+        return f(index+1,count+nums[index]) +f(index+1,count)
+
 
     
-    f(0,0)
-    print(ans)
+    return f(0,0)
 
-nums=[4, 2, 10, 5, 1, 3]
-target=5
-target_sum(nums,target)
+
+nums=[1,2,3]
+print(helper(nums,3))
+
+
+
+
+
     
 
