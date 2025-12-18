@@ -237,27 +237,51 @@
 
 
 
-def subset2(nums):
+# def subset2(nums):
+    # ans=[]
+    # def helper(index,ds):
+        # nonlocal ans
+        # ans.append(ds[:])
+        # if index==len(nums):
+            # return
+        # 
+# 
+        # for i in range(index,len(nums)):
+            # if i > index and nums[i]== nums[i-1]:
+                # continue
+# 
+            # ds.append(nums[i])
+            # helper(i+1,ds)
+            # ds.pop()
+    # 
+# 
+    # helper(0,[])
+    # return ans
+# 
+# 
+# nums = [1,2,2]
+# print(subset2(nums))
+
+
+def combination3(k,n):
     ans=[]
-    def helper(index,ds):
-        nonlocal ans
-        ans.append(ds[:])
-        if index==len(nums):
+    def helper(index,ds,n):
+        if len(ds)==k:
+            if n==0:
+                ans.append(ds[:])
             return
+
         
+        for i in range(index,9):
 
-        for i in range(index,len(nums)):
-            if i > index and nums[i]== nums[i-1]:
-                continue
-
-            ds.append(nums[i])
-            helper(i+1,ds)
+            ds.append(i)
+            helper(i+1,ds,n-i)
             ds.pop()
-    
 
-    helper(0,[])
+    helper(1,[],n)
     return ans
 
 
-nums = [1,2,2]
-print(subset2(nums))
+k=3
+n=9
+print(combination3(k,n))
