@@ -76,36 +76,52 @@
 
 
 
-class Solution:
-    def isPalindrome(self, s: str) -> bool:
-        s=s.strip()
-        left,right=0,len(s)-1
+# class Solution:
+    # def isPalindrome(self, s: str) -> bool:
+        # s=s.strip()
+        # left,right=0,len(s)-1
+# 
+# 
+        # while left< right:
+            # while not s[left].isalnum() and left < right:
+                # left+=1
+            # 
+# 
+            # while not s[right].isalnum() and left<right:
+                # right-=1
+            # 
+# 
+# 
+            # if s[left].lower()!=s[right].lower():
+                # return False
+# 
+            # right-=1
+            # left+=1
+# 
+        # 
+        # return True
+# 
+        # 
 
 
-        while left< right:
-            while not s[left].isalnum() and left < right:
-                left+=1
+
+#  kadness algorithm
+
+def maxSubArray(nums):
+        maxi=float('-inf')
+        count=0
+        for i in nums:
+            count+=i
+            maxi=max(maxi,count)
+            if count<0:
+                count=0
             
-
-            while not s[right].isalnum() and left<right:
-                right-=1
-            
-
-
-            if s[left].lower()!=s[right].lower():
-                return False
-
-            right-=1
-            left+=1
-
         
-        return True
-
-        
+        return maxi
 
 
-
-
+nums=[1]
+print(maxSubArray(nums))
 
 
 
