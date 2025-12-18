@@ -67,42 +67,84 @@
 
     
 
-def mergesort(nums):
-    if len(nums)==1:
-        return nums
-    
-    mid=len(nums)//2
-    left_arr=nums[:mid]
-    right_arr=nums[mid:]
+# def mergesort(nums):
+    # if len(nums)==1:
+        # return nums
+    # 
+    # mid=len(nums)//2
+    # left_arr=nums[:mid]
+    # right_arr=nums[mid:]
+# 
+    # left_half=mergesort(left_arr)
+    # right_half=mergesort(right_arr)
+    # return merge(left_half,right_half)
+# 
+# 
+# 
+# def merge(left,right):
+    # left_index=0
+    # right_index=0
+    # arr=[]
+    # while left_index < len(left) and right_index < len(right):
+        # if left[left_index] <= right[right_index]:
+            # arr.append(left[left_index])
+            # left_index+=1
+        # else:
+            # arr.append(right[right_index])
+            # right_index+=1
+        # 
+    # 
+    # arr.extend(left[left_index:])
+    # arr.extend(right[right_index:])
+# 
+    # return arr
+# 
+# 
+# 
+# 
+# nums=[1,8,9,6,3,5]
+# print(mergesort(nums))
+# 
+# 
 
-    left_half=mergesort(left_arr)
-    right_half=mergesort(right_arr)
-    return merge(left_half,right_half)
 
 
 
-def merge(left,right):
-    left_index=0
-    right_index=0
-    arr=[]
-    while left_index < len(left) and right_index < len(right):
-        if left[left_index] <= right[right_index]:
-            arr.append(left[left_index])
-            left_index+=1
-        else:
-            arr.append(right[right_index])
-            right_index+=1
+# QuickSort()
+
+
+
+def quicksort(arr,lb,ub):
+    if lb < ub :
+        pi=partition(arr,lb,ub)
+
+        quicksort(arr,lb,pi-1)
+        quicksort(arr,pi+1,ub)
+
+
+
+def partition(arr,lb,ub):
+    pivot=lb
+    i=lb+1
+    j=ub
+
+    while i < j :
+        while arr[i]<=arr[pivot] and i < j :
+            i+=1
         
-    
-    arr.extend(left[left_index:])
-    arr.extend(right[right_index:])
+        while arr[j]>= arr[pivot] and i < j:
 
-    return arr
+            j-=1
+        arr[i],arr[j]=arr[j],arr[i]
+    
+    arr[i-1],arr[pivot]=arr[pivot],arr[i-1]
+
+    return i-1
 
 
 
 
 nums=[1,8,9,6,3,5]
-print(mergesort(nums))
-
+print(quicksort(nums,0,len(nums)-1))
+print(nums)
 
