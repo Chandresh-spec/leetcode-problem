@@ -217,18 +217,47 @@
 
 
 
+# 
+# def subset(nums):
+    # ans=[]
+    # def helper(index,count):
+        # if index==len(nums):
+            # ans.append(count)
+            # return
+        # helper(index+1,count+nums[index])
+        # helper(index+1,count)
+    # helper(0,0)
+    # return ans
+# nums = [2, 3]
+# print(subset(nums))
+# 
+# 
+# 
 
-def subset(nums):
+
+
+
+def subset2(nums):
     ans=[]
-    def helper(index,count):
+    def helper(index,ds):
+        nonlocal ans
+        ans.append(ds[:])
         if index==len(nums):
-            ans.append(count)
             return
-        helper(index+1,count+nums[index])
-        helper(index+1,count)
-    helper(0,0)
+        
+
+        for i in range(index,len(nums)):
+            if i > index and nums[i]== nums[i-1]:
+                continue
+
+            ds.append(nums[i])
+            helper(i+1,ds)
+            ds.pop()
+    
+
+    helper(0,[])
     return ans
-nums = [2, 3]
-print(subset(nums))
 
 
+nums = [1,2,2]
+print(subset2(nums))
