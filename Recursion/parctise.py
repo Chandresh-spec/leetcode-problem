@@ -153,31 +153,82 @@
 
 
 
-def combination_sum(candidate,target):
-    ans=set()
-    def helper(index,ds,target):
-        if len(candidate)==index:
-           if target == 0:
-               ans.add(tuple(ds[:]))
-           return
-        
-        if candidate[index]<=target:
-        
-            ds.append(candidate[index])
-            helper(index,ds,target-candidate[index])
-            ds.pop()
-        helper(index+1,ds,target)
-    
+# def combination_sum(candidate,target):
+    # ans=set()
+    # def helper(index,ds,target):
+        # if len(candidate)==index:
+        #    if target == 0:
+            #    ans.add(tuple(ds[:]))
+        #    return
+        # 
+        # if candidate[index]<=target:
+        # 
+            # ds.append(candidate[index])
+            # helper(index,ds,target-candidate[index])
+            # ds.pop()
+        # helper(index+1,ds,target)
+    # 
+# 
+# 
+# 
+# 
+    # helper(0,[],target)
+    # return [list(item) for item in ans]
+# 
+# 
+# 
+# 
+# candidates = [2,3,6,7]
+# target = 7
+# print(combination_sum(candidates,target))
 
 
 
 
-    helper(0,[],target)
-    return [list(item) for item in ans]
+# 
+# def combination2(nums,target):
+    # ans=[]
+    # def helper(index,ds,target):
+# 
+        # if target==0:
+            # ans.append(ds[:])
+        # 
+# 
+        # for i in range(index,len(nums)):
+            # if i> index and nums[i]==nums[i-1]:
+                # continue
+# 
+            # if nums[i]>target:
+                # break
+# 
+            # ds.append(nums[i])
+            # helper(i+1,ds,target-nums[i])
+            # ds.pop()
+        # 
+    # 
+    # helper(0,[],target)
+    # return ans
+# 
+# 
+# 
+# nums=[1,1,1,2,2]
+# target=4
+# print(combination2(nums,target))
 
 
 
 
-candidates = [2,3,6,7]
-target = 7
-print(combination_sum(candidates,target))
+def subset(nums):
+    ans=[]
+    def helper(index,count):
+        if index==len(nums):
+            ans.append(count)
+            return
+        helper(index+1,count+nums[index])
+        helper(index+1,count)
+    helper(0,0)
+    return ans
+nums = [2, 3]
+print(subset(nums))
+
+
