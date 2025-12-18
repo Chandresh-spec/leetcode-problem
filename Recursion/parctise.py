@@ -114,37 +114,70 @@
 
 
 
-def quicksort(arr,lb,ub):
-    if lb < ub :
-        pi=partition(arr,lb,ub)
+# def quicksort(arr,lb,ub):
+    # if lb < ub :
+        # pi=partition(arr,lb,ub)
+# 
+        # quicksort(arr,lb,pi-1)
+        # quicksort(arr,pi+1,ub)
+# 
+# 
+# 
+# def partition(arr,lb,ub):
+    # pivot=lb
+    # i=lb+1
+    # j=ub
+# 
+    # while i < j :
+        # while arr[i]<=arr[pivot] and i < j :
+            # i+=1
+        # 
+        # while arr[j]>= arr[pivot] and i < j:
+# 
+            # j-=1
+        # arr[i],arr[j]=arr[j],arr[i]
+    # 
+    # arr[i-1],arr[pivot]=arr[pivot],arr[i-1]
+# 
+    # return i-1
+# 
+# 
+# 
+# 
+# nums=[1,8,9,6,3,5]
+# print(quicksort(nums,0,len(nums)-1))
+# print(nums)
+# 
+# 
 
-        quicksort(arr,lb,pi-1)
-        quicksort(arr,pi+1,ub)
 
 
 
-def partition(arr,lb,ub):
-    pivot=lb
-    i=lb+1
-    j=ub
-
-    while i < j :
-        while arr[i]<=arr[pivot] and i < j :
-            i+=1
+def combination_sum(candidate,target):
+    ans=set()
+    def helper(index,ds,target):
+        if len(candidate)==index:
+           if target == 0:
+               ans.add(tuple(ds[:]))
+           return
         
-        while arr[j]>= arr[pivot] and i < j:
-
-            j-=1
-        arr[i],arr[j]=arr[j],arr[i]
+        if candidate[index]<=target:
+        
+            ds.append(candidate[index])
+            helper(index,ds,target-candidate[index])
+            ds.pop()
+        helper(index+1,ds,target)
     
-    arr[i-1],arr[pivot]=arr[pivot],arr[i-1]
-
-    return i-1
 
 
 
 
-nums=[1,8,9,6,3,5]
-print(quicksort(nums,0,len(nums)-1))
-print(nums)
+    helper(0,[],target)
+    return [list(item) for item in ans]
 
+
+
+
+candidates = [2,3,6,7]
+target = 7
+print(combination_sum(candidates,target))
