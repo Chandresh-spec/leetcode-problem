@@ -59,17 +59,17 @@
     
 
 
-def sts(s):
-    s=s.split()
-    arr=[""]*len(s)
-
-    for i in range(len(s)):
-        arr[int(s[i][-1])-1]=s[i][:-1]
-    
-
-    print(arr)
-
-
-
-s = "Myself2 Me1 I4 and3"
-print(sts(s))
+# def sts(s):
+    # s=s.split()
+    # arr=[""]*len(s)
+# 
+    # for i in range(len(s)):
+        # arr[int(s[i][-1])-1]=s[i][:-1]
+    # 
+# 
+    # print(arr)
+# 
+# 
+# 
+# s = "Myself2 Me1 I4 and3"
+# print(sts(s))
