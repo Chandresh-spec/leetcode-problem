@@ -36,10 +36,51 @@
 
 
 
-def maxProdDif(nums):
-    nums.sort(reverse=True)
+# def maxProdDif(nums):
+#     nums.sort(reverse=True)
 
-    return (nums[0]*nums[1])-(nums[-1]*nums[-2])
+#     return (nums[0]*nums[1])-(nums[-1]*nums[-2])
+
+
+
+# nums = [5,6,2,7,4]
+# print(maxProdDif(nums))
+
+
+
+
+
+
+def maxProdDif(nums):
+    small1=float('inf')
+    small2=float('inf')
+
+    large1=float('-inf')
+    large2=float('-inf')
+
+    for num in nums:
+        if num>large1:
+            large2=large1
+            large1=num
+        elif num>large2 and num<=large1:
+            large2=num
+
+        if num<small1:
+            small2=small1
+            small1=num
+        elif small2>num and small1 !=small2:
+
+            small2=num
+        
+
+    
+
+    return   (large1*large2) - (small1*small2)
+
+
+
+
+    
 
 
 
