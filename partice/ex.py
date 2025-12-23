@@ -107,21 +107,67 @@
 
 #  kadness algorithm
 
-def maxSubArray(nums):
-        maxi=float('-inf')
-        count=0
-        for i in nums:
-            count+=i
-            maxi=max(maxi,count)
-            if count<0:
-                count=0
-            
+# def maxSubArray(nums):
+        # maxi=float('-inf')
+        # count=0
+        # for i in nums:
+            # count+=i
+            # maxi=max(maxi,count)
+            # if count<0:
+                # count=0
+            # 
+        # 
+        # return maxi
+
+
+# nums=[1]
+# print(maxSubArray(nums))
+
+
+
+
+# def duplicate(nums):
+    # i=0
+    # for j in range(len(nums)):
+        # if nums[j]>nums[i]:
+            # nums[j],nums[i+1]=nums[i+1],nums[j]
+            # i+=1
+    # 
+    # return nums
+# 
+# 
+# 
+# 
+# nums = [0,0,1,1,1,2,2,3,3,4]
+# print(duplicate(nums))
         
-        return maxi
 
 
-nums=[1]
-print(maxSubArray(nums))
+#remove the zero to end
+
+
+def move_zero(nums):
+    if len(nums)==1:
+        return nums
+    for i in range(len(nums)-1):
+        if nums[i]==0:
+            for j in range(i,len(nums)-1):
+                nums[j]=nums[j+1]
+            
+
+            nums.append(0)
+        
+    return nums
+
+
+
+
+
+
+
+
+nums = [0,1,0,3,12]
+print(move_zero(nums))
 
 
 
