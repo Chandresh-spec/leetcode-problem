@@ -56,3 +56,4 @@ print("_"*40)
 inorder(s1.root)
 
 
+print(n1.left.__dict__)
