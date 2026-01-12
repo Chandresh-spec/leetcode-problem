@@ -65,6 +65,27 @@ def postorder(root):
     print(stack2)
 
 
+# using two stack representation
+def postorder2(root):
+    last_visited=None
+    cur=root
+    stack=[root]
+
+    while cur or stack:
+        if cur.left:
+            stack.append(cur)
+            cur=cur.left
+
+
+        else:
+            peek=stack[-1]
+
+            if peek.right and last_visited!=peek.right:
+                cur=peek.right
+
+            else:
+                print(peek.data)
+                last_visited=stack.pop()
 
 
 
@@ -81,4 +102,6 @@ n1.right.right=Node(70)
 # preorder(t1.root)
 
 postorder(t1.root)
+
+postorder2(t1.root)
 
