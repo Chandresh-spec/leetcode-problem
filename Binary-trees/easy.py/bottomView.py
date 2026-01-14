@@ -66,7 +66,7 @@
 #         self.data = val
 #         self.left = left
 #         self.right = right
-
+from collections import deque
 class Solution:
     def bottomView(self, root):
         #your code goes here
