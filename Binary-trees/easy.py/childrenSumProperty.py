@@ -1,12 +1,47 @@
-def sumchid(root):
-    # Base case: empty node or leaf node
-    if root is None or (root.left is None and root.right is None):
-        return True
+class Node:
+     def __init__(self,data):
+          self.data=data
+          self.left=None
+          self.right=None
+    
+class Tree:
+     def __init__(self):
+          self.root=None
 
-    # If both children exist
-    if root.left and root.right:
-        if root.data != root.left.data + root.right.data:
-            return False
 
-    # Recursively check left and right subtrees
-    return sumchid(root.left) and sumchid(root.right)
+
+
+def allRootToLeaf(root):
+        #your code goes here
+        ans=[]
+        def helper(root,ds):
+            if root is None:
+                return 
+            
+            
+            if root.left is None and root.right is  None:
+                ans.append(ds[:])
+            else:
+                ds.append(root.data)
+                helper(root.left,ds)
+                helper(root.right,ds)
+                ds.pop()
+            
+            
+        
+
+        helper(root,[])
+        return ans
+
+
+
+t1=Tree()
+n1=Node(1)
+t1.root=n1
+n1.left=Node(2)
+n1.right=Node(3)
+n1.left.right=Node(5)
+n1.right.right=Node(3)
+n1.right.right=Node(60)
+
+print(allRootToLeaf(t1.root))
