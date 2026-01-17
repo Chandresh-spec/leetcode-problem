@@ -25,7 +25,7 @@ def allRootToLeaf(root):
                 ds.append(root.data)
                 helper(root.left,ds)
                 helper(root.right,ds)
-                ds.pop()
+            ds.pop()
             
             
         
