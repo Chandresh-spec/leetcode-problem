@@ -63,4 +63,4 @@ n1.left.right=Node(5)
 n1.right.right=Node(3)
 n1.right.right=Node(60)
 
-print(distanceK(t1.root))
+print(distanceK(t1.root,))
