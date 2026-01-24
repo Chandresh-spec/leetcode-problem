@@ -63,3 +63,33 @@ class Solution:
                 return False
         
         return True
+
+
+
+
+
+
+# optimal
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isValidBST(self, root):
+        def helper(root,int_max,int_min):
+            if root is None:
+                return True
+            
+
+            if root.val >= int_max or root.val<= int_min:
+                return False
+            
+
+            return  helper(root.left,root.val,int_min) and helper(root.right,int_max,root.val)
+        
+
+        return helper(root, float('inf'),float('-inf'))
