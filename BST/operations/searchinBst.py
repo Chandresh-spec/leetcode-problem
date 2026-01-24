@@ -87,37 +87,58 @@ def traversal(root):
     
 
 
-def search(temp,key):
+# def search(temp,key):
     
 
-    if temp is None:
-        return False
+#     if temp is None:
+#         return False
     
 
-    if temp.data==key:
-        return True
+#     if temp.data==key:
+#         return True
     
-    if temp.data>key:
-        return search(temp.left,key)
+#     if temp.data>key:
+#         return search(temp.left,key)
 
-    return search(temp.right,key)
-
-
+#     return search(temp.right,key)
 
 
-def insertion(temp,key):
-    if temp is None:
-        return Node(key)
+
+
+# def insertion(temp,key):
+#     if temp is None:
+#         return Node(key)
     
-    if temp.data>key:
-         temp.left=insertion(temp.left,key)
+#     if temp.data>key:
+#          temp.left=insertion(temp.left,key)
         
-    else:
-        temp.right=insertion(temp.right,key)
+#     else:
+#         temp.right=insertion(temp.right,key)
     
-    return  temp
+#     return  temp
 
 
+def helper(root,val):
+            temp=root
+
+            while temp:
+                if temp.data>val:
+                    if temp.left:
+                        temp=temp.left
+                    
+                    else:
+                        temp.left=Node(val)
+                        break
+                    
+                else:
+                    if temp.right:
+                        temp=temp.right
+                    
+                    else:
+                        temp.right=Node(val)
+                        break
+                
+        
 
 
 
@@ -133,5 +154,5 @@ n1.right.left=Node(10)
 n1.right.right=Node(14)
 # traversal(t1.root)
 # print(search(t1.root,6))
-insertion(t1.root,11)
+helper(t1.root,11)
 print(traversal(t1.root))
