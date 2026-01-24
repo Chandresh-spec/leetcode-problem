@@ -43,13 +43,95 @@
 #         self.left = left
 #         self.right = right
 
-class Solution:
-    def searchBST(self,root,val):
-        temp=root
+# class Solution:
+#     def searchBST(self,root,val):
+#         temp=root
 
-        while temp:
-            if temp.val==val:
-                return temp
+#         while temp:
+#             if temp.val==val:
+#                 return temp
             
-            elif val < temp.val:
-                temp=temp.left
+#             elif val < temp.val:
+#                 temp=temp.left
+
+
+
+
+
+
+
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.left=None
+        self.right=None
+
+
+
+class BST:
+    def __init__(self):
+        self.root=None
+
+
+
+
+def traversal(root):
+    if root is None:
+        return 
+    
+    
+
+    print(root.data)
+    traversal(root.left)
+    traversal(root.right)
+    
+
+
+def search(temp,key):
+    
+
+    if temp is None:
+        return False
+    
+
+    if temp.data==key:
+        return True
+    
+    if temp.data>key:
+        return search(temp.left,key)
+
+    return search(temp.right,key)
+
+
+
+
+def insertion(temp,key):
+    if temp is None:
+        return Node(key)
+    
+    if temp.data>key:
+         temp.left=insertion(temp.left,key)
+        
+    else:
+        temp.right=insertion(temp.right,key)
+    
+    return  temp
+
+
+
+
+
+t1=BST()
+n1=Node(8)
+t1.root=n1
+
+n1.left=Node(4)
+n1.left.left=Node(2)
+n1.left.right=Node(6)
+n1.right=Node(12)
+n1.right.left=Node(10)
+n1.right.right=Node(14)
+# traversal(t1.root)
+# print(search(t1.root,6))
+insertion(t1.root,11)
+print(traversal(t1.root))
