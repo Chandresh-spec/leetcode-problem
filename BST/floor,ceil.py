@@ -1,17 +1,25 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.data = val
+#         self.left = left
+#         self.right = right
+
 class Solution:
     def floorCeilOfBST(self, root, key):
-        floor = ceil = -1
-        temp = root
+        #your code goes here
+        temp=root
+        ciel,floor=-1,-1
 
         while temp:
-            if temp.data == key:
-                return [key, key]
 
-            if temp.data < key:
-                floor = temp.data
-                temp = temp.right
+            if key < temp.data:
+                ciel=temp.data
+                temp=temp.left
+
+            
             else:
-                ceil = temp.data
-                temp = temp.left
-
-        return [floor, ceil]
+                floor=temp.data
+                temp=temp.right
+        
+        return [floor,ciel]
