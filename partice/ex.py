@@ -146,18 +146,18 @@
 #remove the zero to end
 
 
-def move_zero(nums):
-    if len(nums)==1:
-        return nums
-    for i in range(len(nums)-1):
-        if nums[i]==0:
-            for j in range(i,len(nums)-1):
-                nums[j]=nums[j+1]
+# def move_zero(nums):
+#     if len(nums)==1:
+#         return nums
+#     for i in range(len(nums)-1):
+#         if nums[i]==0:
+#             for j in range(i,len(nums)-1):
+#                 nums[j]=nums[j+1]
             
 
-            nums.append(0)
+#             nums.append(0)
         
-    return nums
+#     return nums
 
 
 
@@ -166,8 +166,37 @@ def move_zero(nums):
 
 
 
-nums = [0,1,0,3,12]
-print(move_zero(nums))
+# nums = [0,1,0,3,12]
+# print(move_zero(nums))
 
 
 
+
+
+
+# def cyclic_sort(nums):
+#     i=0
+    
+
+
+
+# nums=[4,5,2,2,1,6]
+# print(cyclic_sort(nums))
+        
+
+
+nums=[1,2,3,4,5,6,7,8]
+target=9
+
+left,right=0,len(nums)-1
+
+while left <= right:
+    if nums[left]+nums[right]==target:
+        print([nums[left],nums[right]])
+        break
+
+    elif nums[left]+nums[right]>target:
+        left+=1
+    else:
+        right+=1
+    
