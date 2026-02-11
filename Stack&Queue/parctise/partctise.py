@@ -28,22 +28,36 @@
     
 
 
-def isValid(s) -> bool:
-        stack=[]
-        for char in s:
-            if char in "([{":
-                stack.append(char)
+def decode(s):
+    stack=[]
+    for char in s:
+        if char != "]":
+            stack.append(char)
+        
+        else:
+            substr=""
+            while stack and  stack[-1].isalpha() :
+                ch=stack.pop()
+
+                substr=ch+substr
             
-            else:
-                ele=stack.pop()
-                if   (ele=="(" and char==")") or (ele=="{" and char=="}") or (ele=="[" and char=="]"):
-                    continue
-                return False
-        return len(stack)==0
+            stack.pop()
+            num=""
+            while stack and not stack[-1].isdigit():
+                num=stack.pop()+num
+                
+            
+            stack.append(substr*int(num))
+        
+    
+    return stack
 
 
 
 
-s ="(]"
-print(isValid(s))
+s ="abc3[cd]xyz"
+print(decode(s))
+
+                
+
    
