@@ -58,31 +58,89 @@
 
 
 
-def nextGreaterELement2(nums):
-        n=len(nums)
-        arr=[-1]*len(nums)
-        stack=[]
+# def nextGreaterELement2(nums):
+#         n=len(nums)
+#         arr=[-1]*len(nums)
+#         stack=[]
 
-        # for i in range(len(nums)):
-        #     for j in range(i,n*2):
-        #         j=j%n
-        #         if nums[j]>nums[i]:
-        #              arr[i]=nums[j]
-        #              break
+#         # for i in range(len(nums)):
+#         #     for j in range(i,n*2):
+#         #         j=j%n
+#         #         if nums[j]>nums[i]:
+#         #              arr[i]=nums[j]
+#         #              break
         
-        # return arr
-        for i in range(n*2-1,-1,-1):
-                while stack and nums[i%n]>=stack[-1]:
-                        stack.pop()
+#         # return arr
+#         for i in range(n*2-1,-1,-1):
+#                 while stack and nums[i%n]>=stack[-1]:
+#                         stack.pop()
                 
-                if i < n:
-                        if stack:
-                                arr[i]=stack[-1]
+#                 if i < n:
+#                         if stack:
+#                                 arr[i]=stack[-1]
                 
-                stack.append(nums[i%n])
+#                 stack.append(nums[i%n])
         
-        return arr
+#         return arr
                 
-nums =[1,2,1]
+# nums =[1,2,1]
 
-print(nextGreaterELement2(nums))      
+# print(nextGreaterELement2(nums))      
+
+
+def pse(nums):
+    stack=[]
+    pse=[-1]*(len(nums))
+    for i in range(len(nums)):
+        while stack and nums[i] <nums[stack[-1]]:
+            stack.pop()
+        
+        if stack:
+            pse[i]=stack[-1]
+        
+        stack.append(i)
+
+    return pse
+
+
+
+
+
+
+
+
+
+def nse(nums):
+    stack=[]
+    nse=[len(nums)]*len(nums)
+    for i in range(len(nums)-1,-1,-1):
+        while stack and nums[i]<=nums[stack[-1]]:
+            stack.pop()
+        
+        if stack:
+            nse[i]=stack[-1]
+        stack.append(i)
+    return nse
+
+
+
+def maximumrectangle(nums):
+    maxi=0
+    pse1=pse(nums)
+    nse1=nse(nums)
+    print(pse1)
+    print(nse1)
+    for i in range(len(nums)):
+        pval=pse1[i]
+        nval=nse1[i]
+        
+
+        total=(nval-pval-1)*nums[i]
+
+        maxi=max(maxi,total)
+
+    return maxi
+
+
+nums=[2,4]
+print(maximumrectangle(nums))
