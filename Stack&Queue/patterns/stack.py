@@ -88,21 +88,19 @@
 # print(nextGreaterELement2(nums))      
 
 
-def pse(nums):
-    stack=[]
-    pse=[-1]*(len(nums))
-    for i in range(len(nums)):
-        while stack and nums[i] <nums[stack[-1]]:
-            stack.pop()
+# def pse(nums):
+#     stack=[]
+#     pse=[-1]*(len(nums))
+#     for i in range(len(nums)):
+#         while stack and nums[i] <nums[stack[-1]]:
+#             stack.pop()
         
-        if stack:
-            pse[i]=stack[-1]
+#         if stack:
+#             pse[i]=stack[-1]
         
-        stack.append(i)
+#         stack.append(i)
 
-    return pse
-
-
+#     return pse
 
 
 
@@ -110,37 +108,75 @@ def pse(nums):
 
 
 
-def nse(nums):
-    stack=[]
-    nse=[len(nums)]*len(nums)
-    for i in range(len(nums)-1,-1,-1):
-        while stack and nums[i]<=nums[stack[-1]]:
-            stack.pop()
+
+
+# def nse(nums):
+#     stack=[]
+#     nse=[len(nums)]*len(nums)
+#     for i in range(len(nums)-1,-1,-1):
+#         while stack and nums[i]<=nums[stack[-1]]:
+#             stack.pop()
         
-        if stack:
-            nse[i]=stack[-1]
-        stack.append(i)
-    return nse
+#         if stack:
+#             nse[i]=stack[-1]
+#         stack.append(i)
+#     return nse
+
+
+
+# def maximumrectangle(nums):
+#     maxi=0
+#     pse1=pse(nums)
+#     nse1=nse(nums)
+#     print(pse1)
+#     print(nse1)
+#     for i in range(len(nums)):
+#         pval=pse1[i]
+#         nval=nse1[i]
+        
+
+#         total=(nval-pval-1)*nums[i]
+
+#         maxi=max(maxi,total)
+
+#     return maxi
+
+
+# nums=[2,4]
+# print(maximumrectangle(nums))
 
 
 
 def maximumrectangle(nums):
+    stack=[]
     maxi=0
-    pse1=pse(nums)
-    nse1=nse(nums)
-    print(pse1)
-    print(nse1)
-    for i in range(len(nums)):
-        pval=pse1[i]
-        nval=nse1[i]
-        
+    n=len(nums)
+    for i in range(n):
+        while stack and nums[i]<nums[stack[-1]]:
+            cur_ele=stack.pop()
+            pse=stack[-1] if stack else -1
+            nse=i
 
-        total=(nval-pval-1)*nums[i]
+            total=(nse-pse-1)*nums[cur_ele]
+
+            maxi=max(maxi,total)
+        
+        stack.append(i)
+        
+    while stack:
+        ele=stack.pop()
+        pse=stack[-1] if stack else -1
+
+        nse=n
+        total=(nse-pse-1)*nums[ele]
 
         maxi=max(maxi,total)
 
+    
     return maxi
 
 
-nums=[2,4]
-print(maximumrectangle(nums))
+
+heights = [2,4]
+print(maximumrectangle(heights))
+        
