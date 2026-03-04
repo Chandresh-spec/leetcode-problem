@@ -1,43 +1,69 @@
 
-def findPages(nums, m):
-        def check(i,nums,m):
-            total=0
-            count=0
-            for j in range(len(nums)):
-                if total+nums[j]<=i:
-                    total+=nums[j]
+# def findPages(nums, m):
+#         def check(i,nums,m):
+#             total=0
+#             count=0
+#             for j in range(len(nums)):
+#                 if total+nums[j]<=i:
+#                     total+=nums[j]
                 
-                else:
-                    total=nums[j]
-                    count+=1
+#                 else:
+#                     total=nums[j]
+#                     count+=1
                 
             
-            if total!=0:
-                 count+=1
+#             if total!=0:
+#                  count+=1
             
-            return count
+#             return count
 
 
         
-        lb=max(nums)
-        ub=sum(nums)
+#         lb=max(nums)
+#         ub=sum(nums)
 
-        while lb <=ub :
-            mid=(ub+lb)//2
+#         while lb <=ub :
+#             mid=(ub+lb)//2
 
-            total=check(mid,nums,m)
+#             total=check(mid,nums,m)
 
-            if total <=m:
-                 ub=mid-1
-            else:
-                 lb=mid+1
+#             if total <=m:
+#                  ub=mid-1
+#             else:
+#                  lb=mid+1
                 
             
-        return lb
+#         return lb
 
 
 
     
-nums = [25, 46, 28, 49, 24]
-m=4
-print(findPages(nums,m))
+# nums = [25, 46, 28, 49, 24]
+# m=4
+# print(findPages(nums,m))
+
+
+
+
+def rowWithMax1s(mat):
+    index=-1
+    maxi=0
+    n,m=len(mat),len(mat[0])
+    for i in range(n):
+        count=0
+        for j in range(m):
+            if mat[i][j]==1:
+                count+=1
+        
+        if count>maxi:
+            index=i
+            maxi=count
+        
+    return index
+
+
+
+
+
+mat = [ [0, 0, 1], [0, 1, 1], [0, 1, 1] ]
+print(rowWithMax1s(mat))
