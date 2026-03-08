@@ -82,38 +82,36 @@
 
 
 
-def solveNQueens(n):
-    def backtrack(row):
-        if row == n:
-            for r in board:
-                print(" ".join(r))
-            print()     
-            return
+def rowwithmax1(mat):
+    maxi=0
+    n=len(mat)
+    m=len(mat[0])
+    index=-1
+    for i in range(n):
+        lb=0
+        ub=m-1
+        while lb <=ub :
+            mid=(ub+lb)//2
 
-        for col in range(n):
-            if col in columns or (row + col) in diag1 or (row - col) in diag2:
-                continue
+            if mat[i][mid]==0:
+                lb=mid+1
+            
+            else:
+                ub=mid-1
+        count=m-lb
 
-            board[row][col] = "Q"
-            columns.add(col)
-            diag1.add(row + col)
-            diag2.add(row - col)
-
-            backtrack(row + 1)
-
-            board[row][col] = "."
-            columns.remove(col)
-            diag1.remove(row + col)
-            diag2.remove(row - col)
-
-    board = [["."] * n for _ in range(n)]
-    columns = set()
-    diag1 = set()
-    diag2 = set()
-
-    backtrack(0)
+        if count>maxi:
+            index=i
+            maxi=count
+    
+    return maxi,index
 
 
 
-n = int(input("Enter Board Size (n>=4): "))
-solveNQueens(n)
+
+mat = [ [0, 0, 1], [0, 1, 1], [0, 1, 1] ]
+print(rowwithmax1(mat))
+
+
+
+print(2%6)
