@@ -1,15 +1,49 @@
-def print_name(n):
+# parameterised Recursion
 
+# def helper(n,count):
+#     if n==1:
+#         print(count+1)
+#         return
 
-    if n<=0:
-        return 
     
+#     helper(n-1,count+n)
+
+
+# helper(5,0)
+
+# functional_recursion
+
+
+# def helper(n):
+#     if n ==1:
+#         return 1
     
-    print_name(n-1)
-    print(n)
+#     return n+helper(n-1)
+
+
+# print(helper(5))
 
 
 
+def subsequence(nums,k):
+    ans=[]
+    def helper(index,ds,count):
+        if index>=len(nums):
+            if count==k:
+                ans.append(ds[:])
+            return 
+        
+        ds.append(nums[index])
+        helper(index+1,ds,count+nums[index])
+
+        ds.pop()
+        helper(index+1,ds,count)
+    
+
+    helper(0,[],0)
+    return ans
 
 
-print(print_name(5))
+nums=[1,2,1]
+print(subsequence(nums,2))
+            
