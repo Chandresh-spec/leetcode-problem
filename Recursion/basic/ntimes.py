@@ -27,21 +27,23 @@
 
 def subsequence(nums,k):
     ans=[]
-    def helper(index,ds,count):
+    def helper(index,count):
         if index>=len(nums):
             if count==k:
-                ans.append(ds[:])
-            return 
-        
-        ds.append(nums[index])
-        helper(index+1,ds,count+nums[index])
+                return 1
+            return 0
 
-        ds.pop()
-        helper(index+1,ds,count)
     
+        
+        l=helper(index+1,count+nums[index])
+        
+        r=helper(index+1,count)
 
-    helper(0,[],0)
-    return ans
+        return l+r
+            
+
+    return helper(0,0)
+    
 
 
 nums=[1,2,1]

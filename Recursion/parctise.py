@@ -22,36 +22,79 @@
 
 
 
-def combinationSum(candidates,target):
-    ans=[]
-    def helper(index,ds,target):
-        if target==0:
-            ans.append(ds[:])
+# def combinationSum(candidates,target):
+#     ans=[]
+#     def helper(index,ds,target):
+#         if target==0:
+#             ans.append(ds[:])
         
-        for i in range(index,len(candidates)):
+#         for i in range(index,len(candidates)):
 
-            if i>index and candidates[i]==candidates[i-1]:
-                continue
+#             if i>index and candidates[i]==candidates[i-1]:
+#                 continue
 
-            if candidates[i]>target:
-                break
+#             if candidates[i]>target:
+#                 break
             
-            ds.append(candidates[i])
-            helper(i+1,ds,target-candidates[i])
-            ds.pop()
+#             ds.append(candidates[i])
+#             helper(i+1,ds,target-candidates[i])
+#             ds.pop()
         
     
-    helper(0,[],target)
-    return ans
+#     helper(0,[],target)
+#     return ans
         
        
 
-candidates = [2,5,2,1,2]
-target = 5
-candidates.sort()
-print(combinationSum(candidates,target))
+# candidates = [2,5,2,1,2]
+# target = 5
+# candidates.sort()
+# print(combinationSum(candidates,target))
 
 
 
 
 
+
+def merge(arr,left,mid,right):
+    left_index=left
+    right_index=mid+1
+    nums=[]
+
+    while left_index<=mid and right_index<=right:
+        if arr[left_index]<=arr[right_index]:
+            nums.append(arr[left_index])
+            left_index+=1
+        
+        else:
+            nums.append(arr[right_index])
+            right_index+=1
+        
+    
+    nums.extend(arr[left_index:])
+    nums.extend(arr[right_index:])
+
+
+    for i in range(left, right + 1):
+            arr[i] = nums[i-left]
+
+
+
+
+
+def mergesort(arr,left,right):
+    if left>=right:
+        return
+    
+    mid=(right+left)//2
+
+    mergesort(arr,left,mid)
+    mergesort(arr,mid+1,right)
+    return merge(arr,left,mid,right)
+
+
+
+
+arr=[7, 4, 1, 5, 3]
+print(mergesort(arr,0,len(arr)-1))
+print(arr)
