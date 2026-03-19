@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --card: #161616;
+      --border: #242424;
+      --accent: #c8a96e;
+      --accent2: #7eb8c8;
+      --text: #e8e0d5;
+      --muted: #5a5550;
+      --faint: #1e1c1a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Custom cursor */
+    .cursor {
+      position: fixed;
+      width: 10px; height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, width 0.3s, height 0.3s, background 0.3s;
+    }
+    .cursor-ring {
+      position: fixed;
+      width: 36px; height: 36px;
+      border: 1px solid rgba(200,169,110,0.4);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.18s ease, width 0.3s, height 0.3s;
+    }
+    body:hover .cursor { opacity: 1; }
+
+    /* Noise overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9990;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 60px;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.4s, background 0.4s, padding 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(20px);
+      border-color: var(--border);
+      padding: 16px 60px;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg-text {
+      position: absolute;
+      right: -20px; top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(120px, 18vw, 240px);
+      font-weight: 900;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--border);
+      line-height: 1;
+      user-select: none;
+      pointer-events: none;
+      animation: floatText 8s ease-in-out infinite;
+    }
+    @keyframes floatText {
+      0%,100% { transform: translateY(-50%) translateX(0); }
+      50% { transform: translateY(-52%) translateX(-10px); }
+    }
+    .hero-content { max-width: 720px; position: relative; z-index: 2; }
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+    .hero-name em { font-style: italic; color: var(--accent); }
+    .hero-role {
+      font-family: 'DM Mono', monospace;
+      font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+      color: var(--muted);
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
+      border-left: 2px solid var(--accent);
+      padding-left: 16px;
+      min-height: 32px;
+    }
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 520px;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s forwards;
+      min-height: 80px;
+      background: var(--faint);
+      border-radius: 4px;
+      padding: 16px;
+      border: 1px dashed var(--border);
+    }
+    .placeholder-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      opacity: 0.5;
+      letter-spacing: 0.1em;
+    }
+    .hero-cta {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s 1s forwards;
+    }
+    .btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+      transition: background 0.3s, color 0.3s;
+      display: inline-block;
+      cursor: none;
+    }
+    .btn:hover { background: var(--accent); color: var(--bg); }
+    .btn.ghost { border-color: var(--border); color: var(--muted); }
+    .btn.ghost:hover { border-color: var(--accent2); color: var(--accent2); background: transparent; }
+
+    .hero-social {
+      position: absolute;
+      right: 60px; bottom: 60px;
+      display: flex; flex-direction: column; gap: 20px;
+      align-items: center;
+      opacity: 0;
+      animation: fadeIn 1s 1.2s forwards;
+    }
+    .hero-social::before {
+      content: '';
+      width: 1px; height: 60px;
+      background: var(--border);
+    }
+    .hero-social a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-decoration: none;
+      writing-mode: vertical-rl;
+      letter-spacing: 0.15em;
+      transition: color 0.3s;
+    }
+    .hero-social a:hover { color: var(--accent); }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px; left: 60px;
+      display: flex; align-items: center; gap: 12px;
+      opacity: 0;
+      animation: fadeIn 1s 1.4s forwards;
+    }
+    .scroll-hint span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 60px; height: 1px;
+      background: var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: var(--accent);
+      animation: scrollLine 2s 1.5s infinite;
+    }
+    @keyframes scrollLine {
+      to { left: 100%; }
+    }
+
+    /* ── SECTIONS GENERAL ── */
+    section { padding: 120px 60px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 72px;
+    }
+    .section-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      max-width: 200px;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--surface); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .about-photo {
+      aspect-ratio: 3/4;
+      background: var(--card);
+      border: 1px dashed var(--border);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .about-photo-inner {
+      text-align: center;
+    }
+    .photo-icon {
+      width: 64px; height: 64px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted);
+    }
+    .about-photo::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+    .about-tag {
+      position: absolute;
+      bottom: 24px; left: -12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+    }
+    .about-text h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      margin-bottom: 24px;
+      min-height: 40px;
+      background: var(--faint);
+      border: 1px dashed var(--border);
+      padding: 8px 12px;
+      color: var(--muted);
+    }
+    .about-text p {
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 20px;
+      min-height: 80px;
+      background: var(--faint);
+      border: 1px dashed var(--border);
+      padding: 16px;
+      font-size: 0.95rem;
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-top: 40px;
+    }
+    .stat {
+      background: var(--card);
+      padding: 24px;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--accent);
+      display: block;
+      min-height: 48px;
+      line-height: 48px;
+    }
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ── SKILLS ── */
+    #skills {}
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+    }
+    .skill-category {
+      background: var(--card);
+      padding: 40px;
+      transition: background 0.3s;
+    }
+    .skill-category:hover { background: var(--surface); }
+    .skill-cat-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .skill-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding: 10px 12px;
+      background: var(--faint);
+      border: 1px dashed var(--border);
+    }
+    .skill-name {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+    }
+    .skill-bar {
+      width: 80px; height: 2px;
+      background: var(--border);
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--surface); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      background: var(--border);
+    }
+    .project-card {
+      background: var(--card);
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+      group: true;
+    }
+    .project-card:hover { background: #1a1a1a; }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 0;
+      background: var(--accent);
+      transition: height 0.4s;
+    }
+    .project-card:hover::before { height: 100%; }
+    .project-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      margin-bottom: 20px;
+    }
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+      min-height: 36px;
+      background: var(--faint);
+      border: 1px dashed var(--border);
+      padding: 6px 12px;
+      color: var(--muted);
+    }
+    .project-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 28px;
+      min-height: 80px;
+      background: var(--faint);
+      border: 1px dashed var(--border);
+      padding: 14px;
+    }
+    .project-tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 24px;
+    }
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      text-transform: uppercase;
+    }
+    .project-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+      transition: gap 0.3s;
+    }
+    .project-link:hover { gap: 16px; }
+    .project-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--faint);
+      border: 1px dashed var(--border);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── EDUCATION ── */
+    #education {}
+    .timeline {
+      position: relative;
+      padding-left: 40px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 60px;
+      padding: 40px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      transition: border-color 0.3s;
+    }
+    .timeline-item:hover { border-color: var(--accent); }
+    .timeline-dot {
+      position: absolute;
+      left: -48px;
+      top: 40px;
+      width: 16px; height: 16px;
+      background: var(--bg);
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+    }
+    .timeline-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+      min-height: 20px;
+      background: var(--faint);
+      border: 1px dashed var(--border);
+      padding: 4px 10px;
+      display: inline-block;
+    }
+    .timeline-degree {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      min-height: 36px;
+      background: var(--faint);
+      border: 1px dashed var(--border);
+      padding: 6px 12px;
+      color: var(--muted);
+    }
+    .timeline-school {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+      min-height: 24px;
+      background: var(--faint);
+      border: 1px dashed var(--border);
+      padding: 4px 12px;
+    }
+    .timeline-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.8;
+      min-height: 60px;
+      background: var(--faint);
+      border: 1px dashed var(--border);
+      padding: 12px;
+    }
+
+    /* ── CERTIFICATIONS ── */
+    #certifications { background: var(--surface); }
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+    }
+    .cert-card {
+      background: var(--card);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: background 0.3s;
+    }
+    .cert-card:hover { background: var(--surface); }
+    .cert-badge {
+      width: 56px; height: 56px;
+      background: var(--faint);
+      border: 1px dashed var(--border);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cert-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      min-height: 32px;
+      background: var(--faint);
+      border: 1px dashed var(--border);
+      padding: 4px 10px;
+      color: var(--muted);
+    }
+    .cert-org {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      min-height: 20px;
+      background: var(--faint);
+      border: 1px dashed var(--border);
+      padding: 4px 10px;
+    }
+    .cert-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      min-height: 18px;
+      background: var(--faint);
+      border: 1px dashed var(--border);
+      padding: 4px 10px;
+    }
+
+    /* ── ACHIEVEMENTS ── */
+    #achievements {}
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      background: var(--border);
+    }
+    .ach-card {
+      background: var(--card);
+      padding: 48px;
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+      transition: background 0.3s;
+    }
+    .ach-card:hover { background: var(--surface); }
+    .ach-icon {
+      width: 52px; height: 52px;
+      flex-shrink: 0;
+      background: var(--faint);
+      border: 1px dashed var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+    }
+    .ach-body {}
+    .ach-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      margin-bottom: 12px;
+      min-height: 32px;
+      background: var(--faint);
+      border: 1px dashed var(--border);
+      padding: 4px 10px;
+      color: var(--muted);
+    }
+    .ach-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.8;
+      min-height: 60px;
+      background: var(--faint);
+      border: 1px dashed var(--border);
+      padding: 12px;
+    }
+    .ach-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-top: 12px;
+      min-height: 18px;
+      background: var(--faint);
+      border: 1px dashed var(--border);
+      padding: 3px 10px;
+      display: inline-block;
+    }
+
+    /* ── CONTACT / FOOTER ── */
+    #contact {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 100px 60px;
+    }
+    .contact-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .contact-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 24px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .contact-sub {
+      color: var(--muted);
+      margin-bottom: 48px;
+      font-size: 0.95rem;
+      min-height: 40px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      background: var(--faint);
+      border: 1px dashed var(--border);
+      padding: 12px 20px;
+    }
+    .contact-email {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 4px;
+      transition: opacity 0.3s;
+    }
+    .contact-email:hover { opacity: 0.7; }
+    footer {
+      background: #060606;
+      border-top: 1px solid var(--border);
+      padding: 28px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      nav.scrolled { padding: 14px 24px; }
+      .nav-links { gap: 20px; }
+      section { padding: 80px 24px; }
+      #hero { padding: 0 24px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .skills-grid, .certs-grid { grid-template-columns: 1fr; }
+      .projects-grid, .achievements-grid { grid-template-columns: 1fr; }
+      .hero-social { display: none; }
+      .hero-bg-text { display: none; }
+      .about-stats { grid-template-columns: repeat(3, 1fr); }
+      footer { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-logo">YN</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#certifications">Certs</a></li>
+      <li><a href="#achievements">Wins</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-text">FOLIO</div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">— Available for opportunities</p>
+      <h1 class="hero-name">Your <em>Name</em><br>Here</h1>
+      <p class="hero-role">Your Title / Role · Location</p>
+      <p class="hero-desc"><span class="placeholder-label">[ Short bio / tagline goes here ]</span></p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn">View Work</a>
+        <a href="#contact" class="btn ghost">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-social">
+      <a href="#">GitHub</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Twitter</a>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-header reveal">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About Me</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="about-photo">
+          <div class="about-photo-inner">
+            <div class="photo-icon">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            </div>
+            <span class="placeholder-label">[ Your Photo ]</span>
+          </div>
+          <div class="about-tag">Your Name</div>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:0.15s">
+        <div class="about-text">
+          <h3><span class="placeholder-label">[ Your headline ]</span></h3>
+          <p><span class="placeholder-label">[ Paragraph 1 — about yourself, passion, background ]</span></p>
+          <p><span class="placeholder-label">[ Paragraph 2 — what you do, what drives you ]</span></p>
+          <div class="about-stats">
+            <div class="stat">
+              <span class="stat-num">—</span>
+              <span class="stat-label">Years Exp.</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">—</span>
+              <span class="stat-label">Projects</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">—</span>
+              <span class="stat-label">Certifications</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-header reveal">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Skills</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <!-- Category 1 -->
+      <div class="skill-category reveal">
+        <div class="skill-cat-title">[ Category 1 ]</div>
+        <div class="skill-item"><span class="skill-name">Skill Name</span><div class="skill-bar"></div></div>
+        <div class="skill-item"><span class="skill-name">Skill Name</span><div class="skill-bar"></div></div>
+        <div class="skill-item"><span class="skill-name">Skill Name</span><div class="skill-bar"></div></div>
+        <div class="skill-item"><span class="skill-name">Skill Name</span><div class="skill-bar"></div></div>
+      </div>
+      <!-- Category 2 -->
+      <div class="skill-category reveal" style="transition-delay:0.1s">
+        <div class="skill-cat-title">[ Category 2 ]</div>
+        <div class="skill-item"><span class="skill-name">Skill Name</span><div class="skill-bar"></div></div>
+        <div class="skill-item"><span class="skill-name">Skill Name</span><div class="skill-bar"></div></div>
+        <div class="skill-item"><span class="skill-name">Skill Name</span><div class="skill-bar"></div></div>
+        <div class="skill-item"><span class="skill-name">Skill Name</span><div class="skill-bar"></div></div>
+      </div>
+      <!-- Category 3 -->
+      <div class="skill-category reveal" style="transition-delay:0.2s">
+        <div class="skill-cat-title">[ Category 3 ]</div>
+        <div class="skill-item"><span class="skill-name">Skill Name</span><div class="skill-bar"></div></div>
+        <div class="skill-item"><span class="skill-name">Skill Name</span><div class="skill-bar"></div></div>
+        <div class="skill-item"><span class="skill-name">Skill Name</span><div class="skill-bar"></div></div>
+        <div class="skill-item"><span class="skill-name">Skill Name</span><div class="skill-bar"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-header reveal">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Projects</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+      <!-- Project 1 -->
+      <div class="project-card reveal">
+        <div class="project-num">Project / 01</div>
+        <div class="project-img"><span class="placeholder-label">[ Project Screenshot ]</span></div>
+        <div class="project-title"><span class="placeholder-label">[ Project Title ]</span></div>
+        <div class="project-desc"><span class="placeholder-label">[ Brief description of what this project does and the problem it solves ]</span></div>
+        <div class="project-tags">
+          <span class="tag">Tag</span>
+          <span class="tag">Tag</span>
+          <span class="tag">Tag</span>
+        </div>
+        <a href="#" class="project-link">View Project →</a>
+      </div>
+      <!-- Project 2 -->
+      <div class="project-card reveal" style="transition-delay:0.1s">
+        <div class="project-num">Project / 02</div>
+        <div class="project-img"><span class="placeholder-label">[ Project Screenshot ]</span></div>
+        <div class="project-title"><span class="placeholder-label">[ Project Title ]</span></div>
+        <div class="project-desc"><span class="placeholder-label">[ Brief description of what this project does and the problem it solves ]</span></div>
+        <div class="project-tags">
+          <span class="tag">Tag</span>
+          <span class="tag">Tag</span>
+          <span class="tag">Tag</span>
+        </div>
+        <a href="#" class="project-link">View Project →</a>
+      </div>
+      <!-- Project 3 -->
+      <div class="project-card reveal" style="transition-delay:0.15s">
+        <div class="project-num">Project / 03</div>
+        <div class="project-img"><span class="placeholder-label">[ Project Screenshot ]</span></div>
+        <div class="project-title"><span class="placeholder-label">[ Project Title ]</span></div>
+        <div class="project-desc"><span class="placeholder-label">[ Brief description of what this project does and the problem it solves ]</span></div>
+        <div class="project-tags">
+          <span class="tag">Tag</span>
+          <span class="tag">Tag</span>
+          <span class="tag">Tag</span>
+        </div>
+        <a href="#" class="project-link">View Project →</a>
+      </div>
+      <!-- Project 4 -->
+      <div class="project-card reveal" style="transition-delay:0.2s">
+        <div class="project-num">Project / 04</div>
+        <div class="project-img"><span class="placeholder-label">[ Project Screenshot ]</span></div>
+        <div class="project-title"><span class="placeholder-label">[ Project Title ]</span></div>
+        <div class="project-desc"><span class="placeholder-label">[ Brief description of what this project does and the problem it solves ]</span></div>
+        <div class="project-tags">
+          <span class="tag">Tag</span>
+          <span class="tag">Tag</span>
+          <span class="tag">Tag</span>
+        </div>
+        <a href="#" class="project-link">View Project →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-header reveal">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Education</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="timeline">
+      <!-- Entry 1 -->
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date"><span class="placeholder-label">[ Year – Year ]</span></div>
+        <div class="timeline-degree"><span class="placeholder-label">[ Degree / Program Name ]</span></div>
+        <div class="timeline-school"><span class="placeholder-label">[ Institution Name ]</span></div>
+        <div class="timeline-desc"><span class="placeholder-label">[ Relevant coursework, achievements, GPA, or description ]</span></div>
+      </div>
+      <!-- Entry 2 -->
+      <div class="timeline-item reveal" style="transition-delay:0.1s">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date"><span class="placeholder-label">[ Year – Year ]</span></div>
+        <div class="timeline-degree"><span class="placeholder-label">[ Degree / Program Name ]</span></div>
+        <div class="timeline-school"><span class="placeholder-label">[ Institution Name ]</span></div>
+        <div class="timeline-desc"><span class="placeholder-label">[ Relevant coursework, achievements, GPA, or description ]</span></div>
+      </div>
+      <!-- Entry 3 -->
+      <div class="timeline-item reveal" style="transition-delay:0.2s">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date"><span class="placeholder-label">[ Year – Year ]</span></div>
+        <div class="timeline-degree"><span class="placeholder-label">[ Degree / Program Name ]</span></div>
+        <div class="timeline-school"><span class="placeholder-label">[ Institution Name ]</span></div>
+        <div class="timeline-desc"><span class="placeholder-label">[ Relevant coursework, achievements, GPA, or description ]</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="section-header reveal">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Certifications</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="certs-grid">
+      <!-- Cert 1 -->
+      <div class="cert-card reveal">
+        <div class="cert-badge">
+          <svg width="22" height="22" fill="none" stroke="#5a5550" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 15l-3 6 3-1.5 3 1.5-3-6z"/><circle cx="12" cy="9" r="5"/></svg>
+        </div>
+        <div class="cert-name"><span class="placeholder-label">[ Certification Name ]</span></div>
+        <div class="cert-org"><span class="placeholder-label">[ Issuing Organization ]</span></div>
+        <div class="cert-date"><span class="placeholder-label">[ Issue Date ]</span></div>
+      </div>
+      <!-- Cert 2 -->
+      <div class="cert-card reveal" style="transition-delay:0.1s">
+        <div class="cert-badge">
+          <svg width="22" height="22" fill="none" stroke="#5a5550" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 15l-3 6 3-1.5 3 1.5-3-6z"/><circle cx="12" cy="9" r="5"/></svg>
+        </div>
+        <div class="cert-name"><span class="placeholder-label">[ Certification Name ]</span></div>
+        <div class="cert-org"><span class="placeholder-label">[ Issuing Organization ]</span></div>
+        <div class="cert-date"><span class="placeholder-label">[ Issue Date ]</span></div>
+      </div>
+      <!-- Cert 3 -->
+      <div class="cert-card reveal" style="transition-delay:0.2s">
+        <div class="cert-badge">
+          <svg width="22" height="22" fill="none" stroke="#5a5550" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 15l-3 6 3-1.5 3 1.5-3-6z"/><circle cx="12" cy="9" r="5"/></svg>
+        </div>
+        <div class="cert-name"><span class="placeholder-label">[ Certification Name ]</span></div>
+        <div class="cert-org"><span class="placeholder-label">[ Issuing Organization ]</span></div>
+        <div class="cert-date"><span class="placeholder-label">[ Issue Date ]</span></div>
+      </div>
+      <!-- Cert 4 -->
+      <div class="cert-card reveal" style="transition-delay:0.25s">
+        <div class="cert-badge">
+          <svg width="22" height="22" fill="none" stroke="#5a5550" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 15l-3 6 3-1.5 3 1.5-3-6z"/><circle cx="12" cy="9" r="5"/></svg>
+        </div>
+        <div class="cert-name"><span class="placeholder-label">[ Certification Name ]</span></div>
+        <div class="cert-org"><span class="placeholder-label">[ Issuing Organization ]</span></div>
+        <div class="cert-date"><span class="placeholder-label">[ Issue Date ]</span></div>
+      </div>
+      <!-- Cert 5 -->
+      <div class="cert-card reveal" style="transition-delay:0.3s">
+        <div class="cert-badge">
+          <svg width="22" height="22" fill="none" stroke="#5a5550" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 15l-3 6 3-1.5 3 1.5-3-6z"/><circle cx="12" cy="9" r="5"/></svg>
+        </div>
+        <div class="cert-name"><span class="placeholder-label">[ Certification Name ]</span></div>
+        <div class="cert-org"><span class="placeholder-label">[ Issuing Organization ]</span></div>
+        <div class="cert-date"><span class="placeholder-label">[ Issue Date ]</span></div>
+      </div>
+      <!-- Cert 6 -->
+      <div class="cert-card reveal" style="transition-delay:0.35s">
+        <div class="cert-badge">
+          <svg width="22" height="22" fill="none" stroke="#5a5550" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 15l-3 6 3-1.5 3 1.5-3-6z"/><circle cx="12" cy="9" r="5"/></svg>
+        </div>
+        <div class="cert-name"><span class="placeholder-label">[ Certification Name ]</span></div>
+        <div class="cert-org"><span class="placeholder-label">[ Issuing Organization ]</span></div>
+        <div class="cert-date"><span class="placeholder-label">[ Issue Date ]</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements">
+    <div class="section-header reveal">
+      <span class="section-num">06</span>
+      <h2 class="section-title">Achievements</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="achievements-grid">
+      <!-- Achievement 1 -->
+      <div class="ach-card reveal">
+        <div class="ach-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M5 3h14l-2 7H7L5 3zM7 10s1 4 5 4 5-4 5-4"/></svg>
+        </div>
+        <div class="ach-body">
+          <div class="ach-title"><span class="placeholder-label">[ Achievement Title ]</span></div>
+          <div class="ach-desc"><span class="placeholder-label">[ Description of the achievement and its significance ]</span></div>
+          <div class="ach-meta"><span class="placeholder-label">[ Year / Org ]</span></div>
+        </div>
+      </div>
+      <!-- Achievement 2 -->
+      <div class="ach-card reveal" style="transition-delay:0.1s">
+        <div class="ach-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <div class="ach-body">
+          <div class="ach-title"><span class="placeholder-label">[ Achievement Title ]</span></div>
+          <div class="ach-desc"><span class="placeholder-label">[ Description of the achievement and its significance ]</span></div>
+          <div class="ach-meta"><span class="placeholder-label">[ Year / Org ]</span></div>
+        </div>
+      </div>
+      <!-- Achievement 3 -->
+      <div class="ach-card reveal" style="transition-delay:0.15s">
+        <div class="ach-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div class="ach-body">
+          <div class="ach-title"><span class="placeholder-label">[ Achievement Title ]</span></div>
+          <div class="ach-desc"><span class="placeholder-label">[ Description of the achievement and its significance ]</span></div>
+          <div class="ach-meta"><span class="placeholder-label">[ Year / Org ]</span></div>
+        </div>
+      </div>
+      <!-- Achievement 4 -->
+      <div class="ach-card reveal" style="transition-delay:0.2s">
+        <div class="ach-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M5 7H3a2 2 0 00-2 2v9a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2h-2"/><rect x="7" y="3" width="10" height="6" rx="1"/></svg>
+        </div>
+        <div class="ach-body">
+          <div class="ach-title"><span class="placeholder-label">[ Achievement Title ]</span></div>
+          <div class="ach-desc"><span class="placeholder-label">[ Description of the achievement and its significance ]</span></div>
+          <div class="ach-meta"><span class="placeholder-label">[ Year / Org ]</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="contact-eyebrow reveal">— Let's Connect</p>
+    <h2 class="contact-title reveal">Got a project<br>in <em style="font-style:italic;color:var(--accent)">mind?</em></h2>
+    <div class="contact-sub reveal"><span class="placeholder-label">[ Your contact tagline or invitation ]</span></div>
+    <div class="reveal">
+      <a href="mailto:your@email.com" class="contact-email">your@email.com</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Your Name. All rights reserved.</p>
+    <p>Designed & Built with ♥</p>
+  </footer>
+
+  <script>
+    // ── Custom Cursor ──
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
+
+    function animRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animRing);
+    }
+    animRing();
+
+    document.querySelectorAll('a, button, .project-card, .cert-card, .ach-card, .skill-category').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.width = '6px';
+        cursor.style.height = '6px';
+        ring.style.width = '56px';
+        ring.style.height = '56px';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.width = '10px';
+        cursor.style.height = '10px';
+        ring.style.width = '36px';
+        ring.style.height = '36px';
+      });
+    });
+
+    // ── Navbar scroll ──
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ── Scroll reveal ──
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
