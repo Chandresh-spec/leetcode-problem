@@ -102,41 +102,69 @@
 
 
 
-def partition(arr,low,high):
-    pivot=arr[low]
-    i=low
-    j=high
+# def partition(arr,low,high):
+#     pivot=arr[low]
+#     i=low
+#     j=high
 
-    while i <j:
-        while  arr[i]<=pivot and i<high:
-            i+=1
+#     while i <j:
+#         while  arr[i]<=pivot and i<high:
+#             i+=1
         
-        while arr[j]>=pivot and j>low:
-            j-=1
+#         while arr[j]>=pivot and j>low:
+#             j-=1
         
 
-        if i < j :
-            arr[i],arr[j]=arr[j],arr[i]
+#         if i < j :
+#             arr[i],arr[j]=arr[j],arr[i]
         
     
-    arr[j],arr[low]=arr[low],arr[j]
+#     arr[j],arr[low]=arr[low],arr[j]
 
-    return j
-
-
+#     return j
 
 
 
-def quicksort(arr,low,high):
-    if (low <= high):
-        pi=partition(arr,low,high)
-
-        quicksort(arr,low,pi-1)
-        quicksort(arr,pi+1,high)
 
 
+# def quicksort(arr,low,high):
+#     if (low <high):
+#         pi=partition(arr,low,high)
 
-arr= [7, 4, 1, 5, 3]
+#         quicksort(arr,low,pi-1)
+#         quicksort(arr,pi+1,high)
 
-quicksort(arr,0,len(arr)-1)
-print(arr)
+
+
+# arr= [7, 4, 1, 5, 3]
+
+# quicksort(arr,0,len(arr)-1)
+# print(arr)
+
+
+
+def combination_sum(nums,target):
+    ans=[]
+    def helper(index,ds,target):
+        if index >=len(nums):
+            if target==0:
+                ans.append(ds[:])   
+            return
+        
+        if target>= nums[index]:
+            ds.append(nums[index])
+            helper(index,ds,target-nums[index])
+            ds.pop()
+        helper(index+1,ds,target)
+        
+    
+
+
+    helper(0,[],target)
+    return ans
+
+
+
+nums=[2,3,6,7]
+target=7
+print(combination_sum(nums,target))
