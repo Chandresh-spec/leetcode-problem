@@ -143,28 +143,138 @@
 
 
 
-def combination_sum(nums,target):
-    ans=[]
-    def helper(index,ds,target):
-        if index >=len(nums):
-            if target==0:
-                ans.append(ds[:])   
-            return
+# def combination_sum(nums,target):
+#     ans=[]
+#     def helper(index,ds,target):
+#         if index >=len(nums):
+#             if target==0:
+#                 ans.append(ds[:])   
+#             return
         
-        if target>= nums[index]:
-            ds.append(nums[index])
-            helper(index,ds,target-nums[index])
-            ds.pop()
-        helper(index+1,ds,target)
+#         if target>= nums[index]:
+#             ds.append(nums[index])
+#             helper(index,ds,target-nums[index])
+#             ds.pop()
+#         helper(index+1,ds,target)
         
     
 
 
-    helper(0,[],target)
-    return ans
+#     helper(0,[],target)
+#     return ans
 
 
 
-nums=[2,3,6,7]
-target=7
-print(combination_sum(nums,target))
+# nums=[2,3,6,7]
+# target=7
+# print(combination_sum(nums,target))
+
+
+
+
+
+
+# def combination2(nums,target):
+#     ans=[]
+#     def helper(index,ds,target):
+        
+#         if index>=len(nums):
+#             if target==0:
+#                 ans.append(ds[:])
+            
+#             return
+        
+
+#         if target>=nums[index]:
+#             ds.append(nums[index])
+#             helper(index+1,ds,target-nums[index])
+#             ds.pop()
+#         helper(index+1,ds,target)
+
+
+    
+#     helper(0,[],target)
+#     st=set()
+#     for i in ans:
+#         i.sort()
+#         st.add(tuple(i))
+    
+    
+
+#     return [ list(item) for item in st]
+    
+    
+
+# nums=[10,1,2,7,6,1,5]
+# target=8
+# print(combination2(nums,target))
+
+
+
+
+
+
+
+
+
+
+
+
+# def combinationSum2(candidates, target) :
+#         ans=[]
+#         def helper(index,target,ds):
+#             if target==0:
+#                 ans.append(ds[:])
+
+#             if index>=len(candidates):
+#                 return
+            
+#             for i in range(index,len(candidates)):
+#                 if candidates[i]>target:
+#                     break
+
+                
+#                 if i >index and candidates[i-1]==candidates[i]:
+#                     continue
+
+#                 ds.append(candidates[i])
+#                 helper(i+1,target-candidates[i],ds)
+#                 ds.pop()
+        
+#         helper(0,target,[])
+#         return ans
+    
+
+
+# candidates = [10,1,2,7,6,1,5]
+# target = 8
+# candidates.sort()
+# print(combinationSum2(candidates,target))
+
+
+
+
+def combinationSum3(k,n):
+        ans=[]
+        def helper(index,ds,n):
+            if len(ds)==k:
+                if n==0:
+                    ans.append(ds[:])
+                
+                return 
+            
+            for i in range(index,10):
+
+                ds.append(i+1)
+                helper(i+1,ds,n-i)
+                ds.pop()
+        
+
+
+        helper(0,[],n)
+        return ans
+
+
+k=3
+n=7
+print(combinationSum3(k,n))
