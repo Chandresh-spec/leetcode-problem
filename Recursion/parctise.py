@@ -56,45 +56,87 @@
 
 
 
-def merge(arr,left,mid,right):
-    left_index=left
-    right_index=mid+1
-    nums=[]
+# def merge(arr,left,mid,right):
+#     left_index=left
+#     right_index=mid+1
+#     nums=[]
 
-    while left_index<=mid and right_index<=right:
-        if arr[left_index]<=arr[right_index]:
-            nums.append(arr[left_index])
-            left_index+=1
+#     while left_index<=mid and right_index<=right:
+#         if arr[left_index]<=arr[right_index]:
+#             nums.append(arr[left_index])
+#             left_index+=1
         
-        else:
-            nums.append(arr[right_index])
-            right_index+=1
+#         else:
+#             nums.append(arr[right_index])
+#             right_index+=1
         
     
-    nums.extend(arr[left_index:])
-    nums.extend(arr[right_index:])
+#     nums.extend(arr[left_index:])
+#     nums.extend(arr[right_index:])
 
 
-    for i in range(left, right + 1):
-            arr[i] = nums[i-left]
+#     for i in range(left, right + 1):
+#             arr[i] = nums[i-left]
 
 
 
 
 
-def mergesort(arr,left,right):
-    if left>=right:
-        return
+# def mergesort(arr,left,right):
+#     if left>=right:
+#         return
     
-    mid=(right+left)//2
+#     mid=(right+left)//2
 
-    mergesort(arr,left,mid)
-    mergesort(arr,mid+1,right)
-    return merge(arr,left,mid,right)
-
-
+#     mergesort(arr,left,mid)
+#     mergesort(arr,mid+1,right)
+#     return merge(arr,left,mid,right)
 
 
-arr=[7, 4, 1, 5, 3]
-print(mergesort(arr,0,len(arr)-1))
+
+
+# arr=[7, 4, 1, 5, 3]
+# print(mergesort(arr,0,len(arr)-1))
+# print(arr)
+
+
+
+
+def partition(arr,low,high):
+    pivot=arr[low]
+    i=low
+    j=high
+
+    while i <j:
+        while  arr[i]<=pivot and i<high:
+            i+=1
+        
+        while arr[j]>=pivot and j>low:
+            j-=1
+        
+
+        if i < j :
+            arr[i],arr[j]=arr[j],arr[i]
+        
+    
+    arr[j],arr[low]=arr[low],arr[j]
+
+    return j
+
+
+
+
+
+def quicksort(arr,low,high):
+    if (low <= high):
+        pi=partition(arr,low,high)
+
+        quicksort(arr,low,pi-1)
+        quicksort(arr,pi+1,high)
+
+
+
+arr= [7, 4, 1, 5, 3]
+
+quicksort(arr,0,len(arr)-1)
 print(arr)
