@@ -30,20 +30,59 @@
 
 
 
-class Solution:
-    def generateBinaryStrings(self, n):
-        # Your code goes here
-        ans=[]
-        def helper(cur):
-            if len(cur)==n:
-                ans.append(cur)
-                return 
+# class Solution:
+#     def generateBinaryStrings(self, n):
+#         # Your code goes here
+#         ans=[]
+#         def helper(cur):
+#             if len(cur)==n:
+#                 ans.append(cur)
+#                 return 
             
-            helper(cur+'0')
+#             helper(cur+'0')
 
-            if cur=="" or cur[-1]=="0":
-                helper(cur+'1')
+#             if cur=="" or cur[-1]=="0":
+#                 helper(cur+'1')
             
         
-        helper("")
-        return ans
+#         helper("")
+#         return ans
+
+
+
+
+
+def pallindromepartition(s):
+    ans=[]
+    def helper(ds,index):
+        if len(s)==index:
+            ans.append(ds[:])
+            return
+        
+
+        for i in range(index,len(s)):
+            if is_pallindrome(s,index,i):
+                ds.append(s[index:i+1])
+                helper(ds,i+1)
+                ds.pop()
+
+        
+    
+    helper([],0)
+    return ans
+
+
+
+def is_pallindrome(s,left,right):
+    while left < right:
+        if s[left]!=s[right]:
+            return False
+        left+=1
+        right-=1
+    
+    return True
+
+
+
+s = "baa"
+print(pallindromepartition(s))
