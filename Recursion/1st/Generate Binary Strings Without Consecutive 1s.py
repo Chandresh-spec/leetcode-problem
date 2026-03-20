@@ -52,37 +52,82 @@
 
 
 
-def pallindromepartition(s):
-    ans=[]
-    def helper(ds,index):
-        if len(s)==index:
-            ans.append(ds[:])
-            return
+# def pallindromepartition(s):
+#     ans=[]
+#     def helper(ds,index):
+#         if len(s)==index:
+#             ans.append(ds[:])
+#             return
         
 
-        for i in range(index,len(s)):
-            if is_pallindrome(s,index,i):
-                ds.append(s[index:i+1])
-                helper(ds,i+1)
-                ds.pop()
+#         for i in range(index,len(s)):
+#             if is_pallindrome(s,index,i):
+#                 ds.append(s[index:i+1])
+#                 helper(ds,i+1)
+#                 ds.pop()
 
         
     
-    helper([],0)
-    return ans
+#     helper([],0)
+#     return ans
 
 
 
-def is_pallindrome(s,left,right):
-    while left < right:
-        if s[left]!=s[right]:
+# def is_pallindrome(s,left,right):
+#     while left < right:
+#         if s[left]!=s[right]:
+#             return False
+#         left+=1
+#         right-=1
+    
+#     return True
+
+
+
+# s = "baa"
+# print(pallindromepartition(s))
+
+
+
+
+
+def exist(board,word):
+    def helper(i,j,word,board,index,visited,m,n):
+        if index==len(word):
+            return True
+        if 0>i or 0>j or i > n or j >m or visited[i][j] or board[i][j]!=word[index]:
             return False
-        left+=1
-        right-=1
+        
+        visited[i][j]=True
+        
+
+        if not ((helper(i-1,j,word,board,index+1,visited,m,n)) or
+               (helper(i+1,j,word,board,index+1,visited,m,n)) or
+               (helper(i,j+1,word,board,index+1,visited,m,n)) or
+               (helper(i,j-1,word,board,index+1,visited,m,n))):
+            visited[i][j]=False
+            return False
+        
+
+        return True
     
-    return True
+    
+
+
+    n=len(board)
+    m=len(board[0])
+    visited = [[False for j in range(m)] for i in range(n)]
+    for i in range(n):
+        for j in range(m):
+            if board[i][j]==word[0]:
+                if helper(i,j,word,board,0,visited,m-1,n-1):
+                    return True
+            
+        
+    return False
 
 
 
-s = "baa"
-print(pallindromepartition(s))
+board = [["C","A","A"],["A","A","A"],["B","C","D"]]
+word = "AAB"
+print(exist(board,word))
