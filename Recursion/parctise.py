@@ -282,59 +282,94 @@
 
 
 
-def nqueen(n,ans):
+# def nqueen(n,ans):
 
-    def safe(board,row,col,n):
-        j=col
-        for i in range(j-1,-1,-1):
-            if board[row][i]=='Q':
-                return False
+#     def safe(board,row,col,n):
+#         j=col
+#         for i in range(j-1,-1,-1):
+#             if board[row][i]=='Q':
+#                 return False
         
         
-        #upperdiagnal
-        i=row
-        j=col
-        while i>=0 and j >=0:
-            if board[i][j]=='Q':
-                return False
-            i-=1
-            j-=1
+#         #upperdiagnal
+#         i=row
+#         j=col
+#         while i>=0 and j >=0:
+#             if board[i][j]=='Q':
+#                 return False
+#             i-=1
+#             j-=1
         
 
-        #lowerdiagnal
-        i=row
-        j=col
-        while i>=0 and i <= n and j >=0 and j <=n:
-            if board[i][j]=='Q':
-                return False
+#         #lowerdiagnal
+#         i=row
+#         j=col
+#         while i>=0 and i <= n and j >=0 and j <=n:
+#             if board[i][j]=='Q':
+#                 return False
             
-            i+=1
-            j-=1
+#             i+=1
+#             j-=1
         
 
-        return True
+#         return True
          
 
     
         
 
-    def helper(col,board):
-        if col==n:
-            ans.append([''.join(row) for row in board])
-            return
-        for i in range(n):
-            if safe(board,i,col,n-1):
-                board[i][col]='Q'
-                helper(col+1,board)
-                board[i][col]='.'
+#     def helper(col,board):
+#         if col==n:
+#             ans.append([''.join(row) for row in board])
+#             return
+#         for i in range(n):
+#             if safe(board,i,col,n-1):
+#                 board[i][col]='Q'
+#                 helper(col+1,board)
+#                 board[i][col]='.'
             
-    board=[['.' for i in range(n)]for i in range(n)]
-    helper(0,board)
-    return ans
+#     board=[['.' for i in range(n)]for i in range(n)]
+#     helper(0,board)
+#     return ans
     
 
 
 
-n=5
-ans=[]
-print(nqueen(n,ans))
+# n=5
+# ans=[]
+# print(nqueen(n,ans))
+
+
+
+
+def rateMaze(n,grid):
+    ans=[]
+    def helper(row,col,cur,visited):
+        if col==n-1 and row==n-1:
+            ans.append(cur)
+            return
+
+        if row < 0 or col <0 or row>n-1 or col>n-1 or visited[row][col] or grid[row][col]==0:
+            return False
+        
+        visited[row][col]=True
+
+        helper(row-1,col,cur+'U',visited)
+        helper(row+1,col,cur+'D',visited)
+        helper(row,col+1,cur+'R',visited)
+        helper(row,col-1,cur+'L',visited)
+
+
+        visited[row][col]=False
+
+    
+    visited=[[False for _ in range(n)] for _ in range(n)]
+    helper(0,0,'',visited)
+    return ans
+
+
+
+
+n = 4
+grid = [ [1, 0, 0, 0] , [1, 1, 0, 1], [1, 1, 0, 0], [0, 1, 1, 1] ]
+print(rateMaze(n,grid))
