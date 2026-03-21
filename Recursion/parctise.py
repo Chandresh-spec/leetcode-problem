@@ -254,27 +254,87 @@
 
 
 
-def combinationSum3(k,n):
-        ans=[]
-        def helper(index,ds,n):
-            if len(ds)==k:
-                if n==0:
-                    ans.append(ds[:])
+# def combinationSum3(k,n):
+#         ans=[]
+#         def helper(index,ds,n):
+#             if len(ds)==k:
+#                 if n==0:
+#                     ans.append(ds[:])
                 
-                return 
+#                 return 
             
-            for i in range(index,10):
+#             for i in range(index,10):
 
-                ds.append(i+1)
-                helper(i+1,ds,n-i)
-                ds.pop()
+#                 ds.append(i+1)
+#                 helper(i+1,ds,n-i)
+#                 ds.pop()
         
 
 
-        helper(0,[],n)
-        return ans
+#         helper(0,[],n)
+#         return ans
 
 
-k=3
-n=7
-print(combinationSum3(k,n))
+# k=3
+# n=7
+
+
+
+
+
+def nqueen(n,ans):
+
+    def safe(board,row,col,n):
+        j=col
+        for i in range(j-1,-1,-1):
+            if board[row][i]=='Q':
+                return False
+        
+        
+        #upperdiagnal
+        i=row
+        j=col
+        while i>=0 and j >=0:
+            if board[i][j]=='Q':
+                return False
+            i-=1
+            j-=1
+        
+
+        #lowerdiagnal
+        i=row
+        j=col
+        while i>=0 and i <= n and j >=0 and j <=n:
+            if board[i][j]=='Q':
+                return False
+            
+            i+=1
+            j-=1
+        
+
+        return True
+         
+
+    
+        
+
+    def helper(col,board):
+        if col==n:
+            ans.append([''.join(row) for row in board])
+            return
+        for i in range(n):
+            if safe(board,i,col,n-1):
+                board[i][col]='Q'
+                helper(col+1,board)
+                board[i][col]='.'
+            
+    board=[['.' for i in range(n)]for i in range(n)]
+    helper(0,board)
+    return ans
+    
+
+
+
+n=5
+ans=[]
+print(nqueen(n,ans))
