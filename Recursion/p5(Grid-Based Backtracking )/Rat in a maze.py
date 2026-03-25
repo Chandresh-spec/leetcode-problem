@@ -23,14 +23,37 @@
 # Output: ["DDRR", "RRDD"]
 # Explanation: The rat has two possible paths to reach the destination: 1. "DDRR" 2. "RRDD", These are returned in lexicographically sorted order.
 
+def rateMaze(n,grid):
+    ans=[]
+    def helper(row,col,cur,visited):
+        if col==n-1 and row==n-1:
+            ans.append(cur)
+            return
 
-def bactrack(i,j,vis,n,m,ans):
-    pass
+        if row < 0 or col <0 or row>n-1 or col>n-1 or visited[row][col] or grid[row][col]==0:
+            return False
+        
+        visited[row][col]=True
+
+        helper(row-1,col,cur+'U',visited)
+        helper(row+1,col,cur+'D',visited)
+        helper(row,col+1,cur+'R',visited)
+        helper(row,col-1,cur+'L',visited)
+
+
+        visited[row][col]=False
+
     
+    visited=[[False for _ in range(n)] for _ in range(n)]
+    helper(0,0,'',visited)
+    return ans
 
 
 
 
-n=4
-m=[[1, 0, 0, 0], [1, 1, 0, 1], [1, 1, 0, 0], [0, 1, 1, 1]]
-bactrack(n,m)
+n = 4
+grid = [ [1, 0, 0, 0] , [1, 1, 0, 1], [1, 1, 0, 0], [0, 1, 1, 1] ]
+print(rateMaze(n,grid))
+
+
+

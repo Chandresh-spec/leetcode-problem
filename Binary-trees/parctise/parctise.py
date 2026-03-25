@@ -115,6 +115,29 @@ def delete_node(root,data):
             break
         else:
             q.append(item.right)
+
+
+
+def inorder2(root):
+        if root is None:
+            return []
+        stack=[root]
+        cur=None
+        ans=[]
+
+
+        while stack or cur:
+            while cur:
+                stack.append(cur)
+                
+                cur=cur.left
+            
+            temp=stack.pop()
+            ans.append(temp.data)
+            cur=temp.right
+        
+        return ans
+    
     
 
     
@@ -131,16 +154,15 @@ def delete_node(root,data):
 
 
 
-n1=BT(10)
-n1.left=BT(20)
-n1.right=BT(30)
-n1.left.left=BT(40)
-n1.left.right=BT(50)
-n1.right.left=BT(60)
-n1.right.right=BT(70)
+n1=BT(1)
+n1.right=BT(2)
+# n1.left.left=BT(40)
+# n1.left.right=BT(50)
+n1.right.left=BT(3)
+# n1.right.right=BT(70)
 # preorder(n1)
 # inorder(n1)
 # postorder(n1)
-delete(n1,50)
-levelorder(n1)
-
+# delete(n1,50)
+# levelorder(n1)
+print(inorder2(n1))
