@@ -140,6 +140,23 @@ def inorder2(root):
     
     
 
+from collections import deque
+def verticaltraversal(root):
+    q=deque()
+    q.append((root,0,0))
+
+    while q:
+        temp,x,y=q.popleft()
+
+        print((temp.data,x,y))
+
+
+        if temp.left:
+            q.append((temp.left,x+1,y-1))
+        
+        if temp.right:
+            q.append((temp.right,x+1,y+1))
+
     
     
 
@@ -148,21 +165,66 @@ def inorder2(root):
 
 
 
+arr = [1, 2, 3, 4, 5, 6]
+hashmap={}
+
+for i in arr:
+    if i%2==0:
+        if "even" not in hashmap:
+            hashmap["even"]=[]
+        
+        hashmap["even"].append(i)
+    else:
+        if "odd" not in hashmap:
+            hashmap["odd"]=[]
+        
+        hashmap["odd"].append(i)
+
+
+
+print(hashmap)    
 
 
 
 
 
 
-n1=BT(1)
-n1.right=BT(2)
+
+
+n1=BT(3)
+n1.left=BT(9)
+n1.right=BT(20)
 # n1.left.left=BT(40)
 # n1.left.right=BT(50)
-n1.right.left=BT(3)
-# n1.right.right=BT(70)
+n1.right.left=BT(15)
+n1.right.right=BT(7)
 # preorder(n1)
 # inorder(n1)
 # postorder(n1)
 # delete(n1,50)
 # levelorder(n1)
-print(inorder2(n1))
+# print(inorder2(n1))
+verticaltraversal(n1)
+
+
+
+
+
+data = [
+    ("Alice", "Math", 90),
+    ("Alice", "Science", 85),
+    ("Bob", "Math", 78)
+]
+
+hashmap={}
+for item in data:
+    x,y,z=item
+    if x not in hashmap:
+        hashmap[x]={}
+
+    hashmap[x][y]=z
+
+    
+
+
+print(hashmap)
