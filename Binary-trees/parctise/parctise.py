@@ -221,8 +221,35 @@ def bottomView(self, root):
             ans.append(nodes[x])
         
 
+def rightview(root):
+            if root is None:
+                return []
+            
+            q=deque()
+            q.append((root,0))
 
+            nodes={}
+            ans=[]
+            while q:
+                temp,x=q.popleft()
 
+            
+                nodes[x]=temp.val
+
+                if temp.left:
+                    q.append((temp.left,x+1))
+                
+                if temp.right:
+                    q.append((temp.right,x+1))
+            
+
+    
+        
+            for x in sorted(nodes.keys()):
+                ans.append(nodes[x])
+            
+
+            return ans
 
 
 
