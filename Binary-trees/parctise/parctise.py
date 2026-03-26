@@ -164,39 +164,77 @@ def verticaltraversal(root):
 
 
 
+def topView(self, root):
+        #your code goes here
 
-arr = [1, 2, 3, 4, 5, 6]
-hashmap={}
+        q=deque()
+        q.append((root,0))
 
-for i in arr:
-    if i%2==0:
-        if "even" not in hashmap:
-            hashmap["even"]=[]
+        nodes={}
+        ans=[]
+        while q:
+            temp,x=q.popleft()
+
+            if x not in nodes:
+                nodes[x]=temp.data
+
+            if temp.left:
+                q.append((temp.left,x-1))
+            
+            if temp.right:
+                q.append((temp.right,x+1))
         
-        hashmap["even"].append(i)
-    else:
-        if "odd" not in hashmap:
-            hashmap["odd"]=[]
+
         
-        hashmap["odd"].append(i)
+       
+        for x in sorted(nodes.keys()):
+            ans.append(nodes[x])
+        
+
+        return ans
+
+
+def bottomView(self, root):
+        #your code goes here
+        
+        q=deque()
+        q.append((root,0))
+
+        nodes={}
+        ans=[]
+        while q:
+            temp,x=q.popleft()
+
+            
+            nodes[x]=temp.data
+
+            if temp.left:
+                q.append((temp.left,x-1))
+            
+            if temp.right:
+                q.append((temp.right,x+1))
+        
+
+  
+       
+        for x in sorted(nodes.keys()):
+            ans.append(nodes[x])
+        
 
 
 
-print(hashmap)    
 
 
 
 
 
 
-
-
-n1=BT(3)
-n1.left=BT(9)
-n1.right=BT(20)
-# n1.left.left=BT(40)
-# n1.left.right=BT(50)
-n1.right.left=BT(15)
+n1=BT(1)
+n1.left=BT(2)
+n1.right=BT(3)
+n1.left.left=BT(4)
+n1.left.right=BT(5)
+n1.right.left=BT(6)
 n1.right.right=BT(7)
 # preorder(n1)
 # inorder(n1)
@@ -204,7 +242,7 @@ n1.right.right=BT(7)
 # delete(n1,50)
 # levelorder(n1)
 # print(inorder2(n1))
-verticaltraversal(n1)
+# verticaltraversal(n1)
 
 
 
