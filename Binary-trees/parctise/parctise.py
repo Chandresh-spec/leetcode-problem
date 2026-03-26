@@ -210,21 +210,59 @@ verticaltraversal(n1)
 
 
 
-data = [
-    ("Alice", "Math", 90),
-    ("Alice", "Science", 85),
-    ("Bob", "Math", 78)
-]
+# data = [
+#     ("Alice", "Math", 90),
+#     ("Alice", "Science", 85),
+#     ("Bob", "Math", 78)
+# ]
 
-hashmap={}
-for item in data:
-    x,y,z=item
-    if x not in hashmap:
-        hashmap[x]={}
+# hashmap={}
+# for item in data:
+#     x,y,z=item
+#     if y not in hashmap:
+#         hashmap[y]={}
 
-    hashmap[x][y]=z
+#     hashmap[y][x]=z
 
     
 
 
+# print(hashmap)
+
+
+# words = ["apple", "ant", "bat", "ball", "cat"]
+# hashmap={}
+# for i in words:
+#     x=i[0]
+
+#     if x not in hashmap:
+#         hashmap[x]=[]
+    
+#     hashmap[x].append(i)
+
+# print(hashmap)
+
+
+data = [
+    (0, 0, 3),
+    (-1, 1, 9),
+    (1, 1, 20),
+    (0, 2, 15),
+    (2, 2, 7)
+]
+
+hashmap={}
+for i in data:
+    x,y,z=i
+
+    if x not in hashmap:
+        hashmap[x]={}
+
+    if y not in hashmap[x]:
+        hashmap[x][y]=[]
+    
+    hashmap[x][y].append(z)
+
+
 print(hashmap)
+    
