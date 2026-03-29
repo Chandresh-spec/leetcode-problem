@@ -303,20 +303,45 @@ def widthOfBinaryTree(root):
 
 
 
-n1=BT(1)
-n1.left=BT(3)
-n1.right=BT(2)
+
+
+def checkChildrenSum(root):
+
+        def helper(root):
+            if root is None:
+                return True
+
+            # ✅ leaf node
+            if not root.left and not root.right:
+                return True
+            
+            data1 = root.left.val if root.left else 0
+            data2 = root.right.val if root.right else 0
+
+            if data1 + data2 != root.val:
+                return False
+            
+            # ✅ check both sides
+            return helper(root.left) and helper(root.right)
+
+        return helper(root)
+
+
+n1=BT(10)
+n1.left=BT(4)
+n1.right=BT(6)
 n1.left.left=BT(5)
 n1.left.right=BT(3)
-# n1.right.left=BT(6)
-n1.right.right=BT(9)
+n1.right.left=BT(2)
+n1.right.right=BT(4)
 # print(allRootToLeaf(n1))
-print(widthOfBinaryTree(n1))
+# print(widthOfBinaryTree(n1))
+print(checkChildrenSum(n1))
 # preorder(n1)
 # inorder(n1)
 # postorder(n1)
 # delete(n1,50)
-# levelorder(n1)
+levelorder(n1)
 # print(inorder2(n1))
 # verticaltraversal(n1)
 
