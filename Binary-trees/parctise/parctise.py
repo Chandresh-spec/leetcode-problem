@@ -384,7 +384,53 @@ def distancek(root,k,target):
         else:
              break
     print(ans)
-        
+
+
+
+def TimetoBurnTree(root,target):
+     
+    q=deque()
+    q.append(root)
+    hashmap={}
+    while q :
+            temp=q.popleft()
+            if temp.left:
+               hashmap[temp.left]=temp
+               q.append(temp.left)
+            
+            if temp.right:
+                hashmap[temp.left]=temp
+                q.append(temp.right)
+    
+
+    q=deque([target])
+    visited=set([target])
+    count=0
+
+    while q :
+        for i in range(len(q)):
+                temp=q.popleft()
+                visited.add(temp)
+
+                if temp.left and temp.left not in visited:
+                   q.append(temp.left)
+                
+                if temp.right and  temp.right not in visited:
+                     q.append(temp.right)
+                
+                upper=hashmap.get(temp,None)
+
+                if upper and upper not in visited:
+                     q.append(upper)
+        count+=1
+    
+    return count
+            
+                
+
+            
+
+     
         
 
 n1=BT(3)
@@ -399,7 +445,8 @@ n1.left.right.right=BT(4)
 # print(allRootToLeaf(n1))
 # print(widthOfBinaryTree(n1))
 # print(checkChildrenSum(n1))
-print(distancek(n1,2,n1.left))
+# print(distancek(n1,2,n1.left))
+print(TimetoBurnTree(n1,n1))
 # preorder(n1)
 # inorder(n1)
 # postorder(n1)
