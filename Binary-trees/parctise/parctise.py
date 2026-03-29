@@ -327,21 +327,84 @@ def checkChildrenSum(root):
         return helper(root)
 
 
-n1=BT(10)
-n1.left=BT(4)
-n1.right=BT(6)
-n1.left.left=BT(5)
-n1.left.right=BT(3)
-n1.right.left=BT(2)
-n1.right.right=BT(4)
+
+def distancek(root,k,target):
+    q=deque()
+    q.append(root)
+    hashmap={}
+
+    while q :
+            temp=q.popleft()
+          
+            if temp.left:
+               hashmap[temp.left]=temp
+               q.append(temp.left)
+            
+
+            if temp.right:
+                 hashmap[temp.right]=temp
+                 q.append(temp.right)
+            
+    
+    
+    q=deque()
+    q.append(target)
+    visited={}
+    distance=0
+    ans=[]
+
+    while q:
+        if k>=distance:
+            for i in range(len(q)):
+                
+                    temp=q.popleft()
+                    visited[temp]=True
+                
+                   
+                    if temp.left and temp.left not in visited:
+                        q.append(temp.left)
+                      
+                             
+                            
+                    if temp.right and temp.right not in visited:
+                        q.append(temp.right)
+                        
+                        
+                    
+                    upper=hashmap.get(temp,None)
+
+                    if upper and upper not in visited:
+                        q.append(upper)
+                    
+                    if distance==k:
+                         ans.append(temp.data)
+                       
+            distance+=1
+            
+        else:
+             break
+    print(ans)
+        
+        
+
+n1=BT(3)
+n1.left=BT(5)
+n1.right=BT(1)
+n1.left.left=BT(6)
+n1.left.right=BT(2)
+n1.right.left=BT(0)
+n1.right.right=BT(8)
+n1.left.right.left=BT(7)
+n1.left.right.right=BT(4)
 # print(allRootToLeaf(n1))
 # print(widthOfBinaryTree(n1))
-print(checkChildrenSum(n1))
+# print(checkChildrenSum(n1))
+print(distancek(n1,2,n1.left))
 # preorder(n1)
 # inorder(n1)
 # postorder(n1)
 # delete(n1,50)
-levelorder(n1)
+# levelorder(n1)
 # print(inorder2(n1))
 # verticaltraversal(n1)
 
