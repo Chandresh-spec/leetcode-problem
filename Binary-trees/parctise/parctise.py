@@ -251,6 +251,25 @@ def rightview(root):
 
             return ans
 
+def allRootToLeaf(root):
+        #your code goes here
+
+        ans=[]
+        def helper(ds,root):
+            if root is None:
+                return
+            
+            
+
+            ds.append(root.data)
+            helper(ds,root.left)
+            helper(ds,root.right)
+            ds.pop()
+            
+            if not root.left and not root.right:
+                ans.append(ds[:])
+        helper([],root)
+        return ans
 
 
 
@@ -259,10 +278,11 @@ def rightview(root):
 n1=BT(1)
 n1.left=BT(2)
 n1.right=BT(3)
-n1.left.left=BT(4)
+# n1.left.left=BT(4)
 n1.left.right=BT(5)
-n1.right.left=BT(6)
+# n1.right.left=BT(6)
 n1.right.right=BT(7)
+print(allRootToLeaf(n1))
 # preorder(n1)
 # inorder(n1)
 # postorder(n1)
@@ -308,26 +328,26 @@ n1.right.right=BT(7)
 # print(hashmap)
 
 
-data = [
-    (0, 0, 3),
-    (-1, 1, 9),
-    (1, 1, 20),
-    (0, 2, 15),
-    (2, 2, 7)
-]
+# data = [
+#     (0, 0, 3),
+#     (-1, 1, 9),
+#     (1, 1, 20),
+#     (0, 2, 15),
+#     (2, 2, 7)
+# ]
 
-hashmap={}
-for i in data:
-    x,y,z=i
+# hashmap={}
+# for i in data:
+#     x,y,z=i
 
-    if x not in hashmap:
-        hashmap[x]={}
+#     if x not in hashmap:
+#         hashmap[x]={}
 
-    if y not in hashmap[x]:
-        hashmap[x][y]=[]
+#     if y not in hashmap[x]:
+#         hashmap[x][y]=[]
     
-    hashmap[x][y].append(z)
+#     hashmap[x][y].append(z)
 
 
-print(hashmap)
+# print(hashmap)
     
