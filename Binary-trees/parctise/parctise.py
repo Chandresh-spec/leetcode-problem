@@ -275,14 +275,43 @@ def allRootToLeaf(root):
 
 
 
+def widthOfBinaryTree(root):
+        q=deque()
+        q.append((root,0))
+        max_depth=0
+        while q:
+            end_node=0
+            _,start_node=q[0]
+            for i in range(len(q)):
+
+                temp,x=q.popleft()
+                end_node=x
+
+                if temp.left:
+                    
+                    q.append((temp.left,x*2))
+                    
+                
+                if temp.right:
+    
+                    q.append((temp.right,x*2+1))
+            
+            max_depth=max(max_depth,end_node-start_node+1)
+        
+
+        return max_depth
+
+
+
 n1=BT(1)
-n1.left=BT(2)
-n1.right=BT(3)
-# n1.left.left=BT(4)
-n1.left.right=BT(5)
+n1.left=BT(3)
+n1.right=BT(2)
+n1.left.left=BT(5)
+n1.left.right=BT(3)
 # n1.right.left=BT(6)
-n1.right.right=BT(7)
-print(allRootToLeaf(n1))
+n1.right.right=BT(9)
+# print(allRootToLeaf(n1))
+print(widthOfBinaryTree(n1))
 # preorder(n1)
 # inorder(n1)
 # postorder(n1)
