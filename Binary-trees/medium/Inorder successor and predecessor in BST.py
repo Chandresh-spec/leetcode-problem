@@ -106,4 +106,40 @@ class Solution:
             
           
         
-       
+    
+
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.data = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def succPredBST(self, root, key):
+        #your code goes here
+        self.p,self.s=-1,-1
+        cur=root
+
+        while cur :
+            if key <cur.data:
+                self.s=cur.data
+                cur=cur.left
+            if key > cur.data:
+                self.p=cur.data
+                cur=cur.right
+            
+            else:
+                temp=cur.left
+                while temp:
+                    self.p=temp.data
+                    temp=temp.right
+                
+                temp=cur.right
+                while temp:
+                    self.s=temp.data
+                    temp=temp.left
+                
+                break
+        return[self.p,self.s]
