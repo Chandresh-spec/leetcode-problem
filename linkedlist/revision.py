@@ -216,13 +216,191 @@ class Linkedlist:
 
 
 
-l1=Linkedlist()
-l1.insert_at_beg(10)
-l1.insert_at_end(30)
+# l1=Linkedlist()
+# l1.insert_at_beg(10)
+# l1.insert_at_end(30)
+# l1.insert_at_end(60)
+# l1.insert_at_spec(2,50)
+# l1.remove_at_beg()
+# l1.remove_at_end()
+# l1.remove_at_spec(1)
+# l1.traversal()
+
+
+
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+        self.prev=None
+    
+
+
+class DoublyLinkedlist:
+    def __init___(self):
+        self.head=None
+        self.tail=None
+
+    
+
+    def forwardtraversal(self):
+        temp=self.head
+        while temp:
+             print(temp.data,end="->")
+             temp=temp.next
+    
+
+    def length(self):
+        count=0
+        temp=self.head
+        while temp:
+            count+=1
+            temp=temp.next
+        
+        return count
+
+
+    
+
+    def backwardtraversal(self):
+        print()
+        temp=self.tail
+
+        while temp:
+            print(temp.data,end="->")
+            temp=temp.prev
+
+
+
+    
+    def insert_at_beg(self,data):
+        if self.head is None:
+            self.head=Node(data)
+        
+
+        nb=Node(data)
+        nb.next=self.head
+        self.head.prev=nb
+        self.head=nb
+
+
+
+    def insert_at_end(self,data):
+        if self.tail is None:
+            self.tail=Node(data)
+        
+        ne=Node(data)
+        self.tail.next=ne
+        ne.prev=self.tail
+        self.tail=ne
+
+
+
+
+
+    def insert_at_spec(self,index,data):
+        np=Node(data)
+        if self.head and self.tail is None:
+            self.head=np
+            self.tail=np
+        
+        len=self.length()-1
+        if index >len:
+            return "index not found"
+        
+        if index==0:
+            self.insert_at_beg(data)
+            return
+        
+        if index ==len:
+            self.insert_at_end(data)
+            return
+        temp=self.head
+        for _ in range(index-1):
+            temp=temp.next
+        
+
+        np.next=temp.next
+        temp.next.prev=np
+        temp.next=np
+        np.prev=temp
+        
+       
+
+
+    def remove_at_beg(self):
+        if self.head is None:
+            return "linkedlist is empty"
+        
+        temp=self.head
+        self.head=self.head.next
+        self.head.prev=None
+        temp.next=None
+
+    def remove_at_end(self):
+        if self.tail is None:
+            return "linkedlist is empty"
+        
+        temp=self.tail
+        self.tail=self.tail.prev
+        self.tail.next=None
+        temp.prev=None
+
+
+    def remove_at_spec(self,index):
+        if self.head is None:
+            return "linkedlist is empty"
+        
+        if index==0:
+            self.remove_at_beg()
+        
+        len=self.length()
+        if index==len:
+            self.remove_at_end()
+        
+        temp=self.head
+        for i in range(index-1):
+            temp=temp.next
+        
+
+        temp.next=temp.next.next
+        temp.next.prev=temp
+
+        
+
+
+
+
+
+
+n1=Node(10)
+l1=DoublyLinkedlist()
+l1.head=n1
+n2=Node(20)
+n1.next=n2
+n2.prev=n1
+
+n3=Node(30)
+n2.next=n3
+n3.prev=n2
+
+n4=Node(40)
+n4.prev=n3
+n3.next=n4
+l1.tail=n4
+
+
+l1.insert_at_beg(5)
+l1.insert_at_beg(7)
+l1.insert_at_end(50)
 l1.insert_at_end(60)
-l1.insert_at_spec(2,50)
+l1.insert_at_spec(7,23)
+l1.remove_at_beg()
+l1.remove_at_beg()
 l1.remove_at_beg()
 l1.remove_at_end()
+l1.remove_at_end()
+l1.remove_at_spec(2)
 l1.remove_at_spec(1)
-l1.traversal()
-
+l1.forwardtraversal()
+l1.backwardtraversal()
