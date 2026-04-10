@@ -276,6 +276,7 @@ class DoublyLinkedlist:
     def insert_at_beg(self,data):
         if self.head is None:
             self.head=Node(data)
+            return
         
 
         nb=Node(data)
@@ -288,6 +289,7 @@ class DoublyLinkedlist:
     def insert_at_end(self,data):
         if self.tail is None:
             self.tail=Node(data)
+            return
         
         ne=Node(data)
         self.tail.next=ne
@@ -303,6 +305,7 @@ class DoublyLinkedlist:
         if self.head and self.tail is None:
             self.head=np
             self.tail=np
+            return
         
         len=self.length()-1
         if index >len:
@@ -353,10 +356,12 @@ class DoublyLinkedlist:
         
         if index==0:
             self.remove_at_beg()
+            return
         
         len=self.length()
         if index==len:
             self.remove_at_end()
+            return
         
         temp=self.head
         for i in range(index-1):
@@ -367,12 +372,57 @@ class DoublyLinkedlist:
         temp.next.prev=temp
 
         
+    def pallindrome(self):
+        
+        fast=slow=self.head
+
+        while fast and fast.next:
+            slow=slow.next
+            fast=fast.next.next
+
+        
+        
+        prev=None
+        temp=self.head
+        while prev!=slow:
+            next_node=temp.next
+            temp.next=prev
+            prev=temp
+            temp=next_node
+        
+
+        back=slow
+
+        if not fast:
+            slow=slow.next
+        
+        
+        while slow and back:
+            if slow.data!=back.data:
+                return False
+            
+            slow=slow.next
+            back=back.next
+        
+        return True
 
 
 
 
 
+    def helper(self,temp):
+            if temp.next is None:
+                new_head=temp
+                return new_head
+            
 
+            New_head=self.helper(temp.next)
+            front=temp.next
+            front.next=temp
+            temp=None
+            return New_head.data
+        
+        
 n1=Node(10)
 l1=DoublyLinkedlist()
 l1.head=n1
@@ -384,23 +434,27 @@ n3=Node(30)
 n2.next=n3
 n3.prev=n2
 
-n4=Node(40)
+n4=Node(30)
 n4.prev=n3
 n3.next=n4
 l1.tail=n4
 
 
-l1.insert_at_beg(5)
-l1.insert_at_beg(7)
-l1.insert_at_end(50)
-l1.insert_at_end(60)
-l1.insert_at_spec(7,23)
-l1.remove_at_beg()
-l1.remove_at_beg()
-l1.remove_at_beg()
-l1.remove_at_end()
-l1.remove_at_end()
-l1.remove_at_spec(2)
-l1.remove_at_spec(1)
-l1.forwardtraversal()
-l1.backwardtraversal()
+# l1.insert_at_beg(5)
+# l1.insert_at_beg(7)
+# l1.insert_at_end(50)
+l1.insert_at_end(20)
+l1.insert_at_end(10)
+
+# l1.insert_at_spec(7,23)
+# l1.remove_at_beg()
+# l1.remove_at_beg()
+# l1.remove_at_beg()
+# l1.remove_at_end()
+# l1.remove_at_end()
+# l1.remove_at_spec(2)
+# l1.remove_at_spec(1)
+# l1.forwardtraversal()
+# l1.backwardtraversal()
+# print(l1.pallindrome())
+print(l1.helper(l1.head))
