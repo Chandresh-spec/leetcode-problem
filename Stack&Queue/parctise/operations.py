@@ -2,9 +2,7 @@ class stack:
     def __init__(self):
         self.stack=[]
 
-    
-    def __str__(self):
-        pass
+
     
 
     def is_empty(self):
@@ -30,6 +28,8 @@ class stack:
         return f"{value} is popped form stack"
     
 
+#implement the queue using Array
+
 
 
 s1=stack()
@@ -40,3 +40,17 @@ s1.push(30)
 print(s1.stack)
 s1.pop()
 print(s1.stack)
+print(s1)
+
+
+
+
+
+#implement the queue using Array
+class Queue:
+    def __init__(self):
+        self.q=[]
+    
+
+    
+    
