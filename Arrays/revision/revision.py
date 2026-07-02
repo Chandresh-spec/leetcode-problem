@@ -158,44 +158,137 @@
 
 
 
-def missingNumber(nums):
+# def missingNumber(nums):
 
-        # for i in range(len(nums)+1):
-        #         found=False
-        #         for num in nums:
-        #                 if i ==num:
-        #                         found=True
+#         # for i in range(len(nums)+1):
+#         #         found=False
+#         #         for num in nums:
+#         #                 if i ==num:
+#         #                         found=True
 
-        #         if not found:
-        #                 return i
+#         #         if not found:
+#         #                 return i
 
 
-        # xor=0
-        # for i in range(len(nums)+1):
-        #         xor=xor^i
+#         # xor=0
+#         # for i in range(len(nums)+1):
+#         #         xor=xor^i
         
-        # for i in nums:
-        #         xor^=i
+#         # for i in nums:
+#         #         xor^=i
 
-        # return xor
+#         # return xor
 
 
 
-        i=0
-        while i< len(nums):
-                correct_index=nums[i]
-                if i>correct_index and nums[correct_index]!=nums[i]:
-                        nums[correct_index],nums[i]=nums[i],nums[correct_index]
+#         i=0
+#         while i< len(nums):
+#                 correct_index=nums[i]
+#                 if i>correct_index and nums[correct_index]!=nums[i]:
+#                         nums[correct_index],nums[i]=nums[i],nums[correct_index]
                 
-                else:
-                        i+=1
+#                 else:
+#                         i+=1
         
         
-        for i in range(len(nums)):
-                if i!=nums[i]:
-                        return i
-        return i+1
+#         for i in range(len(nums)):
+#                 if i!=nums[i]:
+#                         return i
+#         return i+1
 
                 
-nums = [0, 2, 3, 1, 4]
-print(missingNumber(nums))
+# nums = [0, 2, 3, 1, 4]
+# print(missingNumber(nums))
+
+
+
+
+
+# def longestSubarray(nums, k):
+    # maxi=0
+    
+    # for i in range(len(nums)):
+    #     sum_of=0
+    #     count=0
+    #     for j in range(i,len(nums)):
+    #         sum_of+=nums[j]
+
+
+            
+    #         if sum_of>k:
+    #             break
+
+    #         if sum_of==k:
+    #             maxi=max(maxi,count)
+            
+    #         count+=1
+    
+    # return maxi
+
+
+
+
+
+
+#  nums = [10, 5, 2, 7, 1, 9]
+#  k=15
+# print(longestSubarray(nums,k))
+    
+
+
+
+# def sortColors(nums):
+        
+#         count1=0
+#         count2=0
+#         count3=0
+#         for clr in nums:
+#             if clr==0:
+#                 count1+=1
+#             elif clr==1:
+#                 count2+=1
+#             else:
+#                 count3+=1
+#         # return[count1,count2,count3] 
+        
+
+#         j=0
+#         for i in range(count1):
+#             nums[j]=0
+#             j+=1
+        
+#         for i in range(count2):
+#             nums[j]=1
+#             j+=1
+        
+#         for i in range(count2):
+#             nums[j]=2
+#             j+=1
+        
+
+#         return nums
+
+
+
+# nums = [1]
+# print(sortColors(nums))
+
+
+
+hashmap={}
+
+nums=[2,2,1,1,1,2,2]
+n=len(nums)
+for i in range(len(nums)):
+      hashmap[nums[i]]=hashmap.get(nums[i],0)+1
+    
+
+i=j=0
+for value,count in hashmap.items():
+    if count>i:
+            i=count
+            j=value
+
+print(i,j)
+if count>=n//2:
+    print (value)
