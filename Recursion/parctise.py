@@ -210,71 +210,104 @@
 
 
 
-def exist(board,word):
+# def exist(board,word):
 
-    def helper(row,col,board,word,index,visited,m,n):
+#     def helper(row,col,board,word,index,visited,m,n):
 
-        if index==len(word):
-            return True
+#         if index==len(word):
+#             return True
         
-        if col<0 or col>n-1 or row<0 or row>m-1 or visited[row][col]==True or board[row][col]!=word[index]:
+#         if col<0 or col>n-1 or row<0 or row>m-1 or visited[row][col]==True or board[row][col]!=word[index]:
+#             return False
+        
+#         visited[row][col]=True
+        
+
+#         if   (helper(row,col+1,board,word,index+1,visited,m,n)or
+#                 helper(row,col-1,board,word,index+1,visited,m,n)or
+#                 helper(row+1,col,board,word,index+1,visited,m,n)or
+#                 helper(row-1,col,board,word,index+1,visited,m,n))==True:
+#             return True
+            
+        
+
+#         visited[row][col]=False
+
+        
+            
+            
+        
+
+
+
+
+
+
+
+
+
+
+
+
+#     m=len(board)
+#     n=len(board[0])
+#     visited=[[False for _ in range(n)]for _ in range(m)]
+#     print(visited)
+#     for i in range(m):
+#         for j in range(n):
+#             if board[i][j]==word[0]:
+#                 if(helper(i,j,board,word,0,visited,m,n))==True:
+#                     return True
+    
+#     return False
+
+
+    
+
+# board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
+# word = "ABCB"
+
+# print(exist(board,word))
+
+
+
+
+
+
+
+
+def findPath(grid,n):
+    ans=[]
+    def helper(row,col,grid,word,n):
+
+        if col<0 or col>n-1 or row<0 or row>n-1 or grid[row][col]=='#' or grid[row][col]!=1:
             return False
         
-        visited[row][col]=True
+        if row==n-1 and col==n-1:
+            ans.append(word)
+
+        temp=grid[row][col]
+        grid[row][col]='#'
+
+        found=(helper(row+1,col,grid,word+'D',n)or
+                  helper(row-1,col,grid,word+'U',n)or
+                  helper(row,col+1,grid,word+'R',n)or
+                  helper(row,col-1,grid,word+'L',n))
         
-
-        if   (helper(row,col+1,board,word,index+1,visited,m,n)or
-                helper(row,col-1,board,word,index+1,visited,m,n)or
-                helper(row+1,col,board,word,index+1,visited,m,n)or
-                helper(row-1,col,board,word,index+1,visited,m,n))==True:
-            return True
-            
         
+        grid[row][col]=temp
 
-        visited[row][col]=False
+        return found
+    helper(0,0,grid,"",n)
+    return ans
+
+
+
+n = 2 
+grid = [ [1, 0] , [1, 0] ]
+print(findPath(grid,n))
 
         
-            
-            
-        
-
-
-
-
-
-
-
-
-
-
-
-
-    m=len(board)
-    n=len(board[0])
-    visited=[[False for _ in range(n)]for _ in range(m)]
-    print(visited)
-    for i in range(m):
-        for j in range(n):
-            if board[i][j]==word[0]:
-                if(helper(i,j,board,word,0,visited,m,n))==True:
-                    return True
-    
-    return False
-
-
-    
-
-board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
-word = "ABCB"
-
-print(exist(board,word))
-
-
-
-
-
-
-
      
        
 
