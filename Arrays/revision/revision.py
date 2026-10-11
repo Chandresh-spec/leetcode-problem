@@ -275,20 +275,120 @@
 
 
 
-hashmap={}
+# hashmap={}
 
-nums=[2,2,1,1,1,2,2]
-n=len(nums)
-for i in range(len(nums)):
-      hashmap[nums[i]]=hashmap.get(nums[i],0)+1
+# nums=[2,2,1,1,1,2,2]
+# n=len(nums)
+# for i in range(len(nums)):
+#       hashmap[nums[i]]=hashmap.get(nums[i],0)+1
     
 
-i=j=0
-for value,count in hashmap.items():
-    if count>i:
-            i=count
-            j=value
+# i=j=0
+# for value,count in hashmap.items():
+#     if count>i:
+#             i=count
+#             j=value
 
-print(i,j)
-if count>=n//2:
-    print (value)
+# print(i,j)
+# if count>=n//2:
+#     print (value)
+
+
+
+
+# def threesum(nums):
+#     nums.sort()#[-4,-1,-1,0,1,2]
+
+#     ans=[]
+#     n=len(nums)
+#     for i in range(n):
+
+#         j=i+1
+#         k=n-1
+
+#         while j<=k:
+#             if nums[i]+nums[j]+nums[k]==0:
+#                 temp=[nums[i],nums[j],nums[k]]
+#                 ans.append(temp)
+
+
+#             while nums[i]==nums[j] and i!=j:
+#                 j+=1
+            
+
+#             while nums[j]==nums[k] and k!=j:
+#                 k-=1
+
+#             k-=1
+
+
+#     return ans
+
+
+
+
+# nums = [-1,0,1,2,-1,-4]
+
+# print(threesum(nums))
+
+
+
+# name="harry"
+# print(name[-4:2])
+
+
+
+
+
+
+
+# def fourSum(nums,target):
+#         n=len(nums)
+#         st=set()
+#         for a in range(n):
+#             for b in range(a+1,n):
+#                 hashmap={}
+#                 for c in range(b+1,n):
+                    
+#                     sum_of= -(nums[a]+nums[b]+nums[c])
+#                     total_remain=target-(sum_of)
+                  
+#                     if total_remain in hashmap:
+#                         temp=[nums[a],nums[b],nums[c],sum_of-target]
+#                         temp.sort()
+#                         st.add(tuple(temp))
+                    
+#                     hashmap[nums[c]]=nums[c]
+        
+
+#         ans=[list(item) for item in st]
+#         return ans
+
+
+
+# nums = [2,2,2,2,2]
+# target = 8
+# print(fourSum(nums,target))
+
+
+
+
+
+def maxlen(nums):
+    maxi=0
+    n=len(nums)
+    for i in range(n):
+        count=0
+        for j in range(i,n):
+            if count+nums[j]==0:
+                maxi=max(maxi,j-i+1)
+
+            count+=nums[j]
+
+
+    return maxi
+
+
+
+arr = [1, 0, -4, 3, 1, 0]
+print(maxlen(arr))
